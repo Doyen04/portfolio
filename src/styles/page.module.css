@@ -7,7 +7,27 @@
 
 .about_site{
     display: flex;
-    justify-content: center;
+    align-items: center;
+    flex-direction:column;
+    gap: 15px;
     height: 80%;
     width: 100%;
+    padding: 60px 0 0 0;
+}
+
+.site_description,.site_sub_description{
+    
+    text-align:center;
+    font-weight:bold;
+}
+.site_description{
+    color:white;
+    font-size: 5rem;
+}
+.site_sub_description{
+    color:grey;
+    font-weight: normal;
+    letter-spacing: 0.1rem;
+    font-size:1rem;
+    line-height: 1.7rem;
 }
