@@ -1,0 +1,16 @@
+
+.carousel_container{
+    width:100%;
+    display:flex;
+    align-items:center;
+    gap:25px;
+    flex-shrink:0;
+}
+
+.carousel_container>P{ 
+    font-size:1.6rem;
+    color:grey;
+    overflow-x:true;
+    text-wrap:nowrap;
+    font-weight:300;
+}

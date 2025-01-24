@@ -1,8 +1,11 @@
 import style from "../styles/page.module.css"
 
 import Header from "@/components/header"
+import Carousel from "@/components/carousel"
+
 import Logo from "../ui/logo"
 import GetInTouch from "../ui/getInTouch"
+
 
 export default function Home() {
     return (
@@ -19,7 +22,9 @@ export default function Home() {
                     advantage of new tools/trends in tech.
                 </p>
                 <GetInTouch/>
+                
             </section>
+            <Carousel/>
         </div>
     )
 }
