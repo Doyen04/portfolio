@@ -1,0 +1,28 @@
+
+
+.header{
+    width: 100%;
+    height: 60px;
+    border-bottom: 1px solid lightgrey;
+    padding: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+}
+
+.header_button_container{
+    display: flex;
+    gap: 10px;
+}
+
+.buttons{
+    height: 40px;
+    width: fit-content;
+    padding: 5px;
+    background-color: rgb(137, 137, 224);
+    border: none;
+    border-radius: 5px;
+    color: white;
+    font-weight: bold;
+}

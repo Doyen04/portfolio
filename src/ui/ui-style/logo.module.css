@@ -1,0 +1,11 @@
+
+.logo{
+    height: 40px;
+    width: fit-content;
+    padding: 5px;
+    border: none;
+    background-color:transparent;
+    border-radius: 5px;
+    color: white;
+    font-weight: bold;
+}
