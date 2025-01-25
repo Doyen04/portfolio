@@ -3,14 +3,18 @@
     width:100%;
     display:flex;
     align-items:center;
-    gap:25px;
+    gap:60px;
     flex-shrink:0;
+    overflow-x:scroll;
+}
+
+.carousel_container::-webkit-scrollbar{
+    display: none;
 }
 
 .carousel_container>P{ 
     font-size:1.6rem;
     color:grey;
-    overflow-x:true;
     text-wrap:nowrap;
     font-weight:300;
 }

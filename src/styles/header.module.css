@@ -2,8 +2,8 @@
 
 .header{
     width: 100%;
-    height: 60px;
-    border-bottom: 1px solid lightgrey;
+    height: 65px;
+    border-bottom: 1px solid rgba(128, 128, 128, 0.655);
     padding: 5px;
     display: flex;
     align-items: center;
@@ -19,10 +19,24 @@
 .buttons{
     height: 40px;
     width: fit-content;
-    padding: 5px;
+    padding: 5px 10px;
     background-color: rgb(137, 137, 224);
     border: none;
     border-radius: 5px;
     color: white;
     font-weight: bold;
+    font-size: 0.7rem;
+}
+
+@media (min-width: 768px){
+    .buttons{
+        height: 40px;
+        width: fit-content;
+        padding: 5px 10px;
+        background-color: rgb(137, 137, 224);
+        border: none;
+        border-radius: 5px;
+        color: white;
+        font-weight: bold;
+    }
 }
