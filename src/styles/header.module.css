@@ -26,6 +26,9 @@
     color: white;
     font-weight: bold;
     font-size: 0.7rem;
+    display: flex;
+    align-items: center;
+    gap: 10px;
 }
 .links{
     display: flex;

@@ -5,7 +5,7 @@
     align-items:center;
     gap:60px;
     flex-shrink:0;
-    overflow-x:scroll;
+    overflow-x:hidden;
 }
 
 .carousel_container::-webkit-scrollbar{
