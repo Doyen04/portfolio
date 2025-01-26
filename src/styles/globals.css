@@ -8,7 +8,7 @@
 /* work on font */
 /* Set default font and background color */
 body {
-    font-family: Arial, sans-serif;
+    font-family:var(--font-bungee);
     background-color: #f4f4f9;
     color: #333;
 }
