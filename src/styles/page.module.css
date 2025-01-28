@@ -39,9 +39,7 @@
     .homepage{
         padding: 0 7vw;
     }
-    .about_site{
-        height: 80vh;
-    }
+   
     .site_description{
         font-size: 3.81rem;
         line-height: 4rem;
@@ -55,6 +53,9 @@
         font-size: 5rem;
         line-height: 5rem;
     }
+     .about_site{
+        height: 80vh;
+    }
     .site_sub_description{
         color:grey;
         font-weight: normal;
@@ -63,8 +64,8 @@
         line-height: 1.7rem;
     }
 }
-@media(max-width: 1000px)and (min-height: 900px ) {
+/* @media(max-width: 1000px)and (min-height: 900px ) {
     .about_site{
         height: 56vh;
     }
-}
+} */
