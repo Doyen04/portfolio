@@ -3,13 +3,15 @@ import style from "../styles/page.module.css"
 import Header from "@/components/header"
 import Carousel from "@/components/carousel"
 
-import Logo from "../ui/logo"
-import GetInTouch from "../ui/getInTouch"
+import FloatNav from "@/ui/floatNavBar"
+import Logo from "@/ui/logo"
+import GetInTouch from "@/ui/getInTouch"
 
 
-export default function Home() {
+export default function Home(): JSX.Element {
     return (
         <div className={style.homepage}>
+            <FloatNav />
             <Header />
             <section className={style.about_site}>
                 <Logo />

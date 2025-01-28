@@ -2,35 +2,32 @@
 
 import style from "../styles/carousel.module.css"
 
-import { useEffect, RefObject, useRef } from "react";
+import { useEffect, useRef, } from "react";
 import gsap from "gsap";
 
-export default function Carousel() {
+const Carousel: React.FC = () =>{
 
-    const carouselRef: RefObject<HTMLElement> | RefObject<null> = useRef(null);
-    // const cloneRef: RefObject<HTMLElement> | RefObject<null> = useRef(null);
+    const carouselRef = useRef<HTMLDivElement>(null);
 
     useEffect(() => {
-        const marquee :HTMLDivElement | null = carouselRef.current;
+        const carousel = carouselRef.current as HTMLDivElement;
 
-        // Calculate the total width of all children
-        let totalWidth: number = 0;
-        totalWidth += marquee.scrollWidth;
+        if(!carousel) return;
+        const totalWidth: number =  carousel.scrollWidth;
         
-        Array.from(marquee.children).forEach((child) => {
-            const clone: Node = child.cloneNode(true); // Clone each child
-            marquee.appendChild(clone); // Append the clone to the marquee
+        Array.from(carousel.children).forEach((child) => {
+            const clone: Node = child.cloneNode(true); 
+            carousel.appendChild(clone); 
         });
 
-        // Animate the marquee
-        gsap.to(marquee.children, {
+        gsap.to(carousel.children, {
             x: -(totalWidth) ,
-            duration: totalWidth / (100 * 0.90), // Adjust speed based on total width
+            duration: totalWidth / (100 * 0.90), 
             ease: "linear",
-            repeat: -1, // Infinite loop
+            repeat: -1,
         });
 
-    }, []);
+    }, [carouselRef]);
 
     return (
         <div className={style.carousel_container} ref={carouselRef}>
@@ -49,4 +46,6 @@ export default function Carousel() {
             <p>NEXTJS</p>
         </div>
     )
-} 
+}
+
+export default Carousel;
