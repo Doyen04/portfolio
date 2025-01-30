@@ -1,3 +1,4 @@
+import React from "react";
 import style from "../styles/page.module.css"
 
 import Header from "@/components/header"
