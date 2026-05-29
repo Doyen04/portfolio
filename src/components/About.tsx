@@ -23,10 +23,10 @@ const itemVariants = {
 
 export default function About() {
   return (
-    <section id="about" className="section bg-bg-subtle">
-      <div className="container-base">
+    <section id="about" className="py-24 md:py-32 bg-bg-subtle">
+      <div className="max-w-4xl mx-auto px-6">
         <div className="mb-16">
-          <p className="eyebrow">03 — About</p>
+          <p className="text-sm font-mono uppercase tracking-widest mb-4">03 — About</p>
           <h2 className="font-serif text-5xl md:text-6xl font-bold text-ink">
             A bit about me
           </h2>
@@ -57,7 +57,7 @@ export default function About() {
 
           {/* Sidebar */}
           <motion.div className="space-y-6" variants={itemVariants}>
-            <div className="card">
+            <div className="border border-border rounded-lg bg-white p-6 shadow-sm">
               <div className="space-y-4">
                 <div>
                   <p className="text-sm text-ink-muted mb-1">🎓 Education</p>

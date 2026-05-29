@@ -1,7 +1,6 @@
 'use client';
 
 import { useEffect, useState } from 'react';
-import { Menu, X } from 'lucide-react';
 import Link from 'next/link';
 
 export default function Nav() {
@@ -32,7 +31,7 @@ export default function Nav() {
           : 'bg-transparent'
       }`}
     >
-      <div className="container-base flex items-center justify-between py-6">
+      <div className="max-w-4xl mx-auto px-6 flex items-center justify-between py-6">
         {/* Logo */}
         <Link href="#hero" className="font-serif text-2xl font-bold text-ink">
           AO
@@ -57,7 +56,7 @@ export default function Nav() {
             href="/Ademola_Opeyemi_CV.pdf"
             target="_blank"
             rel="noopener noreferrer"
-            className="btn-primary text-sm"
+            className="px-6 py-3 bg-accent text-white text-sm font-medium rounded-lg transition-all duration-200 hover:bg-accent-hover active:scale-95"
           >
             Download CV
           </a>
@@ -69,14 +68,14 @@ export default function Nav() {
           className="md:hidden text-ink"
           aria-label="Toggle menu"
         >
-          {isMobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
+          <span className="text-xl font-semibold">{isMobileMenuOpen ? 'Close' : 'Menu'}</span>
         </button>
       </div>
 
       {/* Mobile Navigation */}
       {isMobileMenuOpen && (
         <div className="md:hidden border-t border-border bg-bg/95 backdrop-blur-md">
-          <div className="container-base py-6 flex flex-col gap-4">
+          <div className="max-w-4xl mx-auto px-6 py-6 flex flex-col gap-4">
             {navLinks.map((link) => (
               <a
                 key={link.href}
@@ -91,7 +90,7 @@ export default function Nav() {
               href="/Ademola_Opeyemi_CV.pdf"
               target="_blank"
               rel="noopener noreferrer"
-              className="btn-primary text-sm inline-block"
+              className="px-6 py-3 bg-accent text-white text-sm font-medium rounded-lg transition-all duration-200 hover:bg-accent-hover active:scale-95 inline-block"
             >
               Download CV
             </a>

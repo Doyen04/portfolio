@@ -2,7 +2,6 @@
 
 import { useState } from 'react';
 import { motion } from 'framer-motion';
-import { Mail, Linkedin, Github, Loader2, Check } from 'lucide-react';
 
 const containerVariants = {
   hidden: { opacity: 0 },
@@ -101,10 +100,10 @@ export default function Contact() {
   };
 
   return (
-    <section id="contact" className="section">
-      <div className="container-base">
+    <section id="contact" className="py-24 md:py-32">
+      <div className="max-w-4xl mx-auto px-6">
         <div className="mb-16">
-          <p className="eyebrow">04 — Get in Touch</p>
+          <p className="text-sm font-mono uppercase tracking-widest mb-4 text-ink-muted">04 — Get in Touch</p>
           <h2 className="font-serif text-5xl md:text-6xl font-bold text-ink mb-4">
             Let's talk
           </h2>
@@ -124,13 +123,7 @@ export default function Contact() {
           <motion.div variants={itemVariants}>
             {isSuccess ? (
               <div className="flex flex-col items-center justify-center py-12 text-center">
-                <motion.div
-                  initial={{ scale: 0 }}
-                  animate={{ scale: 1 }}
-                  transition={{ type: 'spring', stiffness: 200 }}
-                >
-                  <Check size={48} className="text-accent mb-4" />
-                </motion.div>
+                <div className="text-accent mb-4 text-5xl font-bold">✓</div>
                 <h3 className="font-serif text-2xl font-bold text-ink mb-2">
                   Message sent!
                 </h3>
@@ -222,11 +215,11 @@ export default function Contact() {
                 <button
                   type="submit"
                   disabled={isLoading}
-                  className="btn-primary w-full flex items-center justify-center gap-2 disabled:opacity-70"
+                  className="px-6 py-3 bg-accent text-white font-medium rounded-lg w-full flex items-center justify-center gap-2 disabled:opacity-70"
                 >
                   {isLoading ? (
                     <>
-                      <Loader2 size={18} className="animate-spin" />
+                      <span className="inline-block animate-spin">⟲</span>
                       <span>Sending...</span>
                     </>
                   ) : (
@@ -241,10 +234,10 @@ export default function Contact() {
           <motion.div className="space-y-6" variants={itemVariants}>
             <a
               href="mailto:oluwasolaopeyemi93@gmail.com"
-              className="card group"
+              className="border border-border rounded-lg bg-white p-6 shadow-sm transition-all duration-200 hover:-translate-y-1 hover:shadow-md group"
             >
               <div className="flex items-start gap-4">
-                <Mail className="text-accent flex-shrink-0 mt-1" />
+                <span className="text-accent shrink-0 mt-1 text-lg font-bold">@</span>
                 <div>
                   <p className="text-sm text-ink-muted mb-1">Email</p>
                   <p className="font-medium text-ink group-hover:text-accent transition-colors">
@@ -258,10 +251,10 @@ export default function Contact() {
               href="https://github.com/Doyen04"
               target="_blank"
               rel="noopener noreferrer"
-              className="card group"
+              className="border border-border rounded-lg bg-white p-6 shadow-sm transition-all duration-200 hover:-translate-y-1 hover:shadow-md group"
             >
               <div className="flex items-start gap-4">
-                <Github className="text-accent flex-shrink-0 mt-1" />
+                <span className="text-accent shrink-0 mt-1 text-lg font-bold">GH</span>
                 <div>
                   <p className="text-sm text-ink-muted mb-1">GitHub</p>
                   <p className="font-medium text-ink group-hover:text-accent transition-colors">
@@ -275,10 +268,10 @@ export default function Contact() {
               href="https://linkedin.com/in/Doyen04"
               target="_blank"
               rel="noopener noreferrer"
-              className="card group"
+              className="border border-border rounded-lg bg-white p-6 shadow-sm transition-all duration-200 hover:-translate-y-1 hover:shadow-md group"
             >
               <div className="flex items-start gap-4">
-                <Linkedin className="text-accent flex-shrink-0 mt-1" />
+                <span className="text-accent shrink-0 mt-1 text-lg font-bold">in</span>
                 <div>
                   <p className="text-sm text-ink-muted mb-1">LinkedIn</p>
                   <p className="font-medium text-ink group-hover:text-accent transition-colors">

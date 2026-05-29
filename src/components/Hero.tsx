@@ -1,7 +1,6 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import { ChevronDown, Github, Linkedin, Mail } from 'lucide-react';
 import Link from 'next/link';
 
 const containerVariants = {
@@ -41,7 +40,7 @@ export default function Hero() {
       />
 
       <motion.div
-        className="container-base relative z-10 max-w-3xl"
+        className="max-w-3xl mx-auto px-6 relative z-10"
         variants={containerVariants}
         initial="hidden"
         animate="visible"
@@ -49,7 +48,7 @@ export default function Hero() {
         {/* Eyebrow */}
         <motion.p
           variants={itemVariants}
-          className="eyebrow text-accent mb-6"
+          className="text-sm font-mono uppercase tracking-widest mb-6 text-accent"
         >
           Welcome
         </motion.p>
@@ -86,14 +85,14 @@ export default function Hero() {
           variants={itemVariants}
           className="flex flex-col sm:flex-row gap-4 mb-16"
         >
-          <a href="#work" className="btn-primary">
+          <a href="#work" className="px-6 py-3 bg-accent text-white font-medium rounded-lg transition-all duration-200 hover:bg-accent-hover active:scale-95">
             View My Work →
           </a>
           <a
             href="/Ademola_Opeyemi_CV.pdf"
             target="_blank"
             rel="noopener noreferrer"
-            className="btn-secondary"
+            className="px-6 py-3 border border-accent text-accent font-medium rounded-lg transition-all duration-200 hover:bg-accent hover:text-white"
           >
             Download CV
           </a>
@@ -110,7 +109,7 @@ export default function Hero() {
             rel="noopener noreferrer"
             className="flex items-center gap-2 text-ink-muted hover:text-accent transition-colors"
           >
-            <Github size={18} />
+            <span className="inline-flex h-4 w-4 items-center justify-center text-[10px] font-bold leading-none">GH</span>
             <span>github.com/Doyen04</span>
           </a>
           <a
@@ -119,14 +118,14 @@ export default function Hero() {
             rel="noopener noreferrer"
             className="flex items-center gap-2 text-ink-muted hover:text-accent transition-colors"
           >
-            <Linkedin size={18} />
+            <span className="inline-flex h-4 w-4 items-center justify-center text-[10px] font-bold leading-none">in</span>
             <span>linkedin.com/in/Doyen04</span>
           </a>
           <a
             href="mailto:oluwasolaopeyemi93@gmail.com"
             className="flex items-center gap-2 text-ink-muted hover:text-accent transition-colors"
           >
-            <Mail size={18} />
+            <span className="inline-flex h-4 w-4 items-center justify-center text-[10px] font-bold leading-none">@</span>
             <span>Email</span>
           </a>
         </motion.div>
@@ -138,7 +137,7 @@ export default function Hero() {
         animate={{ y: [0, 8, 0] }}
         transition={{ duration: 2, repeat: Infinity }}
       >
-        <ChevronDown size={28} className="text-accent" />
+        <span className="text-accent text-2xl">⌄</span>
       </motion.div>
     </section>
   );

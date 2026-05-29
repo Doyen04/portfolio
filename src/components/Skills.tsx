@@ -50,10 +50,10 @@ const itemVariants = {
 
 export default function Skills() {
   return (
-    <section id="skills" className="section">
-      <div className="container-base">
+    <section id="skills" className="py-24 md:py-32">
+      <div className="max-w-4xl mx-auto px-6">
         <div className="mb-16">
-          <p className="eyebrow">02 — Toolkit</p>
+          <p className="text-sm font-mono uppercase tracking-widest mb-4">02 — Toolkit</p>
           <h2 className="font-serif text-5xl md:text-6xl font-bold text-ink">
             What I work with
           </h2>
@@ -69,14 +69,14 @@ export default function Skills() {
           {SKILLS_GROUPS.map((group) => (
             <motion.div key={group.category} variants={itemVariants}>
               <div className="flex flex-col sm:flex-row sm:gap-8">
-                <label className="eyebrow sm:w-32 flex-shrink-0">
+                <label className="sm:w-32 shrink-0 text-sm font-mono uppercase tracking-widest text-ink-muted mb-4 sm:mb-0">
                   {group.category}
                 </label>
                 <div className="flex flex-wrap gap-3">
                   {group.items.map((skill) => (
                     <motion.span
                       key={skill}
-                      className="badge"
+                      className="inline-flex items-center justify-center px-3 py-1 rounded-full border border-border bg-white text-sm text-ink-muted transition-all duration-200 hover:border-accent hover:bg-accent hover:text-white"
                       whileHover={{
                         backgroundColor: 'var(--accent)',
                         borderColor: 'var(--accent)',

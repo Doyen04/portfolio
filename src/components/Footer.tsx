@@ -3,7 +3,7 @@ export default function Footer() {
 
   return (
     <footer className="border-t border-border bg-bg py-8">
-      <div className="container-base text-center text-sm text-ink-muted">
+      <div className="max-w-4xl mx-auto px-6 text-center text-sm text-ink-muted">
         <p>
           © {currentYear} Ademola Oluwasola Opeyemi · Built with Next.js & Tailwind
         </p>

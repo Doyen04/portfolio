@@ -1,7 +1,6 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import { Star, Github } from 'lucide-react';
 import Link from 'next/link';
 
 interface ProjectCardProps {
@@ -23,7 +22,7 @@ export default function ProjectCard({
 }: ProjectCardProps) {
   return (
     <motion.div
-      className="card"
+      className="border border-border rounded-lg bg-white p-6 shadow-sm transition-all duration-200 hover:-translate-y-1 hover:shadow-md"
       whileHover={{ y: -3 }}
       transition={{ duration: 0.2 }}
     >
@@ -53,13 +52,13 @@ export default function ProjectCard({
           href={repoUrl}
           target="_blank"
           rel="noopener noreferrer"
-          className="link-arrow"
+          className="inline-flex items-center gap-2 text-accent hover:text-accent-hover transition-colors"
         >
-          <Github size={18} />
+          <span className="text-[10px] font-bold leading-none">GH</span>
           <span className="text-sm">View on GitHub</span>
         </a>
         <div className="flex items-center gap-1 text-sm text-ink-muted">
-          <Star size={16} className="fill-accent text-accent" />
+          <span className="text-accent">★</span>
           <span>{stars}</span>
         </div>
       </div>

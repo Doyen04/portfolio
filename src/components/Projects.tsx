@@ -1,6 +1,5 @@
 import { getGitHubRepos } from '@/lib/github';
 import ProjectCard from './ProjectCard';
-import { ArrowRight } from 'lucide-react';
 
 const FEATURED_PROJECTS = [
   {
@@ -55,10 +54,10 @@ export default async function Projects() {
     .slice(0, 6);
 
   return (
-    <section id="work" className="section bg-bg-subtle">
-      <div className="container-base">
+    <section id="work" className="py-24 md:py-32 bg-bg-subtle">
+      <div className="max-w-4xl mx-auto px-6">
         <div className="mb-16">
-          <p className="eyebrow">01 — Selected Work</p>
+          <p className="text-sm font-mono uppercase tracking-widest mb-4 text-ink-muted">01 — Selected Work</p>
           <h2 className="font-serif text-5xl md:text-6xl font-bold text-ink">
             Things I've built
           </h2>
@@ -78,10 +77,10 @@ export default async function Projects() {
               href="https://github.com/Doyen04?tab=repositories"
               target="_blank"
               rel="noopener noreferrer"
-              className="link-arrow text-lg font-semibold mb-8 inline-flex"
+              className="inline-flex items-center gap-2 text-lg font-semibold mb-8 text-accent hover:text-accent-hover transition-colors"
             >
               <span>Other work on GitHub</span>
-              <ArrowRight size={20} />
+              <span>→</span>
             </a>
 
             <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
