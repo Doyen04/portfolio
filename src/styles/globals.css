@@ -14,6 +14,31 @@
 
 html {
     scroll-behavior: smooth;
+    scrollbar-gutter: stable;
+}
+
+::selection {
+    background-color: var(--accent);
+    color: var(--white);
+}
+
+/* Custom minimal scrollbar for webkit */
+::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: var(--bg);
+}
+
+::-webkit-scrollbar-thumb {
+    background: var(--border);
+    border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: var(--ink-muted);
 }
 
 /* Keep minimal base rules — layout and utilities use Tailwind classes */

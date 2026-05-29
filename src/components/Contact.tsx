@@ -217,7 +217,7 @@ export default function Contact() {
                 <button
                   type="submit"
                   disabled={isLoading}
-                  className="px-6 py-3 bg-accent text-white font-medium rounded-lg w-full flex items-center justify-center gap-2 disabled:opacity-70"
+                  className="px-6 py-3 bg-accent text-white font-medium rounded-lg w-full flex items-center justify-center gap-2 disabled:opacity-70 transition-all duration-300 hover:bg-accent-hover hover:shadow-md active:scale-[0.98]"
                 >
                   {isLoading ? (
                     <>

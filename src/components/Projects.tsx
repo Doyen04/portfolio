@@ -77,10 +77,10 @@ export default async function Projects() {
               href="https://github.com/Doyen04?tab=repositories"
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 text-lg font-semibold mb-8 text-accent hover:text-accent-hover transition-colors"
+              className="group inline-flex items-center gap-2 text-lg font-semibold mb-8 text-accent hover:text-accent-hover transition-colors relative after:absolute after:bottom-0 after:left-0 after:h-[2px] after:w-0 after:bg-accent hover:after:w-full after:transition-all after:duration-300"
             >
               <span>Other work on GitHub</span>
-              <span>→</span>
+              <span className="transition-transform duration-300 group-hover:translate-x-1">→</span>
             </a>
 
             <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">

@@ -74,17 +74,12 @@ export default function Skills() {
                 </label>
                 <div className="flex flex-wrap gap-3">
                   {group.items.map((skill) => (
-                    <motion.span
+                    <span
                       key={skill}
-                      className="inline-flex items-center justify-center px-3 py-1 rounded-full border border-border bg-white text-sm text-ink-muted transition-all duration-200 hover:border-accent hover:bg-accent hover:text-white"
-                      whileHover={{
-                        backgroundColor: 'var(--accent)',
-                        borderColor: 'var(--accent)',
-                        color: 'var(--white)',
-                      }}
+                      className="inline-flex items-center justify-center px-4 py-1.5 rounded-full border border-border bg-white text-sm text-ink-muted transition-all duration-300 hover:border-accent hover:bg-accent hover:text-white hover:shadow-md hover:-translate-y-0.5 cursor-default"
                     >
                       {skill}
-                    </motion.span>
+                    </span>
                   ))}
                 </div>
               </div>

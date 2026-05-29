@@ -31,11 +31,13 @@ export default function Hero() {
     >
       {/* Dot grid background on right (desktop only) */}
       <div
-        className="hidden lg:block absolute top-0 right-0 w-2/5 h-full opacity-10 pointer-events-none"
+        className="hidden lg:block absolute top-0 right-0 w-[45%] h-full opacity-30 pointer-events-none"
         style={{
           backgroundImage:
-            'radial-gradient(circle, var(--accent) 1px, transparent 1px)',
-          backgroundSize: '40px 40px',
+            'radial-gradient(circle, var(--border) 2px, transparent 1px)',
+          backgroundSize: '32px 32px',
+          maskImage: 'linear-gradient(to right, transparent, black 40%, black 80%, transparent)',
+          WebkitMaskImage: 'linear-gradient(to right, transparent, black 40%, black 80%, transparent)',
         }}
       />
 
@@ -85,14 +87,14 @@ export default function Hero() {
           variants={itemVariants}
           className="flex flex-col sm:flex-row gap-4 mb-16"
         >
-          <a href="#work" className="px-6 py-3 bg-accent text-white font-medium rounded-lg transition-all duration-200 hover:bg-accent-hover active:scale-95">
+          <a href="#work" className="px-6 py-3 bg-accent text-white font-medium rounded-lg transition-all duration-200 hover:bg-accent-hover hover:shadow-md active:scale-[0.98]">
             View My Work →
           </a>
           <a
             href="/Ademola_Opeyemi_CV.pdf"
             target="_blank"
             rel="noopener noreferrer"
-            className="px-6 py-3 border border-accent text-accent font-medium rounded-lg transition-all duration-200 hover:bg-accent hover:text-white"
+            className="px-6 py-3 border border-accent text-accent font-medium rounded-lg transition-all duration-200 hover:bg-accent hover:text-white active:scale-[0.98]"
           >
             Download CV
           </a>
