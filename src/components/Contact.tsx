@@ -122,8 +122,10 @@ export default function Contact() {
           {/* Form */}
           <motion.div variants={itemVariants}>
             {isSuccess ? (
-              <div className="flex flex-col items-center justify-center py-12 text-center">
-                <div className="text-accent mb-4 text-5xl font-bold">✓</div>
+              <div className="flex flex-col items-center justify-center py-12 text-center border border-border rounded-lg bg-white h-full">
+                <div className="text-accent mb-4 bg-accent/10 p-3 rounded-full">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M20 6 9 17l-5-5"/></svg>
+                </div>
                 <h3 className="font-serif text-2xl font-bold text-ink mb-2">
                   Message sent!
                 </h3>
@@ -219,7 +221,7 @@ export default function Contact() {
                 >
                   {isLoading ? (
                     <>
-                      <span className="inline-block animate-spin">⟲</span>
+                      <svg className="animate-spin" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M21 12a9 9 0 1 1-9-9c2.52 0 4.93 1 6.74 2.74L21 8"/><path d="M21 3v5h-5"/></svg>
                       <span>Sending...</span>
                     </>
                   ) : (
@@ -231,19 +233,19 @@ export default function Contact() {
           </motion.div>
 
           {/* Contact Info */}
-          <motion.div className="space-y-6" variants={itemVariants}>
+          <motion.div className="flex flex-col gap-4" variants={itemVariants}>
             <a
               href="mailto:oluwasolaopeyemi93@gmail.com"
-              className="border border-border rounded-lg bg-white p-6 shadow-sm transition-all duration-200 hover:-translate-y-1 hover:shadow-md group"
+              className="flex items-center gap-4 border border-border rounded-lg bg-white p-5 shadow-sm transition-all duration-200 hover:-translate-y-1 hover:shadow-md hover:border-accent group"
             >
-              <div className="flex items-start gap-4">
-                <span className="text-accent shrink-0 mt-1 text-lg font-bold">@</span>
-                <div>
-                  <p className="text-sm text-ink-muted mb-1">Email</p>
-                  <p className="font-medium text-ink group-hover:text-accent transition-colors">
-                    oluwasolaopeyemi93@gmail.com
-                  </p>
-                </div>
+              <div className="text-accent bg-accent/5 p-3 rounded-md group-hover:bg-accent group-hover:text-white transition-colors">
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
+              </div>
+              <div>
+                <p className="text-xs uppercase tracking-wider font-semibold text-ink-muted mb-1">Email</p>
+                <p className="font-medium text-ink group-hover:text-accent transition-colors">
+                  oluwasolaopeyemi93@gmail.com
+                </p>
               </div>
             </a>
 
@@ -251,16 +253,16 @@ export default function Contact() {
               href="https://github.com/Doyen04"
               target="_blank"
               rel="noopener noreferrer"
-              className="border border-border rounded-lg bg-white p-6 shadow-sm transition-all duration-200 hover:-translate-y-1 hover:shadow-md group"
+              className="flex items-center gap-4 border border-border rounded-lg bg-white p-5 shadow-sm transition-all duration-200 hover:-translate-y-1 hover:shadow-md hover:border-accent group"
             >
-              <div className="flex items-start gap-4">
-                <span className="text-accent shrink-0 mt-1 text-lg font-bold">GH</span>
-                <div>
-                  <p className="text-sm text-ink-muted mb-1">GitHub</p>
-                  <p className="font-medium text-ink group-hover:text-accent transition-colors">
-                    github.com/Doyen04
-                  </p>
-                </div>
+              <div className="text-accent bg-accent/5 p-3 rounded-md group-hover:bg-accent group-hover:text-white transition-colors">
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M15 22v-4a4.8 4.8 0 0 0-1-3.2c3-.3 6-1.5 6-6.5a5.4 5.4 0 0 0-1.5-3.8 5.4 5.4 0 0 0 .1-3.8s-1.3-.4-4 1.5a13.9 13.9 0 0 0-7 0C4.3 1.6 3 2 3 2a5.4 5.4 0 0 0 .1 3.8A5.4 5.4 0 0 0 1.5 12c0 5 3 6.2 6 6.5-.8.5-1.5 1.4-1.8 2.8-.3.2-1.3.8-2.6-.4-1.2-1.4-1.5-2.4-1.5-2.4"/></svg>
+              </div>
+              <div>
+                <p className="text-xs uppercase tracking-wider font-semibold text-ink-muted mb-1">GitHub</p>
+                <p className="font-medium text-ink group-hover:text-accent transition-colors">
+                  github.com/Doyen04
+                </p>
               </div>
             </a>
 
@@ -268,16 +270,16 @@ export default function Contact() {
               href="https://linkedin.com/in/Doyen04"
               target="_blank"
               rel="noopener noreferrer"
-              className="border border-border rounded-lg bg-white p-6 shadow-sm transition-all duration-200 hover:-translate-y-1 hover:shadow-md group"
+              className="flex items-center gap-4 border border-border rounded-lg bg-white p-5 shadow-sm transition-all duration-200 hover:-translate-y-1 hover:shadow-md hover:border-accent group"
             >
-              <div className="flex items-start gap-4">
-                <span className="text-accent shrink-0 mt-1 text-lg font-bold">in</span>
-                <div>
-                  <p className="text-sm text-ink-muted mb-1">LinkedIn</p>
-                  <p className="font-medium text-ink group-hover:text-accent transition-colors">
-                    linkedin.com/in/Doyen04
-                  </p>
-                </div>
+              <div className="text-accent bg-accent/5 p-3 rounded-md group-hover:bg-accent group-hover:text-white transition-colors">
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect width="4" height="12" x="2" y="9"/><circle cx="4" cy="4" r="2"/></svg>
+              </div>
+              <div>
+                <p className="text-xs uppercase tracking-wider font-semibold text-ink-muted mb-1">LinkedIn</p>
+                <p className="font-medium text-ink group-hover:text-accent transition-colors">
+                  linkedin.com/in/Doyen04
+                </p>
               </div>
             </a>
           </motion.div>

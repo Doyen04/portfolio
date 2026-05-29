@@ -58,23 +58,26 @@ export default function About() {
           {/* Sidebar */}
           <motion.div className="space-y-6" variants={itemVariants}>
             <div className="border border-border rounded-lg bg-white p-6 shadow-sm">
-              <div className="space-y-4">
-                <div>
-                  <p className="text-sm text-ink-muted mb-1">🎓 Education</p>
+              <div className="space-y-5">
+                <div className="flex flex-col gap-1">
+                  <p className="text-[10px] uppercase tracking-widest font-bold text-accent mb-0.5">Education</p>
                   <p className="font-medium text-ink">
                     Mountain Top University, 2026
                   </p>
                 </div>
-                <div>
-                  <p className="text-sm text-ink-muted mb-1">💼 Experience</p>
+                <div className="border-t border-border/50"></div>
+                <div className="flex flex-col gap-1">
+                  <p className="text-[10px] uppercase tracking-widest font-bold text-accent mb-0.5">Experience</p>
                   <p className="font-medium text-ink">Ex-intern @ NSIA Insurance</p>
                 </div>
-                <div>
-                  <p className="text-sm text-ink-muted mb-1">📍 Location</p>
+                <div className="border-t border-border/50"></div>
+                <div className="flex flex-col gap-1">
+                  <p className="text-[10px] uppercase tracking-widest font-bold text-accent mb-0.5">Location</p>
                   <p className="font-medium text-ink">Lagos, Nigeria</p>
                 </div>
-                <div>
-                  <p className="text-sm text-ink-muted mb-1">🌍 Availability</p>
+                <div className="border-t border-border/50"></div>
+                <div className="flex flex-col gap-1">
+                  <p className="text-[10px] uppercase tracking-widest font-bold text-accent mb-0.5">Availability</p>
                   <p className="font-medium text-ink">
                     Open to remote & relocation
                   </p>
