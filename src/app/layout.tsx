@@ -17,9 +17,12 @@ const dmSans = DM_Sans({
 export const metadata: Metadata = {
   title: 'Ademola Opeyemi — Full-Stack Developer',
   description:
-    'Junior Full-Stack Developer in Lagos, Nigeria. I build production-grade web apps with Next.js, TypeScript, and PostgreSQL.',
+    'Junior Full-Stack Developer in Lagos, Nigeria. I build production-grade software and web apps with Next.js, TypeScript, and PostgreSQL.',
   keywords: [
     'Full-Stack Developer',
+    'software Engineer',
+    'Web Developer',
+    'reactjs',
     'Next.js',
     'TypeScript',
     'Lagos',
@@ -27,9 +30,9 @@ export const metadata: Metadata = {
     'Junior Developer',
   ],
   openGraph: {
-    title: 'Ademola Opeyemi — Full-Stack Developer',
+    title: 'Ademola Opeyemi — Software Developer & Full-Stack Developer',
     description:
-      'Junior Full-Stack Developer in Lagos, Nigeria. I build production-grade web apps with Next.js, TypeScript, and PostgreSQL.',
+      'Junior Full-Stack Developer in Lagos, Nigeria. I build production-grade software and  web apps with Next.js, React, TypeScript, and PostgreSQL.',
     url: 'https://portfolio-doyen04.vercel.app',
     siteName: 'Ademola Opeyemi',
     locale: 'en_US',
