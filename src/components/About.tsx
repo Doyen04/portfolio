@@ -1,0 +1,89 @@
+'use client';
+
+import { motion } from 'framer-motion';
+
+const containerVariants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.2,
+    },
+  },
+};
+
+const itemVariants = {
+  hidden: { opacity: 0, y: 20 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.6 },
+  },
+};
+
+export default function About() {
+  return (
+    <section id="about" className="section bg-bg-subtle">
+      <div className="container-base">
+        <div className="mb-16">
+          <p className="eyebrow">03 — About</p>
+          <h2 className="font-serif text-5xl md:text-6xl font-bold text-ink">
+            A bit about me
+          </h2>
+        </div>
+
+        <motion.div
+          className="grid md:grid-cols-3 gap-12"
+          variants={containerVariants}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, margin: '-100px' }}
+        >
+          {/* Main Text */}
+          <motion.div
+            className="md:col-span-2 space-y-6"
+            variants={itemVariants}
+          >
+            <p className="text-lg text-ink-muted leading-relaxed">
+              I'm a final-year Software Engineering student at Mountain Top University, Lagos, building real things before graduation. My focus is full-stack web development — I care as much about the experience a product creates as the code underneath it.
+            </p>
+            <p className="text-lg text-ink-muted leading-relaxed">
+              I've worked as a software intern at NSIA Insurance, led a team at a university hackathon, and spent most of my spare time shipping personal projects. My current obsession is Unplug — a subscription management SaaS I'm building as my final year project.
+            </p>
+            <p className="text-lg text-ink-muted leading-relaxed">
+              I'm looking for a junior developer role where I can contribute quickly, learn from experienced engineers, and keep building.
+            </p>
+          </motion.div>
+
+          {/* Sidebar */}
+          <motion.div className="space-y-6" variants={itemVariants}>
+            <div className="card">
+              <div className="space-y-4">
+                <div>
+                  <p className="text-sm text-ink-muted mb-1">🎓 Education</p>
+                  <p className="font-medium text-ink">
+                    Mountain Top University, 2026
+                  </p>
+                </div>
+                <div>
+                  <p className="text-sm text-ink-muted mb-1">💼 Experience</p>
+                  <p className="font-medium text-ink">Ex-intern @ NSIA Insurance</p>
+                </div>
+                <div>
+                  <p className="text-sm text-ink-muted mb-1">📍 Location</p>
+                  <p className="font-medium text-ink">Lagos, Nigeria</p>
+                </div>
+                <div>
+                  <p className="text-sm text-ink-muted mb-1">🌍 Availability</p>
+                  <p className="font-medium text-ink">
+                    Open to remote & relocation
+                  </p>
+                </div>
+              </div>
+            </div>
+          </motion.div>
+        </motion.div>
+      </div>
+    </section>
+  );
+}
