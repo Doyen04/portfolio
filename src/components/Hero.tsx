@@ -58,9 +58,9 @@ export default function Hero() {
         {/* Heading */}
         <motion.h1
           variants={itemVariants}
-          className="font-serif text-6xl md:text-7xl lg:text-8xl font-bold text-ink mb-6 leading-tight"
+          className="font-serif font-bold text-ink mb-6 leading-tight whitespace-nowrap tracking-tight"
           style={{
-            fontSize: 'clamp(3.5rem, 8vw, 7rem)',
+            fontSize: 'clamp(1.2rem, 8vw, 3.6rem)',
           }}
         >
           Ademola Oluwasola Opeyemi
