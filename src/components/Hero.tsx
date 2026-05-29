@@ -42,7 +42,7 @@ export default function Hero() {
       />
 
       <motion.div
-        className="max-w-3xl mx-auto px-6 relative z-10"
+        className="max-w-4xl mx-auto px-6 relative z-10 w-full"
         variants={containerVariants}
         initial="hidden"
         animate="visible"

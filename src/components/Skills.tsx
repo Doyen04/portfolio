@@ -53,7 +53,7 @@ export default function Skills() {
     <section id="skills" className="py-24 md:py-32">
       <div className="max-w-4xl mx-auto px-6">
         <div className="mb-16">
-          <p className="text-sm font-mono uppercase tracking-widest mb-4">02 — Toolkit</p>
+          <p className="text-sm font-mono uppercase tracking-widest mb-4 text-ink-muted">02 — Toolkit</p>
           <h2 className="font-serif text-5xl md:text-6xl font-bold text-ink">
             What I work with
           </h2>

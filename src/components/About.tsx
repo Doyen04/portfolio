@@ -26,7 +26,7 @@ export default function About() {
     <section id="about" className="py-24 md:py-32 bg-bg-subtle">
       <div className="max-w-4xl mx-auto px-6">
         <div className="mb-16">
-          <p className="text-sm font-mono uppercase tracking-widest mb-4">03 — About</p>
+          <p className="text-sm font-mono uppercase tracking-widest mb-4 text-ink-muted">03 — About</p>
           <h2 className="font-serif text-5xl md:text-6xl font-bold text-ink">
             A bit about me
           </h2>
