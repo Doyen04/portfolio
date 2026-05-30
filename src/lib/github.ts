@@ -28,7 +28,7 @@ export async function getGitHubRepos(): Promise<GitHubRepo[]> {
     }
 
     const repos = await response.json();
-    return repos.filter((repo: any) => !repo.fork);
+    return repos.filter((repo: { fork: boolean }) => !repo.fork);
   } catch (error) {
     console.error('Failed to fetch GitHub repos:', error);
     return [];

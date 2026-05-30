@@ -1,51 +1,43 @@
-"use client"
+'use client';
 
-import style from "../styles/carousel.module.css"
+import React from 'react';
+import styles from '../styles/carousel.module.css';
 
-import { useEffect, useRef, } from "react";
-import gsap from "gsap";
+const SKILLS = [
+  'TypeScript',
+  'JavaScript',
+  'Next.js',
+  'React',
+  'Tailwind CSS',
+  'Node.js',
+  'Prisma ORM',
+  'Drizzle ORM',
+  'PostgreSQL',
+  'Google Gemini',
+  'Anthropic Claude',
+  'Termii',
+  'Resend',
+  'Vercel',
+  'Cloudflare',
+  'Upstash',
+  'NextAuth',
+  'Git & GitHub'
+];
 
-const Carousel: React.FC = () =>{
+export default function Carousel() {
+  // Duplicate skills list for a seamless loop
+  const repeatedSkills = [...SKILLS, ...SKILLS];
 
-    const carouselRef = useRef<HTMLDivElement>(null);
-
-    useEffect(() => {
-        const carousel = carouselRef.current as HTMLDivElement;
-
-        if(!carousel) return;
-        const totalWidth: number =  carousel.scrollWidth;
-        
-        Array.from(carousel.children).forEach((child) => {
-            const clone: Node = child.cloneNode(true); 
-            carousel.appendChild(clone); 
-        });
-
-        gsap.to(carousel.children, {
-            x: -(totalWidth) ,
-            duration: totalWidth / (100 * 0.90), 
-            ease: "linear",
-            repeat: -1,
-        });
-
-    }, [carouselRef]);
-
-    return (
-        <div className={style.carousel_container} ref={carouselRef}>
-            <p >HTML</p>
-            <p>CSS</p>
-            <p>JAVASCRIPT</p>
-            <p>PYTHON</p>
-            <p>CPP</p>
-            <p>WEB</p>
-            <p>BACKEND</p>
-            <p>DJANGO</p>
-            <p>FLASK</p>
-            <p>PRISMA</p>
-            <p>DJANGO-ORM</p>
-            <p>REACT</p>
-            <p>NEXTJS</p>
-        </div>
-    )
+  return (
+    <div className={styles.carousel_container}>
+      <div className={styles.marquee_track}>
+        {repeatedSkills.map((skill, index) => (
+          <div key={`${skill}-${index}`} className={styles.marquee_item}>
+            <span className="w-2 h-2 rounded-full bg-accent" />
+            <span>{skill}</span>
+          </div>
+        ))}
+      </div>
+    </div>
+  );
 }
-
-export default Carousel;

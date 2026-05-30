@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from 'react';
 import Link from 'next/link';
+import Logo from '../ui/logo';
 
 export default function Nav() {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -33,8 +34,8 @@ export default function Nav() {
     >
       <div className="max-w-4xl mx-auto px-6 flex items-center justify-between py-6">
         {/* Logo */}
-        <Link href="#hero" className="font-serif text-2xl font-bold text-ink">
-          AO
+        <Link href="#hero" className="hover:opacity-90 transition-opacity">
+          <Logo />
         </Link>
 
         {/* Desktop Navigation */}

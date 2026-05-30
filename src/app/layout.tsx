@@ -1,5 +1,5 @@
 import type { Metadata } from 'next';
-import { Instrument_Serif, DM_Sans } from 'next/font/google';
+import { Instrument_Serif, DM_Sans, Bungee } from 'next/font/google';
 import '../styles/globals.css';
 
 const instrumentSerif = Instrument_Serif({
@@ -12,6 +12,12 @@ const dmSans = DM_Sans({
   subsets: ['latin'],
   weight: ['400', '500', '600', '700'],
   variable: '--font-dm-sans',
+});
+
+const bungee = Bungee({
+  subsets: ['latin'],
+  weight: ['400'],
+  variable: '--font-bungee',
 });
 
 export const metadata: Metadata = {
@@ -51,7 +57,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${instrumentSerif.variable} ${dmSans.variable} antialiased`}
+        className={`${instrumentSerif.variable} ${dmSans.variable} ${bungee.variable} antialiased`}
       >
         {children}
       </body>

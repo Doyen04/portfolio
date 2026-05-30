@@ -1,7 +1,6 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import Link from 'next/link';
 
 interface ProjectCardProps {
   number: string;
@@ -22,7 +21,7 @@ export default function ProjectCard({
 }: ProjectCardProps) {
   return (
     <motion.div
-      className="border border-border rounded-lg bg-white p-6 shadow-sm transition-all duration-200 hover:-translate-y-1 hover:shadow-md"
+      className="border border-border rounded-lg bg-white p-6 shadow-sm transition-all duration-200 hover:shadow-md"
       whileHover={{ y: -3 }}
       transition={{ duration: 0.2 }}
     >

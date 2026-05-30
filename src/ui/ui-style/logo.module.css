@@ -1,21 +1,31 @@
-
-.logo{
+.logo {
     display: flex;
     align-items: center;
+    gap: 8px;
     height: 40px;
     width: fit-content;
     border: none;
-    background-color:transparent;
-    border-radius: 5px;
-    color: white;
+    background-color: transparent;
+    color: var(--ink);
     font-weight: bold;
-    font-size: 1rem;
-    display:flex;
-    align-items: center;
-    font-family: var(--font-bungee);
+    font-size: 1.1rem;
+    font-family: var(--font-bungee), sans-serif;
+    transition: transform 0.2s ease, opacity 0.2s ease;
+    cursor: pointer;
 }
-@media (min-width: 768px){
-    .logo{
-        font-size: 1.2rem
+
+.logo:hover {
+    transform: scale(1.03);
+    opacity: 0.9;
+}
+
+.logo_image {
+    border-radius: 6px;
+    object-fit: contain;
+}
+
+@media (min-width: 768px) {
+    .logo {
+        font-size: 1.25rem;
     }
 }

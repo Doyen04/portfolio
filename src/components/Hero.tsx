@@ -1,7 +1,6 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import Link from 'next/link';
 
 const containerVariants = {
   hidden: { opacity: 0 },
@@ -58,7 +57,7 @@ export default function Hero() {
         {/* Heading */}
         <motion.h1
           variants={itemVariants}
-          className="font-serif font-bold text-ink mb-6 leading-tight whitespace-nowrap tracking-tight"
+          className="font-serif font-bold text-ink mb-6 leading-tight tracking-tight"
           style={{
             fontSize: 'clamp(1.2rem, 8vw, 3.6rem)',
           }}

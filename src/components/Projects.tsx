@@ -59,7 +59,7 @@ export default async function Projects() {
         <div className="mb-16">
           <p className="text-sm font-mono uppercase tracking-widest mb-4 text-ink-muted">01 — Selected Work</p>
           <h2 className="font-serif text-5xl md:text-6xl font-bold text-ink">
-            Things I've built
+            Things I&apos;ve built
           </h2>
         </div>
 

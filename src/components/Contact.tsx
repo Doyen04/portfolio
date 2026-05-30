@@ -92,7 +92,7 @@ export default function Contact() {
       } else {
         setErrors({ submit: 'Failed to send message. Please try again.' });
       }
-    } catch (error) {
+    } catch {
       setErrors({ submit: 'An error occurred. Please try again.' });
     } finally {
       setIsLoading(false);
@@ -105,10 +105,10 @@ export default function Contact() {
         <div className="mb-16">
           <p className="text-sm font-mono uppercase tracking-widest mb-4 text-ink-muted">04 — Get in Touch</p>
           <h2 className="font-serif text-5xl md:text-6xl font-bold text-ink mb-4">
-            Let's talk
+            Let&apos;s talk
           </h2>
           <p className="text-lg text-ink-muted max-w-2xl">
-            I'm currently open to junior developer roles, freelance projects, and interesting conversations.
+            I&apos;m currently open to junior developer roles, freelance projects, and interesting conversations.
           </p>
         </div>
 
@@ -130,7 +130,7 @@ export default function Contact() {
                   Message sent!
                 </h3>
                 <p className="text-ink-muted">
-                  Thanks for reaching out. I'll get back to you soon.
+                  Thanks for reaching out. I&apos;ll get back to you soon.
                 </p>
               </div>
             ) : (
