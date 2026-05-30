@@ -30,7 +30,6 @@ const SKILLS_GROUPS = [
     },
 ];
 
-const ALL_SKILLS = SKILLS_GROUPS.flatMap((group) => group.items);
 
 const containerVariants = {
     hidden: { opacity: 0 },
@@ -82,13 +81,6 @@ export default function Skills() {
                             <div className="text-xs uppercase tracking-[0.14em] text-(--accent) mb-2" style={{ fontFamily: 'var(--mono)' }}>
                                 Skill Atlas
                             </div>
-                            <p className="text-[15px] leading-[1.75] text-(--muted) max-w-[62ch]" style={{ fontFamily: 'var(--sans)' }}>
-                                A more open masonry layout groups the stack by discipline so the section scans faster and feels less rigid.
-                            </p>
-                        </div>
-
-                        <div className="text-xs text-(--muted)" style={{ fontFamily: 'var(--mono)' }}>
-                            {SKILLS_GROUPS.length} groups / {ALL_SKILLS.length} tools
                         </div>
                     </div>
                 </div>

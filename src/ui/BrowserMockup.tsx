@@ -12,5 +12,5 @@ export default function BrowserMockup() {
         </motion.div>
     );
 }
-    );
-}
+    
+

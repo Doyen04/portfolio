@@ -1,4 +1,4 @@
- 'use client';
+'use client';
 
 import { motion } from 'framer-motion';
 import ContactForm from './Contact/ContactForm';
@@ -24,8 +24,6 @@ const itemVariants = {
 };
 
 export default function Contact() {
-
-    // styles moved to Tailwind classes in JSX
 
     return (
         <section id="contact" className="py-24 px-12 border-b border-(--border)">
