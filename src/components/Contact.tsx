@@ -2,6 +2,8 @@
 
 import { useState } from 'react';
 import { motion } from 'framer-motion';
+import ContactForm from './Contact/ContactForm';
+import ContactInfo from './Contact/ContactInfo';
 
 const containerVariants = {
     hidden: { opacity: 0 },
@@ -127,162 +129,12 @@ export default function Contact() {
             >
                 {/* Form */}
                 <motion.div variants={itemVariants}>
-                    {isSuccess ? (
-                        <div className="flex flex-col items-center justify-center p-12 text-center border border-(--border) min-h-75">
-                            <div
-                                style={{
-                                    color: 'var(--accent)',
-                                    marginBottom: '16px',
-                                }}
-                            >
-                                <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M20 6 9 17l-5-5" /></svg>
-                            </div>
-                            <h3 className="text-[28px] mb-2" style={{ fontFamily: 'var(--serif)', fontWeight: 500, color: 'var(--white)' }}>
-                                Message sent!
-                            </h3>
-                            <p
-                                style={{
-                                    fontFamily: 'var(--sans)',
-                                    fontSize: '14px',
-                                    color: 'var(--muted)',
-                                }}
-                            >
-                                Thanks for reaching out. I&apos;ll get back to you soon.
-                            </p>
-                        </div>
-                    ) : (
-                        <form onSubmit={handleSubmit} className="flex flex-col gap-6">
-                            <div>
-                                <label htmlFor="name" className="block text-xs uppercase tracking-[0.14em] text-(--muted) mb-2" style={{ fontFamily: 'var(--mono)' }}>
-                                    Name
-                                </label>
-                                <input
-                                    type="text"
-                                    id="name"
-                                    name="name"
-                                    value={formState.name}
-                                    onChange={handleChange}
-                                    className="w-full py-3.5 px-4 border border-(--border) bg-(--surface) text-(--text) text-[14px] font-light outline-none transition-colors duration-200"
-                                    style={{ fontFamily: 'var(--sans)', borderColor: errors.name ? '#ef4444' : 'var(--border)' }}
-                                    onFocus={(e) => { if (!errors.name) e.currentTarget.style.borderColor = 'var(--accent)'; }}
-                                    onBlur={(e) => { if (!errors.name) e.currentTarget.style.borderColor = 'var(--border)'; }}
-                                    placeholder="Your name"
-                                />
-                                {errors.name && (
-                                    <p className="text-red-500 text-[12px] mt-1" style={{ fontFamily: 'var(--mono)' }}>{errors.name}</p>
-                                )}
-                            </div>
-
-                            <div>
-                                <label htmlFor="email" className="block text-xs uppercase tracking-[0.14em] text-(--muted) mb-2" style={{ fontFamily: 'var(--mono)' }}>
-                                    Email
-                                </label>
-                                <input
-                                    type="email"
-                                    id="email"
-                                    name="email"
-                                    value={formState.email}
-                                    onChange={handleChange}
-                                    className="w-full py-3.5 px-4 border border-(--border) bg-(--surface) text-(--text) text-[14px] font-light outline-none transition-colors duration-200"
-                                    style={{ fontFamily: 'var(--sans)', borderColor: errors.email ? '#ef4444' : 'var(--border)' }}
-                                    onFocus={(e) => { if (!errors.email) e.currentTarget.style.borderColor = 'var(--accent)'; }}
-                                    onBlur={(e) => { if (!errors.email) e.currentTarget.style.borderColor = 'var(--border)'; }}
-                                    placeholder="you@example.com"
-                                />
-                                {errors.email && (
-                                    <p className="text-red-500 text-[12px] mt-1" style={{ fontFamily: 'var(--mono)' }}>{errors.email}</p>
-                                )}
-                            </div>
-
-                            <div>
-                                <label htmlFor="message" className="block text-xs uppercase tracking-[0.14em] text-(--muted) mb-2" style={{ fontFamily: 'var(--mono)' }}>
-                                    Message
-                                </label>
-                                <textarea
-                                    id="message"
-                                    name="message"
-                                    value={formState.message}
-                                    onChange={handleChange}
-                                    rows={5}
-                                    className="w-full py-3.5 px-4 border border-(--border) bg-(--surface) text-(--text) text-[14px] font-light outline-none transition-colors duration-200 resize-none"
-                                    style={{ fontFamily: 'var(--sans)', borderColor: errors.message ? '#ef4444' : 'var(--border)' }}
-                                    onFocus={(e) => { if (!errors.message) e.currentTarget.style.borderColor = 'var(--accent)'; }}
-                                    onBlur={(e) => { if (!errors.message) e.currentTarget.style.borderColor = 'var(--border)'; }}
-                                    placeholder="Tell me about your project or just say hi..."
-                                />
-                                {errors.message && (
-                                    <p className="text-red-500 text-[12px] mt-1" style={{ fontFamily: 'var(--mono)' }}>{errors.message}</p>
-                                )}
-                            </div>
-
-                            {errors.submit && (
-                                <p className="text-red-500 text-[12px]" style={{ fontFamily: 'var(--mono)' }}>{errors.submit}</p>
-                            )}
-
-                            <button type="submit" disabled={isLoading} className="btn-fill w-full justify-center" style={{ opacity: isLoading ? 0.7 : 1 }}>
-                                {isLoading ? (
-                                    <>
-                                        <svg className="animate-spin" xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M21 12a9 9 0 1 1-9-9c2.52 0 4.93 1 6.74 2.74L21 8" /><path d="M21 3v5h-5" /></svg>
-                                        <span>Sending...</span>
-                                    </>
-                                ) : (
-                                    <span>Send Message →</span>
-                                )}
-                            </button>
-                        </form>
-                    )}
+                    <ContactForm formState={formState} errors={errors} isLoading={isLoading} isSuccess={isSuccess} handleChange={handleChange} handleSubmit={handleSubmit} />
                 </motion.div>
 
                 {/* Contact Info */}
                 <motion.div className="flex flex-col gap-1" variants={itemVariants}>
-                    {[
-                        {
-                            href: 'mailto:oluwasolaopeyemi93@gmail.com',
-                            label: 'Email',
-                            value: 'oluwasolaopeyemi93@gmail.com',
-                            icon: <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><rect width="20" height="16" x="2" y="4" rx="0" /><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7" /></svg>,
-                            external: false,
-                        },
-                        {
-                            href: 'https://github.com/Doyen04',
-                            label: 'GitHub',
-                            value: 'github.com/Doyen04',
-                            icon: <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><path d="M15 22v-4a4.8 4.8 0 0 0-1-3.2c3-.3 6-1.5 6-6.5a5.4 5.4 0 0 0-1.5-3.8 5.4 5.4 0 0 0 .1-3.8s-1.3-.4-4 1.5a13.9 13.9 0 0 0-7 0C4.3 1.6 3 2 3 2a5.4 5.4 0 0 0 .1 3.8A5.4 5.4 0 0 0 1.5 12c0 5 3 6.2 6 6.5-.8.5-1.5 1.4-1.8 2.8-.3.2-1.3.8-2.6-.4-1.2-1.4-1.5-2.4-1.5-2.4" /></svg>,
-                            external: true,
-                        },
-                        {
-                            href: 'https://linkedin.com/in/Doyen04',
-                            label: 'LinkedIn',
-                            value: 'linkedin.com/in/Doyen04',
-                            icon: <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z" /><rect width="4" height="12" x="2" y="9" /><circle cx="4" cy="4" r="2" /></svg>,
-                            external: true,
-                        },
-                    ].map((contact) => (
-                        <a
-                            key={contact.label}
-                            href={contact.href}
-                            target={contact.external ? '_blank' : undefined}
-                            rel={contact.external ? 'noopener noreferrer' : undefined}
-                            className="group flex items-center justify-between transition-colors border border-(--border) p-6 bg-transparent hover:bg-(--surface) no-underline"
-                        >
-                            <div className="flex items-center gap-4">
-                                <div className="text-(--accent)">
-                                    {contact.icon}
-                                </div>
-                                <div>
-                                    <p className="text-[9px] uppercase tracking-[0.14em] text-(--muted) mb-1" style={{ fontFamily: 'var(--mono)' }}>
-                                        {contact.label}
-                                    </p>
-                                    <p className="group-hover:text-(--accent)! transition-colors text-[14px]" style={{ fontFamily: 'var(--sans)', fontWeight: 400, color: 'var(--text)' }}>
-                                        {contact.value}
-                                    </p>
-                                </div>
-                            </div>
-                            <span className="transition-transform duration-200 group-hover:translate-x-1 text-(--faint) text-[16px]">
-                                <span className="group-hover:text-(--accent)! transition-colors">→</span>
-                            </span>
-                        </a>
-                    ))}
+                    <ContactInfo />
                 </motion.div>
             </motion.div>
         </section>

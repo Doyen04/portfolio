@@ -1,5 +1,4 @@
 import { getGitHubRepos } from '@/lib/github';
-import BrowserMockup from '@/ui/BrowserMockup';
 import ProjectCard from './ProjectCard';
 import SectionTag from './ui/SectionTag';
 import FeaturedProject from './Projects/FeaturedProject';
@@ -121,11 +120,11 @@ export default async function Projects() {
 
                         <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-3.5">
                             {otherRepos.map((repo, index) => {
-                                            const isLarge = index === 0 || index === 3;
-                                            const colSpanClass = isLarge ? 'md:col-span-2 xl:col-span-2' : 'md:col-span-1 xl:col-span-1';
+                                const isLarge = index === 0 || index === 3;
+                                const colSpanClass = isLarge ? 'md:col-span-2 xl:col-span-2' : 'md:col-span-1 xl:col-span-1';
 
-                                            return <RepoCard key={repo.id} repo={repo} className={colSpanClass} />;
-                                        })}
+                                return <RepoCard key={repo.id} repo={repo} className={colSpanClass} />;
+                            })}
                         </div>
                     </div>
                 )}
