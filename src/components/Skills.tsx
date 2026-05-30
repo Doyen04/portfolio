@@ -104,7 +104,7 @@ export default function Skills() {
                     const isTall = index === 0 || index === 2 || index === 4;
 
                     return (
-                            <motion.article
+                        <motion.article
                             key={group.category}
                             variants={itemVariants}
                             className={`group mb-4 break-inside-avoid border border-(--border) bg-transparent p-6 flex flex-col justify-between ${isTall ? 'min-h-65' : 'min-h-55'}`}

@@ -99,28 +99,7 @@ export default function Contact() {
         }
     };
 
-    const inputStyle: React.CSSProperties = {
-        width: '100%',
-        padding: '14px 16px',
-        border: '1px solid var(--border)',
-        background: 'var(--surface)',
-        color: 'var(--text)',
-        fontFamily: 'var(--sans)',
-        fontSize: '14px',
-        fontWeight: 300,
-        outline: 'none',
-        transition: 'border-color 200ms cubic-bezier(0.4, 0, 0.2, 1)',
-    };
-
-    const labelStyle: React.CSSProperties = {
-        display: 'block',
-        fontFamily: 'var(--mono)',
-        fontSize: '10px',
-        textTransform: 'uppercase',
-        letterSpacing: '0.14em',
-        color: 'var(--muted)',
-        marginBottom: '8px',
-    };
+    // styles moved to Tailwind classes in JSX
 
     return (
         <section id="contact" className="py-24 px-12 border-b border-(--border)">
@@ -136,7 +115,7 @@ export default function Contact() {
                 <em style={{ color: 'var(--accent)', fontWeight: 300 }}>talk</em>
             </h2>
 
-            <p className="text-[15px] font-[300] leading-[1.75] text-(--muted) max-w-[500px] mb-16" style={{ fontFamily: 'var(--sans)' }}>
+            <p className="text-[15px] font-light leading-[1.75] text-(--muted) max-w-125 mb-16" style={{ fontFamily: 'var(--sans)' }}>
                 I&apos;m currently open to junior developer roles, freelance projects, and interesting conversations.
             </p>
 
@@ -183,7 +162,7 @@ export default function Contact() {
                                     name="name"
                                     value={formState.name}
                                     onChange={handleChange}
-                                    className="w-full py-3.5 px-4 border border-(--border) bg-(--surface) text-(--text) text-[14px] font-[300] outline-none transition-colors duration-200"
+                                    className="w-full py-3.5 px-4 border border-(--border) bg-(--surface) text-(--text) text-[14px] font-light outline-none transition-colors duration-200"
                                     style={{ fontFamily: 'var(--sans)', borderColor: errors.name ? '#ef4444' : 'var(--border)' }}
                                     onFocus={(e) => { if (!errors.name) e.currentTarget.style.borderColor = 'var(--accent)'; }}
                                     onBlur={(e) => { if (!errors.name) e.currentTarget.style.borderColor = 'var(--border)'; }}
@@ -204,7 +183,7 @@ export default function Contact() {
                                     name="email"
                                     value={formState.email}
                                     onChange={handleChange}
-                                    className="w-full py-3.5 px-4 border border-(--border) bg-(--surface) text-(--text) text-[14px] font-[300] outline-none transition-colors duration-200"
+                                    className="w-full py-3.5 px-4 border border-(--border) bg-(--surface) text-(--text) text-[14px] font-light outline-none transition-colors duration-200"
                                     style={{ fontFamily: 'var(--sans)', borderColor: errors.email ? '#ef4444' : 'var(--border)' }}
                                     onFocus={(e) => { if (!errors.email) e.currentTarget.style.borderColor = 'var(--accent)'; }}
                                     onBlur={(e) => { if (!errors.email) e.currentTarget.style.borderColor = 'var(--border)'; }}
@@ -225,7 +204,7 @@ export default function Contact() {
                                     value={formState.message}
                                     onChange={handleChange}
                                     rows={5}
-                                    className="w-full py-3.5 px-4 border border-(--border) bg-(--surface) text-(--text) text-[14px] font-[300] outline-none transition-colors duration-200 resize-none"
+                                    className="w-full py-3.5 px-4 border border-(--border) bg-(--surface) text-(--text) text-[14px] font-light outline-none transition-colors duration-200 resize-none"
                                     style={{ fontFamily: 'var(--sans)', borderColor: errors.message ? '#ef4444' : 'var(--border)' }}
                                     onFocus={(e) => { if (!errors.message) e.currentTarget.style.borderColor = 'var(--accent)'; }}
                                     onBlur={(e) => { if (!errors.message) e.currentTarget.style.borderColor = 'var(--border)'; }}
