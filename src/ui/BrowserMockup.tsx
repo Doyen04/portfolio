@@ -40,7 +40,7 @@ export default function BrowserMockup() {
                         <span style={{ fontFamily: 'var(--serif)', fontWeight: 500, color: 'var(--white)', fontSize: '11px' }}>Unplug</span>
                     </div>
 
-                      {[
+                    {[
                         { label: 'Dashboard', active: true },
                         { label: 'Subscriptions', active: false },
                         { label: 'Virtual Cards', active: false },
