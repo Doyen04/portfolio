@@ -64,13 +64,7 @@ export default async function Projects() {
         .slice(0, 6);
 
     return (
-        <section
-            id="work"
-            style={{
-                padding: '96px 48px',
-                borderBottom: '1px solid var(--border)',
-            }}
-        >
+        <section id="work" className="py-24 px-12 border-b border-(--border)">
             <div>
                 <div className="section-tag">
                     <span className="section-tag__number">[01]</span>
@@ -93,10 +87,8 @@ export default async function Projects() {
 
                 {unplugProject && (
                     <div
-                        className="grid grid-cols-1 lg:grid-cols-5 gap-4 lg:gap-5 mb-16"
+                        className="grid grid-cols-1 lg:grid-cols-5 gap-4 lg:gap-5 mb-16 border border-(--border) p-4"
                         style={{
-                            border: '1px solid var(--border)',
-                            padding: '16px',
                             background:
                                 'linear-gradient(180deg, rgba(255,255,255,0.03) 0%, rgba(255,255,255,0.01) 100%)',
                         }}
@@ -108,38 +100,15 @@ export default async function Projects() {
                             <div>
                                 <div className="flex items-start justify-between gap-4 mb-8">
                                     <div>
-                                        <span
-                                            style={{
-                                                fontFamily: 'var(--mono)',
-                                                fontSize: '10px',
-                                                textTransform: 'uppercase',
-                                                letterSpacing: '0.14em',
-                                                color: 'var(--accent)',
-                                            }}
-                                        >
+                                        <span className="text-xs uppercase tracking-[0.14em] text-(--accent) mb-2 inline-block" style={{ fontFamily: 'var(--mono)' }}>
                                             Featured Product
                                         </span>
-                                        <div
-                                            style={{
-                                                fontFamily: 'var(--mono)',
-                                                fontSize: '12px',
-                                                color: 'var(--muted)',
-                                                marginTop: '10px',
-                                            }}
-                                        >
+                                        <div className="text-xs text-(--muted) mt-2" style={{ fontFamily: 'var(--mono)' }}>
                                             {unplugProject.stars} stars on GitHub
                                         </div>
                                     </div>
 
-                                    <span
-                                        style={{
-                                            fontFamily: 'var(--mono)',
-                                            fontSize: '64px',
-                                            fontWeight: 300,
-                                            color: 'var(--faint)',
-                                            lineHeight: 0.9,
-                                        }}
-                                    >
+                                    <span className="text-[64px] leading-[0.9] text-(--faint)" style={{ fontFamily: 'var(--mono)', fontWeight: 300 }}>
                                         {unplugProject.number}
                                     </span>
                                 </div>
@@ -158,36 +127,22 @@ export default async function Projects() {
                                 </h3>
 
                                 <p
-                                    style={{
-                                        fontFamily: 'var(--sans)',
-                                        fontSize: '15px',
-                                        fontWeight: 300,
-                                        lineHeight: 1.75,
-                                        color: 'var(--muted)',
-                                        marginBottom: '24px',
-                                        maxWidth: '56ch',
-                                    }}
+                                    className="mb-6 max-w-[56ch] text-[15px] leading-[1.75] text-(--muted)"
+                                    style={{ fontFamily: 'var(--sans)', fontWeight: 300 }}
                                 >
                                     {unplugProject.description}
                                 </p>
 
                                 <div className="flex flex-wrap gap-2 mb-4">
-                                    {unplugProject.tags.map((tag) => (
-                                        <span
-                                            key={tag}
-                                            style={{
-                                                fontFamily: 'var(--mono)',
-                                                fontSize: '9px',
-                                                textTransform: 'uppercase',
-                                                letterSpacing: '0.12em',
-                                                padding: '6px 12px',
-                                                border: '1px solid var(--border)',
-                                                color: 'var(--muted)',
-                                            }}
-                                        >
-                                            {tag}
-                                        </span>
-                                    ))}
+                                        {unplugProject.tags.map((tag) => (
+                                            <span
+                                                key={tag}
+                                                className="inline-block px-3 py-1.5 border border-(--border) text-[9px] uppercase tracking-[0.12em] text-(--muted)"
+                                                style={{ fontFamily: 'var(--mono)' }}
+                                            >
+                                                {tag}
+                                            </span>
+                                        ))}
                                 </div>
                             </div>
 
@@ -237,7 +192,7 @@ export default async function Projects() {
                     </div>
                 )}
 
-                <div className="grid grid-cols-1 md:grid-cols-3" style={{ gap: '14px', marginBottom: '80px' }}>
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-3.5 mb-20">
                     {otherFeaturedProjects.map((project, index) => (
                         <ProjectCard
                             key={project.number}
@@ -265,7 +220,7 @@ export default async function Projects() {
                             <span className="transition-transform duration-300 group-hover:translate-x-1">→</span>
                         </a>
 
-                        <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3" style={{ gap: '14px' }}>
+                        <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-3.5">
                             {otherRepos.map((repo, index) => {
                                 const isLarge = index === 0 || index === 3;
                                 const colSpanClass = isLarge ? 'md:col-span-2 xl:col-span-2' : 'md:col-span-1 xl:col-span-1';
@@ -276,15 +231,7 @@ export default async function Projects() {
                                         href={repo.url}
                                         target="_blank"
                                         rel="noopener noreferrer"
-                                        className={`group relative overflow-hidden transition-colors bg-transparent hover:bg-(--surface) ${colSpanClass}`}
-                                        style={{
-                                            border: '1px solid var(--border)',
-                                            padding: '24px',
-                                            display: 'flex',
-                                            flexDirection: 'column',
-                                            justifyContent: 'space-between',
-                                            minHeight: '210px',
-                                        }}
+                                        className={`group relative overflow-hidden transition-colors bg-transparent hover:bg-(--surface) border border-(--border) p-6 flex flex-col justify-between min-h-[210px] ${colSpanClass}`}
                                     >
                                         <div
                                             aria-hidden="true"
@@ -293,28 +240,14 @@ export default async function Projects() {
 
                                         <div className="flex-1">
                                             <h4
-                                                className="group-hover:text-(--accent)! transition-colors mb-2"
-                                                style={{
-                                                    fontFamily: 'var(--serif)',
-                                                    fontSize: '24px',
-                                                    fontWeight: 500,
-                                                    color: 'var(--white)',
-                                                }}
+                                                className="group-hover:text-(--accent)! transition-colors mb-2 text-[24px]"
+                                                style={{ fontFamily: 'var(--serif)', fontWeight: 500, color: 'var(--white)' }}
                                             >
                                                 {formatProjectName(repo.name)}
                                             </h4>
 
                                             {repo.description && (
-                                                <p
-                                                    style={{
-                                                        fontFamily: 'var(--sans)',
-                                                        fontSize: '14px',
-                                                        fontWeight: 300,
-                                                        lineHeight: 1.6,
-                                                        color: 'var(--muted)',
-                                                        marginBottom: '16px',
-                                                    }}
-                                                >
+                                                <p className="mb-4 text-[14px] leading-[1.6] text-(--muted)" style={{ fontFamily: 'var(--sans)', fontWeight: 300 }}>
                                                     {repo.description}
                                                 </p>
                                             )}
@@ -323,13 +256,8 @@ export default async function Projects() {
                                         <div className="flex items-center justify-between mt-4">
                                             {repo.language && (
                                                 <span
-                                                    style={{
-                                                        fontFamily: 'var(--mono)',
-                                                        fontSize: '10px',
-                                                        textTransform: 'uppercase',
-                                                        letterSpacing: '0.12em',
-                                                        color: 'var(--muted)',
-                                                    }}
+                                                    className="text-(--muted) text-[10px]"
+                                                    style={{ fontFamily: 'var(--mono)', textTransform: 'uppercase', letterSpacing: '0.12em' }}
                                                 >
                                                     {repo.language}
                                                 </span>
