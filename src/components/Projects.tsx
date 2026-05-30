@@ -134,15 +134,15 @@ export default async function Projects() {
                                 </p>
 
                                 <div className="flex flex-wrap gap-2 mb-4">
-                                        {unplugProject.tags.map((tag) => (
-                                            <span
-                                                key={tag}
-                                                className="inline-block px-3 py-1.5 border border-(--border) text-[9px] uppercase tracking-[0.12em] text-(--muted)"
-                                                style={{ fontFamily: 'var(--mono)' }}
-                                            >
-                                                {tag}
-                                            </span>
-                                        ))}
+                                    {unplugProject.tags.map((tag) => (
+                                        <span
+                                            key={tag}
+                                            className="inline-block px-3 py-1.5 border border-(--border) text-[9px] uppercase tracking-[0.12em] text-(--muted)"
+                                            style={{ fontFamily: 'var(--mono)' }}
+                                        >
+                                            {tag}
+                                        </span>
+                                    ))}
                                 </div>
                             </div>
 
@@ -231,7 +231,7 @@ export default async function Projects() {
                                         href={repo.url}
                                         target="_blank"
                                         rel="noopener noreferrer"
-                                        className={`group relative overflow-hidden transition-colors bg-transparent hover:bg-(--surface) border border-(--border) p-6 flex flex-col justify-between min-h-[210px] ${colSpanClass}`}
+                                        className={`group relative overflow-hidden transition-colors bg-transparent hover:bg-(--surface) border border-(--border) p-6 flex flex-col justify-between min-h-52.5 ${colSpanClass}`}
                                     >
                                         <div
                                             aria-hidden="true"

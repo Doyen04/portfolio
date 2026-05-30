@@ -30,13 +30,7 @@ const STATS = [
 
 export default function About() {
     return (
-        <section
-            id="about"
-            style={{
-                padding: '96px 48px',
-                borderBottom: '1px solid var(--border)',
-            }}
-        >
+        <section id="about" className="py-24 px-12 border-b border-(--border)">
             {/* Section Tag */}
             <div className="section-tag">
                 <span className="section-tag__number">[03]</span>
@@ -44,69 +38,29 @@ export default function About() {
             </div>
 
             {/* Section Heading */}
-            <h2
-                style={{
-                    fontFamily: 'var(--serif)',
-                    fontSize: 'clamp(44px, 6vw, 84px)',
-                    fontWeight: 300,
-                    lineHeight: 1.05,
-                    letterSpacing: '-0.015em',
-                    color: 'var(--white)',
-                    marginBottom: '64px',
-                }}
-            >
-                A bit{' '}
-                <em style={{ color: 'var(--accent)', fontWeight: 300 }}>about me</em>
+            <h2 className="mb-16" style={{ fontFamily: 'var(--serif)', fontSize: 'clamp(44px, 6vw, 84px)', fontWeight: 300, lineHeight: 1.05, letterSpacing: '-0.015em', color: 'var(--white)' }}>
+                A bit{' '}about me
             </h2>
 
-            <motion.div
-                className="grid grid-cols-1 md:grid-cols-2"
-                style={{ gap: '80px' }}
+            <motion.div className="grid grid-cols-1 md:grid-cols-2 gap-20"
                 variants={containerVariants}
                 initial="hidden"
                 whileInView="visible"
                 viewport={{ once: true, margin: '-100px' }}
             >
                 {/* Main Text */}
-                <motion.div
-                    variants={itemVariants}
-                    style={{ display: 'flex', flexDirection: 'column', gap: '24px' }}
-                >
-                    <p
-                        style={{
-                            fontFamily: 'var(--sans)',
-                            fontSize: '15px',
-                            fontWeight: 300,
-                            lineHeight: 1.85,
-                            color: 'var(--muted)',
-                        }}
-                    >
+                <motion.div variants={itemVariants} className="flex flex-col gap-6">
+                    <p className="text-[15px] font-[300] leading-[1.85] text-(--muted)" style={{ fontFamily: 'var(--sans)' }}>
                         I&apos;m a final-year Software Engineering student at Mountain Top University, Lagos,
                         building real things before graduation. My focus is full-stack web development — I care
                         as much about the experience a product creates as the code underneath it.
                     </p>
-                    <p
-                        style={{
-                            fontFamily: 'var(--sans)',
-                            fontSize: '15px',
-                            fontWeight: 300,
-                            lineHeight: 1.85,
-                            color: 'var(--muted)',
-                        }}
-                    >
+                    <p className="text-[15px] font-[300] leading-[1.85] text-(--muted)" style={{ fontFamily: 'var(--sans)' }}>
                         I&apos;ve worked as a software intern at NSIA Insurance, led a team at a university
                         hackathon, and spent most of my spare time shipping personal projects. My current
                         obsession is Unplug — a subscription management SaaS I&apos;m building as my final year project.
                     </p>
-                    <p
-                        style={{
-                            fontFamily: 'var(--sans)',
-                            fontSize: '15px',
-                            fontWeight: 300,
-                            lineHeight: 1.85,
-                            color: 'var(--muted)',
-                        }}
-                    >
+                    <p className="text-[15px] font-[300] leading-[1.85] text-(--muted)" style={{ fontFamily: 'var(--sans)' }}>
                         I&apos;m looking for a junior developer role where I can contribute quickly, learn from
                         experienced engineers, and keep building.
                     </p>
@@ -115,26 +69,13 @@ export default function About() {
                 {/* Sidebar — Stats Grid */}
                 <motion.div variants={itemVariants}>
                     {/* Stats bordered grid */}
-                    <div
-                        style={{
-                            display: 'grid',
-                            gridTemplateColumns: '1fr 1fr',
-                            border: '1px solid var(--border)',
-                        }}
-                    >
+                    <div className="grid grid-cols-2 border border-(--border)">
                         {STATS.map((stat, index) => {
                             const isEvenCol = index % 2 === 1;
                             const isLastRow = index >= STATS.length - 2;
 
                             return (
-                                <div
-                                    key={stat.label}
-                                    style={{
-                                        padding: '28px 20px',
-                                        borderRight: isEvenCol ? 'none' : '1px solid var(--border)',
-                                        borderBottom: isLastRow ? 'none' : '1px solid var(--border)',
-                                    }}
-                                >
+                                <div key={stat.label} className="p-7" style={{ borderRight: isEvenCol ? 'none' : '1px solid var(--border)', borderBottom: isLastRow ? 'none' : '1px solid var(--border)' }}>
                                     <div
                                         style={{
                                             fontFamily: 'var(--serif)',

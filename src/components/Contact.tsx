@@ -123,13 +123,7 @@ export default function Contact() {
     };
 
     return (
-        <section
-            id="contact"
-            style={{
-                padding: '96px 48px',
-                borderBottom: '1px solid var(--border)',
-            }}
-        >
+        <section id="contact" className="py-24 px-12 border-b border-(--border)">
             {/* Section Tag */}
             <div className="section-tag">
                 <span className="section-tag__number">[04]</span>
@@ -137,41 +131,16 @@ export default function Contact() {
             </div>
 
             {/* Massive serif heading */}
-            <h2
-                style={{
-                    fontFamily: 'var(--serif)',
-                    fontSize: 'clamp(52px, 9vw, 130px)',
-                    fontWeight: 300,
-                    lineHeight: 0.95,
-                    letterSpacing: '-0.02em',
-                    color: 'var(--white)',
-                    marginBottom: '16px',
-                }}
-            >
+            <h2 className="mb-4" style={{ fontFamily: 'var(--serif)', fontSize: 'clamp(52px, 9vw, 130px)', fontWeight: 300, lineHeight: 0.95, letterSpacing: '-0.02em', color: 'var(--white)' }}>
                 Let&apos;s{' '}
                 <em style={{ color: 'var(--accent)', fontWeight: 300 }}>talk</em>
             </h2>
 
-            <p
-                style={{
-                    fontFamily: 'var(--sans)',
-                    fontSize: '15px',
-                    fontWeight: 300,
-                    lineHeight: 1.75,
-                    color: 'var(--muted)',
-                    maxWidth: '500px',
-                    marginBottom: '64px',
-                }}
-            >
+            <p className="text-[15px] font-[300] leading-[1.75] text-(--muted) max-w-[500px] mb-16" style={{ fontFamily: 'var(--sans)' }}>
                 I&apos;m currently open to junior developer roles, freelance projects, and interesting conversations.
             </p>
 
-            <motion.div
-                className="grid grid-cols-1 md:grid-cols-2"
-                style={{
-                    gap: '48px',
-                    alignItems: 'start',
-                }}
+            <motion.div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-start"
                 variants={containerVariants}
                 initial="hidden"
                 whileInView="visible"
@@ -180,18 +149,7 @@ export default function Contact() {
                 {/* Form */}
                 <motion.div variants={itemVariants}>
                     {isSuccess ? (
-                        <div
-                            style={{
-                                display: 'flex',
-                                flexDirection: 'column',
-                                alignItems: 'center',
-                                justifyContent: 'center',
-                                padding: '48px',
-                                textAlign: 'center',
-                                border: '1px solid var(--border)',
-                                minHeight: '300px',
-                            }}
-                        >
+                        <div className="flex flex-col items-center justify-center p-12 text-center border border-(--border) min-h-75">
                             <div
                                 style={{
                                     color: 'var(--accent)',
@@ -200,15 +158,7 @@ export default function Contact() {
                             >
                                 <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M20 6 9 17l-5-5" /></svg>
                             </div>
-                            <h3
-                                style={{
-                                    fontFamily: 'var(--serif)',
-                                    fontSize: '28px',
-                                    fontWeight: 500,
-                                    color: 'var(--white)',
-                                    marginBottom: '8px',
-                                }}
-                            >
+                            <h3 className="text-[28px] mb-2" style={{ fontFamily: 'var(--serif)', fontWeight: 500, color: 'var(--white)' }}>
                                 Message sent!
                             </h3>
                             <p
@@ -222,9 +172,9 @@ export default function Contact() {
                             </p>
                         </div>
                     ) : (
-                        <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '24px' }}>
+                        <form onSubmit={handleSubmit} className="flex flex-col gap-6">
                             <div>
-                                <label htmlFor="name" style={labelStyle}>
+                                <label htmlFor="name" className="block text-xs uppercase tracking-[0.14em] text-(--muted) mb-2" style={{ fontFamily: 'var(--mono)' }}>
                                     Name
                                 </label>
                                 <input
@@ -233,21 +183,19 @@ export default function Contact() {
                                     name="name"
                                     value={formState.name}
                                     onChange={handleChange}
-                                    style={{
-                                        ...inputStyle,
-                                        borderColor: errors.name ? '#ef4444' : 'var(--border)',
-                                    }}
+                                    className="w-full py-3.5 px-4 border border-(--border) bg-(--surface) text-(--text) text-[14px] font-[300] outline-none transition-colors duration-200"
+                                    style={{ fontFamily: 'var(--sans)', borderColor: errors.name ? '#ef4444' : 'var(--border)' }}
                                     onFocus={(e) => { if (!errors.name) e.currentTarget.style.borderColor = 'var(--accent)'; }}
                                     onBlur={(e) => { if (!errors.name) e.currentTarget.style.borderColor = 'var(--border)'; }}
                                     placeholder="Your name"
                                 />
                                 {errors.name && (
-                                    <p style={{ color: '#ef4444', fontSize: '12px', marginTop: '4px', fontFamily: 'var(--mono)' }}>{errors.name}</p>
+                                    <p className="text-red-500 text-[12px] mt-1" style={{ fontFamily: 'var(--mono)' }}>{errors.name}</p>
                                 )}
                             </div>
 
                             <div>
-                                <label htmlFor="email" style={labelStyle}>
+                                <label htmlFor="email" className="block text-xs uppercase tracking-[0.14em] text-(--muted) mb-2" style={{ fontFamily: 'var(--mono)' }}>
                                     Email
                                 </label>
                                 <input
@@ -256,21 +204,19 @@ export default function Contact() {
                                     name="email"
                                     value={formState.email}
                                     onChange={handleChange}
-                                    style={{
-                                        ...inputStyle,
-                                        borderColor: errors.email ? '#ef4444' : 'var(--border)',
-                                    }}
+                                    className="w-full py-3.5 px-4 border border-(--border) bg-(--surface) text-(--text) text-[14px] font-[300] outline-none transition-colors duration-200"
+                                    style={{ fontFamily: 'var(--sans)', borderColor: errors.email ? '#ef4444' : 'var(--border)' }}
                                     onFocus={(e) => { if (!errors.email) e.currentTarget.style.borderColor = 'var(--accent)'; }}
                                     onBlur={(e) => { if (!errors.email) e.currentTarget.style.borderColor = 'var(--border)'; }}
                                     placeholder="you@example.com"
                                 />
                                 {errors.email && (
-                                    <p style={{ color: '#ef4444', fontSize: '12px', marginTop: '4px', fontFamily: 'var(--mono)' }}>{errors.email}</p>
+                                    <p className="text-red-500 text-[12px] mt-1" style={{ fontFamily: 'var(--mono)' }}>{errors.email}</p>
                                 )}
                             </div>
 
                             <div>
-                                <label htmlFor="message" style={labelStyle}>
+                                <label htmlFor="message" className="block text-xs uppercase tracking-[0.14em] text-(--muted) mb-2" style={{ fontFamily: 'var(--mono)' }}>
                                     Message
                                 </label>
                                 <textarea
@@ -279,32 +225,22 @@ export default function Contact() {
                                     value={formState.message}
                                     onChange={handleChange}
                                     rows={5}
-                                    style={{
-                                        ...inputStyle,
-                                        resize: 'none',
-                                        borderColor: errors.message ? '#ef4444' : 'var(--border)',
-                                    }}
+                                    className="w-full py-3.5 px-4 border border-(--border) bg-(--surface) text-(--text) text-[14px] font-[300] outline-none transition-colors duration-200 resize-none"
+                                    style={{ fontFamily: 'var(--sans)', borderColor: errors.message ? '#ef4444' : 'var(--border)' }}
                                     onFocus={(e) => { if (!errors.message) e.currentTarget.style.borderColor = 'var(--accent)'; }}
                                     onBlur={(e) => { if (!errors.message) e.currentTarget.style.borderColor = 'var(--border)'; }}
                                     placeholder="Tell me about your project or just say hi..."
                                 />
                                 {errors.message && (
-                                    <p style={{ color: '#ef4444', fontSize: '12px', marginTop: '4px', fontFamily: 'var(--mono)' }}>{errors.message}</p>
+                                    <p className="text-red-500 text-[12px] mt-1" style={{ fontFamily: 'var(--mono)' }}>{errors.message}</p>
                                 )}
                             </div>
 
                             {errors.submit && (
-                                <p style={{ color: '#ef4444', fontSize: '12px', fontFamily: 'var(--mono)' }}>{errors.submit}</p>
+                                <p className="text-red-500 text-[12px]" style={{ fontFamily: 'var(--mono)' }}>{errors.submit}</p>
                             )}
 
-                            <button
-                                type="submit"
-                                disabled={isLoading}
-                                className="btn-fill w-full justify-center"
-                                style={{
-                                    opacity: isLoading ? 0.7 : 1,
-                                }}
-                            >
+                            <button type="submit" disabled={isLoading} className="btn-fill w-full justify-center" style={{ opacity: isLoading ? 0.7 : 1 }}>
                                 {isLoading ? (
                                     <>
                                         <svg className="animate-spin" xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M21 12a9 9 0 1 1-9-9c2.52 0 4.93 1 6.74 2.74L21 8" /><path d="M21 3v5h-5" /></svg>
@@ -319,7 +255,7 @@ export default function Contact() {
                 </motion.div>
 
                 {/* Contact Info */}
-                <motion.div style={{ display: 'flex', flexDirection: 'column', gap: '3px' }} variants={itemVariants}>
+                <motion.div className="flex flex-col gap-1" variants={itemVariants}>
                     {[
                         {
                             href: 'mailto:oluwasolaopeyemi93@gmail.com',
@@ -348,55 +284,23 @@ export default function Contact() {
                             href={contact.href}
                             target={contact.external ? '_blank' : undefined}
                             rel={contact.external ? 'noopener noreferrer' : undefined}
-                            className="group flex items-center justify-between transition-colors"
-                            style={{
-                                border: '1px solid var(--border)',
-                                padding: '24px',
-                                background: 'transparent',
-                                textDecoration: 'none',
-                            }}
-                            onMouseEnter={(e) => {
-                                e.currentTarget.style.background = 'var(--surface)';
-                            }}
-                            onMouseLeave={(e) => {
-                                e.currentTarget.style.background = 'transparent';
-                            }}
+                            className="group flex items-center justify-between transition-colors border border-(--border) p-6 bg-transparent hover:bg-(--surface) no-underline"
                         >
                             <div className="flex items-center gap-4">
-                                <div style={{ color: 'var(--accent)' }}>
+                                <div className="text-(--accent)">
                                     {contact.icon}
                                 </div>
                                 <div>
-                                    <p
-                                        style={{
-                                            fontFamily: 'var(--mono)',
-                                            fontSize: '9px',
-                                            textTransform: 'uppercase',
-                                            letterSpacing: '0.14em',
-                                            color: 'var(--muted)',
-                                            marginBottom: '4px',
-                                        }}
-                                    >
+                                    <p className="text-[9px] uppercase tracking-[0.14em] text-(--muted) mb-1" style={{ fontFamily: 'var(--mono)' }}>
                                         {contact.label}
                                     </p>
-                                    <p
-                                        className="group-hover:!text-[var(--accent)] transition-colors"
-                                        style={{
-                                            fontFamily: 'var(--sans)',
-                                            fontSize: '14px',
-                                            fontWeight: 400,
-                                            color: 'var(--text)',
-                                        }}
-                                    >
+                                    <p className="group-hover:text-(--accent)! transition-colors text-[14px]" style={{ fontFamily: 'var(--sans)', fontWeight: 400, color: 'var(--text)' }}>
                                         {contact.value}
                                     </p>
                                 </div>
                             </div>
-                            <span
-                                className="transition-transform duration-200 group-hover:translate-x-1"
-                                style={{ color: 'var(--faint)', fontSize: '16px' }}
-                            >
-                                <span className="group-hover:!text-[var(--accent)] transition-colors">→</span>
+                            <span className="transition-transform duration-200 group-hover:translate-x-1 text-(--faint) text-[16px]">
+                                <span className="group-hover:text-(--accent)! transition-colors">→</span>
                             </span>
                         </a>
                     ))}

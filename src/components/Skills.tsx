@@ -52,13 +52,7 @@ const itemVariants = {
 
 export default function Skills() {
     return (
-        <section
-            id="skills"
-            style={{
-                padding: '96px 48px',
-                borderBottom: '1px solid var(--border)',
-            }}
-        >
+        <section id="skills" className="py-24 px-12 border-b border-(--border)">
             {/* Section Tag */}
             <div className="section-tag">
                 <span className="section-tag__number">[02]</span>
@@ -77,70 +71,22 @@ export default function Skills() {
                     marginBottom: '64px',
                 }}
             >
-                What I{' '}
-                <em style={{ color: 'var(--accent)', fontWeight: 300 }}>work with</em>
+                What I{' '}work with
             </h2>
 
-            <div
-                style={{
-                    display: 'grid',
-                    gridTemplateColumns: 'repeat(12, minmax(0, 1fr))',
-                    gap: '16px',
-                    marginBottom: '16px',
-                }}
-            >
-                <div
-                    style={{
-                        gridColumn: 'span 12',
-                        border: '1px solid var(--border)',
-                        padding: '28px',
-                        background: 'rgba(255,255,255,0.015)',
-                    }}
-                >
-                    <div
-                        style={{
-                            display: 'flex',
-                            justifyContent: 'space-between',
-                            gap: '24px',
-                            alignItems: 'flex-end',
-                            flexWrap: 'wrap',
-                        }}
-                    >
+            <div className="grid grid-cols-12 gap-4 mb-4">
+                <div className="col-span-12 border border-(--border) p-7" style={{ background: 'rgba(255,255,255,0.015)' }}>
+                    <div className="flex justify-between gap-6 items-end flex-wrap">
                         <div>
-                            <div
-                                style={{
-                                    fontFamily: 'var(--mono)',
-                                    fontSize: '10px',
-                                    textTransform: 'uppercase',
-                                    letterSpacing: '0.14em',
-                                    color: 'var(--accent)',
-                                    marginBottom: '10px',
-                                }}
-                            >
+                            <div className="text-xs uppercase tracking-[0.14em] text-(--accent) mb-2" style={{ fontFamily: 'var(--mono)' }}>
                                 Skill Atlas
                             </div>
-                            <p
-                                style={{
-                                    fontFamily: 'var(--sans)',
-                                    fontSize: '15px',
-                                    lineHeight: 1.75,
-                                    color: 'var(--muted)',
-                                    maxWidth: '62ch',
-                                }}
-                            >
+                            <p className="text-[15px] leading-[1.75] text-(--muted) max-w-[62ch]" style={{ fontFamily: 'var(--sans)' }}>
                                 A more open masonry layout groups the stack by discipline so the section scans faster and feels less rigid.
                             </p>
                         </div>
 
-                        <div
-                            style={{
-                                fontFamily: 'var(--mono)',
-                                fontSize: '10px',
-                                textTransform: 'uppercase',
-                                letterSpacing: '0.14em',
-                                color: 'var(--muted)',
-                            }}
-                        >
+                        <div className="text-xs text-(--muted)" style={{ fontFamily: 'var(--mono)' }}>
                             {SKILLS_GROUPS.length} groups / {ALL_SKILLS.length} tools
                         </div>
                     </div>
@@ -148,8 +94,7 @@ export default function Skills() {
             </div>
 
             {/* Masonry-style grouped cards */}
-            <motion.div
-                className="columns-1 md:columns-2 xl:columns-3 gap-4"
+            <motion.div className="columns-1 md:columns-2 xl:columns-3 gap-4"
                 variants={containerVariants}
                 initial="hidden"
                 whileInView="visible"
@@ -159,94 +104,32 @@ export default function Skills() {
                     const isTall = index === 0 || index === 2 || index === 4;
 
                     return (
-                        <motion.article
+                            <motion.article
                             key={group.category}
                             variants={itemVariants}
-                            className="group mb-4 break-inside-avoid"
-                            style={{
-                                border: '1px solid var(--border)',
-                                background: 'transparent',
-                                padding: '24px',
-                                display: 'flex',
-                                flexDirection: 'column',
-                                justifyContent: 'space-between',
-                                minHeight: isTall ? '260px' : '220px',
-                            }}
+                            className={`group mb-4 break-inside-avoid border border-(--border) bg-transparent p-6 flex flex-col justify-between ${isTall ? 'min-h-65' : 'min-h-55'}`}
                             whileHover={{ backgroundColor: 'var(--surface)' }}
                         >
-                            <div
-                                style={{
-                                    display: 'flex',
-                                    justifyContent: 'space-between',
-                                    gap: '16px',
-                                    alignItems: 'flex-start',
-                                    marginBottom: '18px',
-                                }}
-                            >
+                            <div className="flex justify-between gap-4 items-start mb-4">
                                 <div>
-                                    <div
-                                        style={{
-                                            fontFamily: 'var(--mono)',
-                                            fontSize: '10px',
-                                            textTransform: 'uppercase',
-                                            letterSpacing: '0.14em',
-                                            color: 'var(--accent)',
-                                            marginBottom: '8px',
-                                        }}
-                                    >
+                                    <div className="text-xs uppercase tracking-[0.14em] text-(--accent) mb-2" style={{ fontFamily: 'var(--mono)' }}>
                                         0{index + 1}
                                     </div>
-                                    <h3
-                                        style={{
-                                            fontFamily: 'var(--serif)',
-                                            fontSize: '24px',
-                                            fontWeight: 500,
-                                            color: 'var(--white)',
-                                            lineHeight: 1.1,
-                                        }}
-                                    >
+                                    <h3 className="text-[24px]" style={{ fontFamily: 'var(--serif)', fontWeight: 500, color: 'var(--white)', lineHeight: 1.1 }}>
                                         {group.category}
                                     </h3>
                                 </div>
 
-                                <span
-                                    style={{
-                                        fontFamily: 'var(--mono)',
-                                        fontSize: '10px',
-                                        textTransform: 'uppercase',
-                                        letterSpacing: '0.12em',
-                                        color: 'var(--muted)',
-                                        paddingTop: '6px',
-                                        whiteSpace: 'nowrap',
-                                    }}
-                                >
+                                <span className="text-xs text-(--muted) pt-1" style={{ fontFamily: 'var(--mono)', letterSpacing: '0.12em' }}>
                                     {group.items.length} items
                                 </span>
                             </div>
 
-                            <div
-                                style={{
-                                    display: 'grid',
-                                    gridTemplateColumns: 'repeat(2, minmax(0, 1fr))',
-                                    gap: '10px 12px',
-                                }}
-                            >
+                            <div className="grid grid-cols-2 gap-y-2 gap-x-3">
                                 {group.items.map((skill) => (
-                                    <div key={skill} className="group/item" style={{ display: 'flex', alignItems: 'center', gap: '10px', minWidth: 0 }}>
-                                        <span
-                                            data-keep-radius="true"
-                                            className="inline-block w-1.5 h-1.5 rounded-full bg-(--border) group-hover:bg-(--accent) transition-colors duration-200"
-                                        />
-                                        <span
-                                            className="transition-colors duration-200 group-hover:text-(--text)"
-                                            style={{
-                                                fontFamily: 'var(--mono)',
-                                                fontSize: '13px',
-                                                color: 'var(--muted)',
-                                                lineHeight: 1.35,
-                                                overflowWrap: 'anywhere',
-                                            }}
-                                        >
+                                    <div key={skill} className="group/item flex items-center gap-2.5 min-w-0">
+                                        <span data-keep-radius="true" className="inline-block w-1.5 h-1.5 rounded-full bg-(--border) group-hover:bg-(--accent) transition-colors duration-200" />
+                                        <span className="transition-colors duration-200 group-hover:text-(--text)" style={{ fontFamily: 'var(--mono)', fontSize: '13px', color: 'var(--muted)', lineHeight: 1.35, overflowWrap: 'anywhere' }}>
                                             {skill}
                                         </span>
                                     </div>
