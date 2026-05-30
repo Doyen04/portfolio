@@ -8,7 +8,7 @@ export default function BrowserMockup() {
       initial={{ opacity: 0, y: 30 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: '-100px' }}
-      transition={{ duration: 0.8, ease: [0.4, 0, 0.2, 1] }}
+      transition={{ duration: 0.8, ease: [0.4, 0, 0.2, 1] as const }}
       className="w-full relative bg-[var(--surface-2)] border border-[var(--border)] overflow-hidden"
       style={{
         aspectRatio: '1.6 / 1',

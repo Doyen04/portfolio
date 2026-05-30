@@ -3,16 +3,26 @@
 /* ─── Lagos Editorial — Design Tokens ─── */
 :root {
     /* Minimal Mono — monochrome, subtle accent */
-    --bg:         #0B0B0B;   /* page background */
-    --surface:    #0F0F10;   /* elevated surfaces */
-    --surface-2:  #161617;   /* secondary surfaces */
-    --border:     #262626;   /* rules and dividers */
-    --text:       #E6E6E6;   /* primary text */
-    --muted:      #9A9A9A;   /* secondary text */
-    --faint:      #2B2B2B;   /* ghost elements */
-    --accent:     #9DA3A6;   /* subtle monochrome accent */
-    --accent-hi:  #BFC6C8;   /* hover/active accent */
-    --white:      #F5F5F5;   /* headings/strong text */
+    --bg: #0B0B0B;
+    /* page background */
+    --surface: #0F0F10;
+    /* elevated surfaces */
+    --surface-2: #161617;
+    /* secondary surfaces */
+    --border: #262626;
+    /* rules and dividers */
+    --text: #E6E6E6;
+    /* primary text */
+    --muted: #9A9A9A;
+    /* secondary text */
+    --faint: #2B2B2B;
+    /* ghost elements */
+    --accent: #9DA3A6;
+    /* subtle monochrome accent */
+    --accent-hi: #BFC6C8;
+    /* hover/active accent */
+    --white: #F5F5F5;
+    /* headings/strong text */
 
     --ease: cubic-bezier(0.4, 0, 0.2, 1);
 }
@@ -47,12 +57,19 @@ html {
 }
 
 /* ─── Typography Defaults ─── */
-h1, h2, h3, h4, h5, h6 {
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
     font-family: var(--serif), Georgia, serif;
     font-weight: 300;
 }
 
-code, pre, .mono-text {
+code,
+pre,
+.mono-text {
     font-family: var(--mono), monospace;
 }
 
@@ -90,13 +107,31 @@ button {
 
 /* ─── Hero Load Sequence ─── */
 @keyframes fadeUp {
-    from { opacity: 0; transform: translateY(32px); }
-    to   { opacity: 1; transform: translateY(0); }
+    from {
+        opacity: 0;
+        transform: translateY(32px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
 
-.h-a1 { opacity: 0; animation: fadeUp 0.9s ease 0.1s forwards; }
-.h-a2 { opacity: 0; animation: fadeUp 0.9s ease 0.3s forwards; }
-.h-a3 { opacity: 0; animation: fadeUp 0.9s ease 0.55s forwards; }
+.h-a1 {
+    opacity: 0;
+    animation: fadeUp 0.9s ease 0.1s forwards;
+}
+
+.h-a2 {
+    opacity: 0;
+    animation: fadeUp 0.9s ease 0.3s forwards;
+}
+
+.h-a3 {
+    opacity: 0;
+    animation: fadeUp 0.9s ease 0.55s forwards;
+}
 
 /* ─── Scroll Reveal ─── */
 .reveal {
@@ -110,14 +145,29 @@ button {
     transform: translateY(0);
 }
 
-.reveal-d1 { transition-delay: 0.08s; }
-.reveal-d2 { transition-delay: 0.18s; }
-.reveal-d3 { transition-delay: 0.28s; }
+.reveal-d1 {
+    transition-delay: 0.08s;
+}
+
+.reveal-d2 {
+    transition-delay: 0.18s;
+}
+
+.reveal-d3 {
+    transition-delay: 0.28s;
+}
 
 /* ─── Status Dot ─── */
 @keyframes pulse {
-    0%, 100% { opacity: 1; }
-    50%      { opacity: 0.25; }
+
+    0%,
+    100% {
+        opacity: 1;
+    }
+
+    50% {
+        opacity: 0.25;
+    }
 }
 
 /* ─── Button utilities ─── */
@@ -180,12 +230,6 @@ button {
     letter-spacing: 0.14em;
 }
 
-.section-tag__rule {
-    width: 60px;
-    height: 1px;
-    background: var(--border);
-}
-
 .section-tag__label {
     font-family: var(--mono);
     font-size: 10.5px;
@@ -203,8 +247,5 @@ button {
 @media (max-width: 768px) {
     .section-tag {
         margin-bottom: 20px;
-    }
-    .section-tag__rule {
-        width: 30px;
     }
 }

@@ -46,7 +46,7 @@ const itemVariants = {
   visible: {
     opacity: 1,
     y: 0,
-    transition: { duration: 0.4, ease: [0.4, 0, 0.2, 1] },
+    transition: { duration: 0.4, ease: [0.4, 0, 0.2, 1] as const },
   },
 };
 
@@ -62,7 +62,6 @@ export default function Skills() {
       {/* Section Tag */}
       <div className="section-tag">
         <span className="section-tag__number">[02]</span>
-        <span className="section-tag__rule" />
         <span className="section-tag__label">Toolkit</span>
       </div>
 

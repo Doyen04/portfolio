@@ -71,7 +71,7 @@ export default function Hero() {
           }}
         >
           <span className="block lg:inline">Ademola</span>
-          <span className="block lg:inline lg:ml-4" style={{ color: 'var(--accent)', fontStyle: 'italic' }}>
+          <span className="block lg:inline lg:ml-4">
             Oluwasola
           </span>
         </motion.h1>
