@@ -1,15 +1,19 @@
 @import 'tailwindcss';
 
-/* Design tokens */
+/* ─── Lagos Editorial — Design Tokens ─── */
 :root {
-    --bg: #f7f4ef;
-    --bg-subtle: #efebe4;
-    --ink: #1a1a18;
-    --ink-muted: #6b6860;
-    --accent: #c94a2e;
-    --accent-hover: #a83b22;
-    --border: #ddd9d1;
-    --white: #ffffff;
+    --bg:         #0C0C0A;
+    --surface:    #141412;
+    --surface-2:  #1C1C19;
+    --border:     #2A2A24;
+    --text:       #EDE8DC;
+    --muted:      #7A756A;
+    --faint:      #2E2E28;
+    --accent:     #C8913A;
+    --accent-hi:  #E8B060;
+    --white:      #F5F0E8;
+
+    --ease: cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 html {
@@ -17,15 +21,16 @@ html {
     scrollbar-gutter: stable;
 }
 
+/* ─── Selection ─── */
 ::selection {
     background-color: var(--accent);
-    color: var(--white);
+    color: var(--bg);
 }
 
-/* Custom minimal scrollbar for webkit */
+/* ─── Scrollbar (dark) ─── */
 ::-webkit-scrollbar {
-    width: 8px;
-    height: 8px;
+    width: 6px;
+    height: 6px;
 }
 
 ::-webkit-scrollbar-track {
@@ -34,32 +39,171 @@ html {
 
 ::-webkit-scrollbar-thumb {
     background: var(--border);
-    border-radius: 4px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-    background: var(--ink-muted);
+    background: var(--muted);
 }
 
-/* Keep minimal base rules — layout and utilities use Tailwind classes */
+/* ─── Typography Defaults ─── */
+h1, h2, h3, h4, h5, h6 {
+    font-family: var(--serif), Georgia, serif;
+    font-weight: 300;
+}
+
+code, pre, .mono-text {
+    font-family: var(--mono), monospace;
+}
+
+/* ─── Body ─── */
 body {
-    font-family: var(--font-dm-sans), ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Roboto,
-        'Helvetica Neue', 'Noto Sans', 'Liberation Sans', Arial, 'DM Sans',
-        sans-serif;
+    font-family: var(--sans), ui-sans-serif, system-ui, -apple-system, sans-serif;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     background-color: var(--bg);
-    color: var(--ink);
+    color: var(--text);
+    position: relative;
 }
 
+/* Film-grain noise texture overlay */
+body::after {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 999;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E");
+}
+
+/* ─── Base transitions ─── */
 a {
-    transition-property: color;
-    transition-duration: 200ms;
+    transition: color 200ms var(--ease);
 }
 
 button {
-    transition-property: all;
-    transition-duration: 200ms;
+    transition: all 200ms var(--ease);
 }
 
-/* Component-level utility classes have been moved into JSX as Tailwind utilities. */
+/* ─── Hero Load Sequence ─── */
+@keyframes fadeUp {
+    from { opacity: 0; transform: translateY(32px); }
+    to   { opacity: 1; transform: translateY(0); }
+}
+
+.h-a1 { opacity: 0; animation: fadeUp 0.9s ease 0.1s forwards; }
+.h-a2 { opacity: 0; animation: fadeUp 0.9s ease 0.3s forwards; }
+.h-a3 { opacity: 0; animation: fadeUp 0.9s ease 0.55s forwards; }
+
+/* ─── Scroll Reveal ─── */
+.reveal {
+    opacity: 0;
+    transform: translateY(28px);
+    transition: opacity 0.75s var(--ease), transform 0.75s var(--ease);
+}
+
+.reveal.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.reveal-d1 { transition-delay: 0.08s; }
+.reveal-d2 { transition-delay: 0.18s; }
+.reveal-d3 { transition-delay: 0.28s; }
+
+/* ─── Status Dot ─── */
+@keyframes pulse {
+    0%, 100% { opacity: 1; }
+    50%      { opacity: 0.25; }
+}
+
+/* ─── Button utilities ─── */
+.btn-fill {
+    font-family: var(--mono);
+    font-size: 10.5px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    padding: 13px 28px;
+    background: var(--accent);
+    color: var(--bg);
+    border: none;
+    border-radius: 0;
+    cursor: pointer;
+    transition: all 200ms var(--ease);
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.btn-fill:hover {
+    background: var(--accent-hi);
+    transform: translateY(-2px);
+}
+
+.btn-outline {
+    font-family: var(--mono);
+    font-size: 10.5px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    padding: 13px 28px;
+    background: transparent;
+    color: var(--muted);
+    border: 1px solid var(--border);
+    border-radius: 0;
+    cursor: pointer;
+    transition: all 200ms var(--ease);
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.btn-outline:hover {
+    border-color: var(--accent);
+    color: var(--accent);
+}
+
+/* ─── Section Tag ─── */
+.section-tag {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin-bottom: 32px;
+}
+
+.section-tag__number {
+    font-family: var(--mono);
+    font-size: 10.5px;
+    color: var(--accent);
+    letter-spacing: 0.14em;
+}
+
+.section-tag__rule {
+    width: 60px;
+    height: 1px;
+    background: var(--border);
+}
+
+.section-tag__label {
+    font-family: var(--mono);
+    font-size: 10.5px;
+    text-transform: uppercase;
+    color: var(--muted);
+    letter-spacing: 0.14em;
+}
+
+/* ─── Global no-radius override ─── */
+*:not([data-keep-radius]) {
+    border-radius: 0 !important;
+}
+
+/* ─── Responsive: Mobile ─── */
+@media (max-width: 768px) {
+    .section-tag {
+        margin-bottom: 20px;
+    }
+    .section-tag__rule {
+        width: 30px;
+    }
+}

@@ -2,13 +2,38 @@ export default function Footer() {
   const currentYear = new Date().getFullYear();
 
   return (
-    <footer className="border-t border-border bg-bg-subtle py-12">
-      <div className="max-w-4xl mx-auto px-6 flex flex-col md:flex-row items-center justify-between gap-4">
-        <p className="text-sm font-medium text-ink-muted">
+    <footer
+      style={{
+        borderTop: '1px solid var(--border)',
+        background: 'var(--bg)',
+        padding: '48px',
+      }}
+    >
+      <div className="flex flex-col md:flex-row items-center justify-between gap-4">
+        <p
+          style={{
+            fontFamily: 'var(--mono)',
+            fontSize: '10px',
+            textTransform: 'uppercase',
+            letterSpacing: '0.14em',
+            color: 'var(--faint)',
+          }}
+        >
           © {currentYear} Ademola Oluwasola Opeyemi
         </p>
-        <p className="text-sm text-ink-muted flex items-center gap-1.5">
-          Built with <span className="text-ink font-medium">Next.js</span> & <span className="text-ink font-medium">Tailwind</span>
+        <p
+          style={{
+            fontFamily: 'var(--mono)',
+            fontSize: '10px',
+            textTransform: 'uppercase',
+            letterSpacing: '0.14em',
+            color: 'var(--faint)',
+          }}
+          className="flex items-center gap-1.5"
+        >
+          Built with{' '}
+          <span style={{ color: 'var(--muted)' }}>Next.js</span> &{' '}
+          <span style={{ color: 'var(--muted)' }}>Tailwind</span>
         </p>
       </div>
     </footer>

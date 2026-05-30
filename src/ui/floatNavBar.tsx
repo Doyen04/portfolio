@@ -52,6 +52,7 @@ export default function FloatNav() {
       {SECTIONS.map((section) => (
         <div key={section.id} className={styles.nav_dot_wrapper}>
           <button
+            data-keep-radius="true"
             onClick={() => scrollToSection(section.id)}
             className={`${styles.nav_dot} ${
               activeSection === section.id ? styles.active : ''

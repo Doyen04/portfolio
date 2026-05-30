@@ -10,7 +10,7 @@ export default function Nav() {
 
   useEffect(() => {
     const handleScroll = () => {
-      setIsScrolled(window.scrollY > 50);
+      setIsScrolled(window.scrollY > 60);
     };
 
     window.addEventListener('scroll', handleScroll);
@@ -26,13 +26,18 @@ export default function Nav() {
 
   return (
     <nav
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
+      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-400 ${
         isScrolled
-          ? 'bg-bg/80 backdrop-blur-md border-b border-border'
+          ? 'border-b border-border'
           : 'bg-transparent'
       }`}
+      style={isScrolled ? {
+        background: 'rgba(12,12,10,0.88)',
+        backdropFilter: 'blur(16px)',
+        WebkitBackdropFilter: 'blur(16px)',
+      } : undefined}
     >
-      <div className="max-w-4xl mx-auto px-6 flex items-center justify-between py-6">
+      <div className="w-full px-12 flex items-center justify-between py-5">
         {/* Logo */}
         <Link href="#hero" className="hover:opacity-90 transition-opacity">
           <Logo />
@@ -44,20 +49,52 @@ export default function Nav() {
             <a
               key={link.href}
               href={link.href}
-              className="relative text-sm font-medium text-ink-muted hover:text-ink transition-colors after:absolute after:bottom-[-4px] after:left-0 after:h-[1px] after:w-0 after:bg-accent after:transition-all after:duration-300 hover:after:w-full"
+              className="transition-colors"
+              style={{
+                fontFamily: 'var(--mono)',
+                fontSize: '10.5px',
+                textTransform: 'uppercase',
+                letterSpacing: '0.14em',
+                color: 'var(--muted)',
+              }}
+              onMouseEnter={(e) => (e.currentTarget.style.color = 'var(--accent)')}
+              onMouseLeave={(e) => (e.currentTarget.style.color = 'var(--muted)')}
             >
               {link.label}
             </a>
           ))}
         </div>
 
-        {/* Desktop CTA Button */}
-        <div className="hidden md:block">
+        {/* Status Indicator + CTA */}
+        <div className="hidden md:flex items-center gap-6">
+          {/* Available for work */}
+          <div className="flex items-center gap-2">
+            <span
+              data-keep-radius="true"
+              className="inline-block w-2 h-2 rounded-full"
+              style={{
+                backgroundColor: '#4ADE80',
+                animation: 'pulse 2.4s ease-in-out infinite',
+              }}
+            />
+            <span
+              style={{
+                fontFamily: 'var(--mono)',
+                fontSize: '10px',
+                textTransform: 'uppercase',
+                letterSpacing: '0.12em',
+                color: 'var(--muted)',
+              }}
+            >
+              Available for work
+            </span>
+          </div>
+
           <a
             href="/Ademola_Opeyemi_CV.pdf"
             target="_blank"
             rel="noopener noreferrer"
-            className="px-6 py-3 bg-accent text-white text-sm font-medium rounded-lg transition-all duration-200 hover:bg-accent-hover active:scale-95"
+            className="btn-fill"
           >
             Download CV
           </a>
@@ -66,7 +103,8 @@ export default function Nav() {
         {/* Mobile Menu Button */}
         <button
           onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-          className="md:hidden text-ink p-2 -mr-2"
+          className="md:hidden p-2 -mr-2"
+          style={{ color: 'var(--text)' }}
           aria-label="Toggle menu"
         >
           {isMobileMenuOpen ? (
@@ -79,23 +117,58 @@ export default function Nav() {
 
       {/* Mobile Navigation */}
       {isMobileMenuOpen && (
-        <div className="md:hidden border-t border-border bg-bg/95 backdrop-blur-md">
-          <div className="max-w-4xl mx-auto px-6 py-6 flex flex-col gap-4">
+        <div
+          className="md:hidden border-t border-border"
+          style={{
+            background: 'var(--surface)',
+            backdropFilter: 'blur(16px)',
+          }}
+        >
+          <div className="px-12 py-6 flex flex-col gap-5">
             {navLinks.map((link) => (
               <a
                 key={link.href}
                 href={link.href}
-                className="text-sm text-ink-muted hover:text-ink transition-colors"
+                className="transition-colors"
+                style={{
+                  fontFamily: 'var(--mono)',
+                  fontSize: '10.5px',
+                  textTransform: 'uppercase',
+                  letterSpacing: '0.14em',
+                  color: 'var(--muted)',
+                }}
                 onClick={() => setIsMobileMenuOpen(false)}
               >
                 {link.label}
               </a>
             ))}
+            {/* Available for work (mobile) */}
+            <div className="flex items-center gap-2 pt-2">
+              <span
+                data-keep-radius="true"
+                className="inline-block w-2 h-2 rounded-full"
+                style={{
+                  backgroundColor: '#4ADE80',
+                  animation: 'pulse 2.4s ease-in-out infinite',
+                }}
+              />
+              <span
+                style={{
+                  fontFamily: 'var(--mono)',
+                  fontSize: '10px',
+                  textTransform: 'uppercase',
+                  letterSpacing: '0.12em',
+                  color: 'var(--muted)',
+                }}
+              >
+                Available for work
+              </span>
+            </div>
             <a
               href="/Ademola_Opeyemi_CV.pdf"
               target="_blank"
               rel="noopener noreferrer"
-              className="px-6 py-3 bg-accent text-white text-sm font-medium rounded-lg transition-all duration-200 hover:bg-accent-hover active:scale-95 inline-block"
+              className="btn-fill inline-block text-center"
             >
               Download CV
             </a>

@@ -7,18 +7,18 @@ const containerVariants = {
   visible: {
     opacity: 1,
     transition: {
-      staggerChildren: 0.1,
-      delayChildren: 0.2,
+      staggerChildren: 0.15,
+      delayChildren: 0.1,
     },
   },
 };
 
 const itemVariants = {
-  hidden: { opacity: 0, y: 20 },
+  hidden: { opacity: 0, y: 32 },
   visible: {
     opacity: 1,
     y: 0,
-    transition: { duration: 0.6, ease: 'easeOut' },
+    transition: { duration: 0.9, ease: [0.4, 0, 0.2, 1] },
   },
 };
 
@@ -26,74 +26,90 @@ export default function Hero() {
   return (
     <section
       id="hero"
-      className="relative min-h-screen flex items-center justify-center pt-20 md:pt-0 overflow-hidden"
+      className="relative min-h-screen flex items-center pt-20 md:pt-0 overflow-hidden"
+      style={{ padding: '0 48px' }}
     >
-      {/* Dot grid background on right (desktop only) */}
+      {/* Ghost letter "A" */}
       <div
-        className="hidden lg:block absolute top-0 right-0 w-[45%] h-full opacity-30 pointer-events-none"
+        className="absolute pointer-events-none select-none"
         style={{
-          backgroundImage:
-            'radial-gradient(circle, var(--border) 2px, transparent 1px)',
-          backgroundSize: '32px 32px',
-          maskImage: 'linear-gradient(to right, transparent, black 40%, black 80%, transparent)',
-          WebkitMaskImage: 'linear-gradient(to right, transparent, black 40%, black 80%, transparent)',
+          right: '-60px',
+          top: '48%',
+          transform: 'translateY(-50%)',
+          fontFamily: 'var(--serif)',
+          fontSize: '52vw',
+          fontWeight: 700,
+          color: 'transparent',
+          WebkitTextStroke: '1px var(--faint)',
+          lineHeight: 0.8,
         }}
-      />
+        aria-hidden="true"
+      >
+        A
+      </div>
 
       <motion.div
-        className="max-w-4xl mx-auto px-6 relative z-10 w-full"
+        className="relative z-10 w-full"
         variants={containerVariants}
         initial="hidden"
         animate="visible"
       >
-        {/* Eyebrow */}
-        <motion.p
-          variants={itemVariants}
-          className="text-sm font-mono uppercase tracking-widest mb-6 text-accent"
-        >
-          Welcome
-        </motion.p>
 
-        {/* Heading */}
+
+        {/* Heading — Massive serif name */}
         <motion.h1
           variants={itemVariants}
-          className="font-serif font-bold text-ink mb-6 leading-tight tracking-tight"
           style={{
-            fontSize: 'clamp(1.2rem, 8vw, 3.6rem)',
+            fontFamily: 'var(--serif)',
+            fontSize: 'clamp(88px, 14.5vw, 220px)',
+            fontWeight: 300,
+            lineHeight: 0.87,
+            letterSpacing: '-0.025em',
+            color: 'var(--white)',
+            marginBottom: '32px',
+            textAlign: 'center',
           }}
         >
-          Ademola Oluwasola Opeyemi
+          Ademola
+          <br />
+          <span style={{ color: 'var(--accent)', fontStyle: 'italic' }}>Opeyemi</span>
         </motion.h1>
 
         {/* Subheading */}
         <motion.h2
           variants={itemVariants}
-          className="text-2xl md:text-3xl text-ink-muted font-light mb-8"
+          style={{
+            fontFamily: 'var(--sans)',
+            fontSize: '16.5px',
+            fontWeight: 300,
+            lineHeight: 1.85,
+            color: 'var(--muted)',
+            maxWidth: '640px',
+            marginBottom: '40px',
+            marginLeft: 'auto',
+            marginRight: 'auto',
+            textAlign: 'center',
+          }}
         >
-          Full-Stack Developer · Lagos, Nigeria
+          Full-Stack Developer based in Lagos, Nigeria. I build production-grade web applications 
+          with Next.js, TypeScript, and PostgreSQL — from SaaS products and institutional platforms 
+          to AI-integrated tools. Currently open to junior developer roles.
         </motion.h2>
-
-        {/* Description */}
-        <motion.p
-          variants={itemVariants}
-          className="text-lg text-ink-muted max-w-2xl mb-12 leading-relaxed"
-        >
-          I build production-grade web applications with Next.js, TypeScript, and PostgreSQL — from SaaS products and institutional platforms to AI-integrated tools. Currently open to junior developer roles.
-        </motion.p>
 
         {/* CTAs */}
         <motion.div
           variants={itemVariants}
-          className="flex flex-col sm:flex-row gap-4 mb-16"
+          className="flex flex-col sm:flex-row justify-center items-center gap-4 mb-16"
         >
-          <a href="#work" className="px-6 py-3 bg-accent text-white font-medium rounded-lg transition-all duration-200 hover:bg-accent-hover hover:shadow-md active:scale-[0.98]">
-            View My Work →
+          <a href="#work" className="btn-fill">
+            View My Work
+            <span>→</span>
           </a>
           <a
             href="/Ademola_Opeyemi_CV.pdf"
             target="_blank"
             rel="noopener noreferrer"
-            className="px-6 py-3 border border-accent text-accent font-medium rounded-lg transition-all duration-200 hover:bg-accent hover:text-white active:scale-[0.98]"
+            className="btn-outline"
           >
             Download CV
           </a>
@@ -102,43 +118,59 @@ export default function Hero() {
         {/* Social Links */}
         <motion.div
           variants={itemVariants}
-          className="flex flex-col sm:flex-row gap-6 sm:gap-8 text-sm pt-4"
+          className="flex flex-col sm:flex-row justify-center items-center gap-6 sm:gap-8 pt-4"
+          style={{
+            fontFamily: 'var(--mono)',
+            fontSize: '10.5px',
+            textTransform: 'uppercase',
+            letterSpacing: '0.14em',
+          }}
         >
           <a
             href="https://github.com/Doyen04"
             target="_blank"
             rel="noopener noreferrer"
-            className="flex items-center gap-2.5 text-ink-muted hover:text-accent transition-colors"
+            className="flex items-center gap-2.5 transition-colors"
+            style={{ color: 'var(--muted)' }}
+            onMouseEnter={(e) => (e.currentTarget.style.color = 'var(--accent)')}
+            onMouseLeave={(e) => (e.currentTarget.style.color = 'var(--muted)')}
           >
-            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M15 22v-4a4.8 4.8 0 0 0-1-3.2c3-.3 6-1.5 6-6.5a5.4 5.4 0 0 0-1.5-3.8 5.4 5.4 0 0 0 .1-3.8s-1.3-.4-4 1.5a13.9 13.9 0 0 0-7 0C4.3 1.6 3 2 3 2a5.4 5.4 0 0 0 .1 3.8A5.4 5.4 0 0 0 1.5 12c0 5 3 6.2 6 6.5-.8.5-1.5 1.4-1.8 2.8-.3.2-1.3.8-2.6-.4-1.2-1.4-1.5-2.4-1.5-2.4"/></svg>
-            <span className="font-medium">github.com/Doyen04</span>
+            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M15 22v-4a4.8 4.8 0 0 0-1-3.2c3-.3 6-1.5 6-6.5a5.4 5.4 0 0 0-1.5-3.8 5.4 5.4 0 0 0 .1-3.8s-1.3-.4-4 1.5a13.9 13.9 0 0 0-7 0C4.3 1.6 3 2 3 2a5.4 5.4 0 0 0 .1 3.8A5.4 5.4 0 0 0 1.5 12c0 5 3 6.2 6 6.5-.8.5-1.5 1.4-1.8 2.8-.3.2-1.3.8-2.6-.4-1.2-1.4-1.5-2.4-1.5-2.4"/></svg>
+            <span>github.com/Doyen04</span>
           </a>
           <a
             href="https://linkedin.com/in/Doyen04"
             target="_blank"
             rel="noopener noreferrer"
-            className="flex items-center gap-2.5 text-ink-muted hover:text-accent transition-colors"
+            className="flex items-center gap-2.5 transition-colors"
+            style={{ color: 'var(--muted)' }}
+            onMouseEnter={(e) => (e.currentTarget.style.color = 'var(--accent)')}
+            onMouseLeave={(e) => (e.currentTarget.style.color = 'var(--muted)')}
           >
-            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect width="4" height="12" x="2" y="9"/><circle cx="4" cy="4" r="2"/></svg>
-            <span className="font-medium">linkedin.com/in/Doyen04</span>
+            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect width="4" height="12" x="2" y="9"/><circle cx="4" cy="4" r="2"/></svg>
+            <span>linkedin.com/in/Doyen04</span>
           </a>
           <a
             href="mailto:oluwasolaopeyemi93@gmail.com"
-            className="flex items-center gap-2.5 text-ink-muted hover:text-accent transition-colors"
+            className="flex items-center gap-2.5 transition-colors"
+            style={{ color: 'var(--muted)' }}
+            onMouseEnter={(e) => (e.currentTarget.style.color = 'var(--accent)')}
+            onMouseLeave={(e) => (e.currentTarget.style.color = 'var(--muted)')}
           >
-            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
-            <span className="font-medium">Email</span>
+            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect width="20" height="16" x="2" y="4" rx="0"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
+            <span>Email</span>
           </a>
         </motion.div>
       </motion.div>
 
       {/* Scroll indicator */}
       <motion.div
-        className="absolute bottom-8 left-1/2 transform -translate-x-1/2 text-accent"
+        className="absolute bottom-8 left-1/2 transform -translate-x-1/2"
+        style={{ color: 'var(--muted)' }}
         animate={{ y: [0, 8, 0] }}
         transition={{ duration: 2, repeat: Infinity }}
       >
-        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><path d="m6 9 6 6 6-6"/></svg>
       </motion.div>
     </section>
   );

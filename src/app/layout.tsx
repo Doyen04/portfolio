@@ -1,23 +1,24 @@
 import type { Metadata } from 'next';
-import { Instrument_Serif, DM_Sans, Bungee } from 'next/font/google';
+import { Cormorant_Garamond, JetBrains_Mono, Plus_Jakarta_Sans } from 'next/font/google';
 import '../styles/globals.css';
 
-const instrumentSerif = Instrument_Serif({
+const cormorantGaramond = Cormorant_Garamond({
   subsets: ['latin'],
-  weight: ['400'],
-  variable: '--font-instrument-serif',
+  weight: ['300', '500', '700'],
+  style: ['normal', 'italic'],
+  variable: '--serif',
 });
 
-const dmSans = DM_Sans({
+const jetbrainsMono = JetBrains_Mono({
   subsets: ['latin'],
-  weight: ['400', '500', '600', '700'],
-  variable: '--font-dm-sans',
+  weight: ['300', '400'],
+  variable: '--mono',
 });
 
-const bungee = Bungee({
+const plusJakartaSans = Plus_Jakarta_Sans({
   subsets: ['latin'],
-  weight: ['400'],
-  variable: '--font-bungee',
+  weight: ['300', '400', '500'],
+  variable: '--sans',
 });
 
 export const metadata: Metadata = {
@@ -57,7 +58,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${instrumentSerif.variable} ${dmSans.variable} ${bungee.variable} antialiased`}
+        className={`${cormorantGaramond.variable} ${jetbrainsMono.variable} ${plusJakartaSans.variable} antialiased`}
       >
         {children}
       </body>

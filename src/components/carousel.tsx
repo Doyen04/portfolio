@@ -33,8 +33,8 @@ export default function Carousel() {
       <div className={styles.marquee_track}>
         {repeatedSkills.map((skill, index) => (
           <div key={`${skill}-${index}`} className={styles.marquee_item}>
-            <span className="w-2 h-2 rounded-full bg-accent" />
             <span>{skill}</span>
+            <span className={styles.diamond}>◆</span>
           </div>
         ))}
       </div>
