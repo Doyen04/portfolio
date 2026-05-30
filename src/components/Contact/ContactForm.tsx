@@ -1,15 +1,58 @@
+import { useState } from 'react';
+
 type FormState = { name: string; email: string; message: string };
 
-type Props = {
-    formState: FormState;
-    errors: Record<string, string>;
-    isLoading: boolean;
-    isSuccess: boolean;
-    handleChange: (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => void;
-    handleSubmit: (e: React.FormEvent<HTMLFormElement>) => Promise<void> | void;
-};
+export default function ContactForm() {
+    const [formState, setFormState] = useState<FormState>({ name: '', email: '', message: '' });
+    const [errors, setErrors] = useState<Record<string, string>>({});
+    const [isLoading, setIsLoading] = useState(false);
+    const [isSuccess, setIsSuccess] = useState(false);
 
-export default function ContactForm({ formState, errors, isLoading, isSuccess, handleChange, handleSubmit }: Props) {
+    const validateForm = () => {
+        const newErrors: Record<string, string> = {};
+
+        if (!formState.name.trim()) newErrors.name = 'Name is required';
+        if (!formState.email.trim()) newErrors.email = 'Email is required';
+        else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formState.email)) newErrors.email = 'Please enter a valid email';
+        if (!formState.message.trim()) newErrors.message = 'Message is required';
+        else if (formState.message.trim().length < 10) newErrors.message = 'Message must be at least 10 characters';
+
+        setErrors(newErrors);
+        return Object.keys(newErrors).length === 0;
+    };
+
+    const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+        const { name, value } = e.target;
+        setFormState((prev) => ({ ...prev, [name]: value }));
+        if (errors[name]) setErrors((prev) => ({ ...prev, [name]: '' }));
+    };
+
+    const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+        e.preventDefault();
+        if (!validateForm()) return;
+        setIsLoading(true);
+
+        try {
+            const response = await fetch('/api/contact', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(formState),
+            });
+
+            if (response.ok) {
+                setIsSuccess(true);
+                setFormState({ name: '', email: '', message: '' });
+                setTimeout(() => setIsSuccess(false), 5000);
+            } else {
+                setErrors({ submit: 'Failed to send message. Please try again.' });
+            }
+        } catch {
+            setErrors({ submit: 'An error occurred. Please try again.' });
+        } finally {
+            setIsLoading(false);
+        }
+    };
+
     if (isSuccess) {
         return (
             <div className="flex flex-col items-center justify-center p-12 text-center border border-(--border) min-h-75">

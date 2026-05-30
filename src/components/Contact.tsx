@@ -1,6 +1,5 @@
-'use client';
+ 'use client';
 
-import { useState } from 'react';
 import { motion } from 'framer-motion';
 import ContactForm from './Contact/ContactForm';
 import ContactInfo from './Contact/ContactInfo';
@@ -25,81 +24,6 @@ const itemVariants = {
 };
 
 export default function Contact() {
-    const [formState, setFormState] = useState({
-        name: '',
-        email: '',
-        message: '',
-    });
-    const [errors, setErrors] = useState<Record<string, string>>({});
-    const [isLoading, setIsLoading] = useState(false);
-    const [isSuccess, setIsSuccess] = useState(false);
-
-    const validateForm = () => {
-        const newErrors: Record<string, string> = {};
-
-        if (!formState.name.trim()) {
-            newErrors.name = 'Name is required';
-        }
-
-        if (!formState.email.trim()) {
-            newErrors.email = 'Email is required';
-        } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formState.email)) {
-            newErrors.email = 'Please enter a valid email';
-        }
-
-        if (!formState.message.trim()) {
-            newErrors.message = 'Message is required';
-        } else if (formState.message.trim().length < 10) {
-            newErrors.message = 'Message must be at least 10 characters';
-        }
-
-        setErrors(newErrors);
-        return Object.keys(newErrors).length === 0;
-    };
-
-    const handleChange = (
-        e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
-    ) => {
-        const { name, value } = e.target;
-        setFormState((prev) => ({ ...prev, [name]: value }));
-        // Clear error for this field when user starts typing
-        if (errors[name]) {
-            setErrors((prev) => ({ ...prev, [name]: '' }));
-        }
-    };
-
-    const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-        e.preventDefault();
-
-        if (!validateForm()) {
-            return;
-        }
-
-        setIsLoading(true);
-
-        try {
-            const response = await fetch('/api/contact', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify(formState),
-            });
-
-            if (response.ok) {
-                setIsSuccess(true);
-                setFormState({ name: '', email: '', message: '' });
-                // Reset success message after 5 seconds
-                setTimeout(() => setIsSuccess(false), 5000);
-            } else {
-                setErrors({ submit: 'Failed to send message. Please try again.' });
-            }
-        } catch {
-            setErrors({ submit: 'An error occurred. Please try again.' });
-        } finally {
-            setIsLoading(false);
-        }
-    };
 
     // styles moved to Tailwind classes in JSX
 
@@ -129,7 +53,7 @@ export default function Contact() {
             >
                 {/* Form */}
                 <motion.div variants={itemVariants}>
-                    <ContactForm formState={formState} errors={errors} isLoading={isLoading} isSuccess={isSuccess} handleChange={handleChange} handleSubmit={handleSubmit} />
+                    <ContactForm />
                 </motion.div>
 
                 {/* Contact Info */}
