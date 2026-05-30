@@ -35,12 +35,11 @@ export default function Contact() {
 
             {/* Massive serif heading */}
             <h2 className="mb-4" style={{ fontFamily: 'var(--serif)', fontSize: 'clamp(52px, 9vw, 130px)', fontWeight: 300, lineHeight: 0.95, letterSpacing: '-0.02em', color: 'var(--white)' }}>
-                Let&apos;s{' '}
-                <em style={{ color: 'var(--accent)', fontWeight: 300 }}>talk</em>
+                Let&apos;s{' '}talk
             </h2>
 
             <p className="text-[15px] font-light leading-[1.75] text-(--muted) max-w-125 mb-16" style={{ fontFamily: 'var(--sans)' }}>
-                I&apos;m currently open to junior developer roles, freelance projects, and interesting conversations.
+                I&apos;m currently open to developer roles, freelance projects, and interesting conversations.
             </p>
 
             <motion.div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-start"

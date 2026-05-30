@@ -12,7 +12,7 @@ export default function AboutBio() {
                 obsession is Unplug — a subscription management SaaS I&apos;m building as my final year project.
             </p>
             <p className="text-[15px] font-light leading-[1.85] text-(--muted)" style={{ fontFamily: 'var(--sans)' }}>
-                I&apos;m looking for a junior developer role where I can contribute quickly, learn from
+                I&apos;m looking for a developer role where I can contribute quickly, learn from
                 experienced engineers, and keep building.
             </p>
         </>
