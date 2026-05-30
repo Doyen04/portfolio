@@ -2,16 +2,17 @@
 
 /* ─── Lagos Editorial — Design Tokens ─── */
 :root {
-    --bg:         #0C0C0A;
-    --surface:    #141412;
-    --surface-2:  #1C1C19;
-    --border:     #2A2A24;
-    --text:       #EDE8DC;
-    --muted:      #7A756A;
-    --faint:      #2E2E28;
-    --accent:     #C8913A;
-    --accent-hi:  #E8B060;
-    --white:      #F5F0E8;
+    /* Minimal Mono — monochrome, subtle accent */
+    --bg:         #0B0B0B;   /* page background */
+    --surface:    #0F0F10;   /* elevated surfaces */
+    --surface-2:  #161617;   /* secondary surfaces */
+    --border:     #262626;   /* rules and dividers */
+    --text:       #E6E6E6;   /* primary text */
+    --muted:      #9A9A9A;   /* secondary text */
+    --faint:      #2B2B2B;   /* ghost elements */
+    --accent:     #9DA3A6;   /* subtle monochrome accent */
+    --accent-hi:  #BFC6C8;   /* hover/active accent */
+    --white:      #F5F5F5;   /* headings/strong text */
 
     --ease: cubic-bezier(0.4, 0, 0.2, 1);
 }

@@ -2,6 +2,12 @@
 
 import { motion } from 'framer-motion';
 
+function formatProjectName(name: string) {
+  return name
+    .replace(/[-_]+/g, ' ')
+    .replace(/\b\w/g, (character) => character.toUpperCase());
+}
+
 interface ProjectCardProps {
   number: string;
   name: string;
@@ -9,6 +15,7 @@ interface ProjectCardProps {
   tags: string[];
   repoUrl: string;
   stars: number;
+  className?: string;
 }
 
 export default function ProjectCard({
@@ -18,13 +25,14 @@ export default function ProjectCard({
   tags,
   repoUrl,
   stars,
+  className,
 }: ProjectCardProps) {
   return (
     <motion.a
       href={repoUrl}
       target="_blank"
       rel="noopener noreferrer"
-      className="group block transition-colors"
+      className={`group block transition-colors ${className ?? ''}`}
       style={{
         border: '1px solid var(--border)',
         padding: '32px',
@@ -54,7 +62,7 @@ export default function ProjectCard({
             color: 'var(--faint)',
           }}
         >
-          <span className="group-hover:!text-[var(--accent)] transition-colors">↗</span>
+          <span className="group-hover:text-(--accent)! transition-colors">↗</span>
         </span>
       </div>
 
@@ -69,7 +77,7 @@ export default function ProjectCard({
           marginBottom: '12px',
         }}
       >
-        {name}
+        {formatProjectName(name)}
       </h3>
 
       {/* Description */}

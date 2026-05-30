@@ -1,6 +1,12 @@
 import { getGitHubRepos } from '@/lib/github';
-import ProjectCard from './ProjectCard';
 import BrowserMockup from '@/ui/BrowserMockup';
+import ProjectCard from './ProjectCard';
+
+function formatProjectName(name: string) {
+  return name
+    .replace(/[-_]+/g, ' ')
+    .replace(/\b\w/g, (character) => character.toUpperCase());
+}
 
 const FEATURED_PROJECTS = [
   {
@@ -21,8 +27,8 @@ const FEATURED_PROJECTS = [
     repoSlug: 'catalyst-reactor',
     displayName: 'Catalyst Reactor',
     description:
-      'Figma-inspired collaborative browser design tool with Konva.js canvas engine and real-time state',
-    tags: ['React', 'Konva.js', 'Zustand', 'TypeScript'],
+      'Figma-inspired collaborative browser design tool with CanvasKit canvas engine and real-time state',
+    tags: ['React', 'CanvasKit', 'Zustand', 'TypeScript'],
   },
   {
     repoSlug: 'carrom-pool',
@@ -35,26 +41,26 @@ const FEATURED_PROJECTS = [
 
 export default async function Projects() {
   const repos = await getGitHubRepos();
-  const repoMap = new Map(repos.map((r) => [r.name, r]));
+  const repoMap = new Map(repos.map((repo) => [repo.name, repo]));
 
-  const featuredProjects = FEATURED_PROJECTS
-    .map((project, idx) => {
-      const repo = repoMap.get(project.repoSlug);
-      return {
-        number: String(idx + 1).padStart(2, '0'),
-        name: project.displayName,
-        description: project.description,
-        tags: project.tags,
-        repoUrl: repo?.url || `https://github.com/Doyen04/${project.repoSlug}`,
-        stars: repo?.stargazers_count || 0,
-      };
-    });
+  const featuredProjects = FEATURED_PROJECTS.map((project, index) => {
+    const repo = repoMap.get(project.repoSlug);
+
+    return {
+      number: String(index + 1).padStart(2, '0'),
+      name: formatProjectName(project.displayName),
+      description: repo?.description || project.description,
+      tags: project.tags,
+      repoUrl: repo?.url || `https://github.com/Doyen04/${project.repoSlug}`,
+      stars: repo?.stargazers_count || 0,
+    };
+  });
 
   const unplugProject = featuredProjects[0];
   const otherFeaturedProjects = featuredProjects.slice(1);
 
   const otherRepos = repos
-    .filter((repo) => !FEATURED_PROJECTS.some((p) => p.repoSlug === repo.name))
+    .filter((repo) => !FEATURED_PROJECTS.some((project) => project.repoSlug === repo.name))
     .slice(0, 6);
 
   return (
@@ -66,14 +72,12 @@ export default async function Projects() {
       }}
     >
       <div>
-        {/* Section Tag */}
         <div className="section-tag">
           <span className="section-tag__number">[01]</span>
           <span className="section-tag__rule" />
           <span className="section-tag__label">Selected Work</span>
         </div>
 
-        {/* Section Heading */}
         <h2
           style={{
             fontFamily: 'var(--serif)',
@@ -85,52 +89,66 @@ export default async function Projects() {
             marginBottom: '64px',
           }}
         >
-          Things I&apos;ve{' '}
-          <em style={{ color: 'var(--accent)', fontWeight: 300 }}>built</em>
+          Things I&apos;ve <em style={{ color: 'var(--accent)', fontWeight: 300 }}>built</em>
         </h2>
 
-        {/* Top Featured Showcase: Unplug (1fr 1fr grid) */}
         {unplugProject && (
           <div
-            className="grid grid-cols-1 lg:grid-cols-2 gap-12 mb-16"
+            className="grid grid-cols-1 lg:grid-cols-5 gap-4 lg:gap-5 mb-16"
             style={{
               border: '1px solid var(--border)',
-              padding: '32px',
-              background: 'transparent',
+              padding: '16px',
+              background:
+                'linear-gradient(180deg, rgba(255,255,255,0.03) 0%, rgba(255,255,255,0.01) 100%)',
             }}
           >
-            {/* Left Column: Details */}
-            <div className="flex flex-col justify-between gap-8">
+            <div
+              className="lg:col-span-3 flex flex-col justify-between gap-8 rounded-[inherit] border border-(--border) p-8 lg:p-10"
+              style={{ background: 'rgba(255,255,255,0.015)' }}
+            >
               <div>
-                <div className="flex items-center justify-between mb-6">
+                <div className="flex items-start justify-between gap-4 mb-8">
+                  <div>
+                    <span
+                      style={{
+                        fontFamily: 'var(--mono)',
+                        fontSize: '10px',
+                        textTransform: 'uppercase',
+                        letterSpacing: '0.14em',
+                        color: 'var(--accent)',
+                      }}
+                    >
+                      Featured Product
+                    </span>
+                    <div
+                      style={{
+                        fontFamily: 'var(--mono)',
+                        fontSize: '12px',
+                        color: 'var(--muted)',
+                        marginTop: '10px',
+                      }}
+                    >
+                      {unplugProject.stars} stars on GitHub
+                    </div>
+                  </div>
+
                   <span
                     style={{
                       fontFamily: 'var(--mono)',
-                      fontSize: '80px',
+                      fontSize: '64px',
                       fontWeight: 300,
                       color: 'var(--faint)',
-                      lineHeight: 1,
+                      lineHeight: 0.9,
                     }}
                   >
                     {unplugProject.number}
-                  </span>
-                  <span
-                    style={{
-                      fontFamily: 'var(--mono)',
-                      fontSize: '10px',
-                      textTransform: 'uppercase',
-                      letterSpacing: '0.14em',
-                      color: 'var(--accent)',
-                    }}
-                  >
-                    Featured Product
                   </span>
                 </div>
 
                 <h3
                   style={{
                     fontFamily: 'var(--serif)',
-                    fontSize: '42px',
+                    fontSize: 'clamp(34px, 4vw, 56px)',
                     fontWeight: 500,
                     lineHeight: 1.05,
                     color: 'var(--white)',
@@ -148,6 +166,7 @@ export default async function Projects() {
                     lineHeight: 1.75,
                     color: 'var(--muted)',
                     marginBottom: '24px',
+                    maxWidth: '56ch',
                   }}
                 >
                   {unplugProject.description}
@@ -182,7 +201,7 @@ export default async function Projects() {
                 >
                   View My Work <span>→</span>
                 </a>
-                
+
                 <div
                   className="flex items-center gap-1.5"
                   style={{
@@ -191,45 +210,51 @@ export default async function Projects() {
                     color: 'var(--muted)',
                   }}
                 >
-                  <svg style={{ color: 'var(--accent)' }} xmlns="http://www.w3.org/2000/svg" width="10" height="10" viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                  <svg
+                    style={{ color: 'var(--accent)' }}
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="10"
+                    height="10"
+                    viewBox="0 0 24 24"
+                    fill="currentColor"
+                    stroke="currentColor"
+                    strokeWidth="2"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  >
+                    <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" />
+                  </svg>
                   <span>{unplugProject.stars}</span>
                 </div>
               </div>
             </div>
 
-            {/* Right Column: Browser Mockup */}
-            <div className="w-full flex items-center justify-center">
+            <div
+              className="lg:col-span-2 w-full flex items-center justify-center rounded-[inherit] border border-(--border) p-6 lg:p-8"
+              style={{ background: 'rgba(0,0,0,0.12)' }}
+            >
               <BrowserMockup />
             </div>
           </div>
         )}
 
-        {/* Featured Projects Card Row (3 Columns) */}
-        <div
-          className="grid grid-cols-1 md:grid-cols-3"
-          style={{
-            gap: '3px',
-            marginBottom: '80px',
-          }}
-        >
-          {otherFeaturedProjects.map((project) => (
-            <ProjectCard key={project.number} {...project} />
+        <div className="grid grid-cols-1 md:grid-cols-3" style={{ gap: '14px', marginBottom: '80px' }}>
+          {otherFeaturedProjects.map((project, index) => (
+            <ProjectCard
+              key={project.number}
+              {...project}
+              className={index === 0 ? 'md:col-span-2' : 'md:col-span-1'}
+            />
           ))}
         </div>
 
-        {/* Other Repos */}
         {otherRepos.length > 0 && (
-          <div
-            style={{
-              borderTop: '1px solid var(--border)',
-              paddingTop: '48px',
-            }}
-          >
+          <div style={{ borderTop: '1px solid var(--border)', paddingTop: '48px' }}>
             <a
               href="https://github.com/Doyen04?tab=repositories"
               target="_blank"
               rel="noopener noreferrer"
-              className="group inline-flex items-center gap-2 mb-8 transition-colors text-[var(--muted)] hover:text-[var(--accent)]"
+              className="group inline-flex items-center gap-2 mb-8 transition-colors text-(--muted) hover:text-(--accent)"
               style={{
                 fontFamily: 'var(--mono)',
                 fontSize: '10.5px',
@@ -241,15 +266,10 @@ export default async function Projects() {
               <span className="transition-transform duration-300 group-hover:translate-x-1">→</span>
             </a>
 
-            <div
-              className="grid grid-cols-1 md:grid-cols-3"
-              style={{
-                gap: '3px',
-              }}
-            >
-              {otherRepos.map((repo, idx) => {
-                const isLarge = idx === 0 || idx === 3 || idx === 5;
-                const colSpanClass = isLarge ? 'md:col-span-2' : 'md:col-span-1';
+            <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3" style={{ gap: '14px' }}>
+              {otherRepos.map((repo, index) => {
+                const isLarge = index === 0 || index === 3;
+                const colSpanClass = isLarge ? 'md:col-span-2 xl:col-span-2' : 'md:col-span-1 xl:col-span-1';
 
                 return (
                   <a
@@ -257,33 +277,39 @@ export default async function Projects() {
                     href={repo.url}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className={`group transition-colors bg-transparent hover:bg-[var(--surface)] ${colSpanClass}`}
+                    className={`group relative overflow-hidden transition-colors bg-transparent hover:bg-(--surface) ${colSpanClass}`}
                     style={{
                       border: '1px solid var(--border)',
                       padding: '24px',
                       display: 'flex',
                       flexDirection: 'column',
                       justifyContent: 'space-between',
-                      minHeight: '180px',
+                      minHeight: '210px',
                     }}
                   >
+                    <div
+                      aria-hidden="true"
+                      className="absolute inset-x-0 top-0 h-px bg-linear-to-r from-transparent via-(--accent) to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100"
+                    />
+
                     <div className="flex-1">
                       <h4
-                        className="group-hover:!text-[var(--accent)] transition-colors mb-2"
+                        className="group-hover:text-(--accent)! transition-colors mb-2"
                         style={{
                           fontFamily: 'var(--serif)',
-                          fontSize: '22px',
+                          fontSize: '24px',
                           fontWeight: 500,
                           color: 'var(--white)',
                         }}
                       >
-                        {repo.name}
+                        {formatProjectName(repo.name)}
                       </h4>
+
                       {repo.description && (
                         <p
                           style={{
                             fontFamily: 'var(--sans)',
-                            fontSize: '13.5px',
+                            fontSize: '14px',
                             fontWeight: 300,
                             lineHeight: 1.6,
                             color: 'var(--muted)',
@@ -309,8 +335,22 @@ export default async function Projects() {
                           {repo.language}
                         </span>
                       )}
+
                       <div className="flex items-center gap-1" style={{ color: 'var(--muted)', fontSize: '10px' }}>
-                        <svg style={{ color: 'var(--accent)' }} xmlns="http://www.w3.org/2000/svg" width="10" height="10" viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                        <svg
+                          style={{ color: 'var(--accent)' }}
+                          xmlns="http://www.w3.org/2000/svg"
+                          width="10"
+                          height="10"
+                          viewBox="0 0 24 24"
+                          fill="currentColor"
+                          stroke="currentColor"
+                          strokeWidth="2"
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                        >
+                          <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" />
+                        </svg>
                         <span style={{ fontFamily: 'var(--mono)', fontSize: '10px' }}>{repo.stargazers_count}</span>
                       </div>
                     </div>

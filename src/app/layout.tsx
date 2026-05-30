@@ -1,23 +1,22 @@
 import type { Metadata } from 'next';
-import { Cormorant_Garamond, JetBrains_Mono, Plus_Jakarta_Sans } from 'next/font/google';
+import { Fraunces, IBM_Plex_Mono, Manrope } from 'next/font/google';
 import '../styles/globals.css';
 
-const cormorantGaramond = Cormorant_Garamond({
+const fraunces = Fraunces({
   subsets: ['latin'],
-  weight: ['300', '500', '700'],
-  style: ['normal', 'italic'],
+  weight: ['300', '400', '500', '600'],
   variable: '--serif',
 });
 
-const jetbrainsMono = JetBrains_Mono({
+const ibmPlexMono = IBM_Plex_Mono({
   subsets: ['latin'],
-  weight: ['300', '400'],
+  weight: ['400', '500'],
   variable: '--mono',
 });
 
-const plusJakartaSans = Plus_Jakarta_Sans({
+const manrope = Manrope({
   subsets: ['latin'],
-  weight: ['300', '400', '500'],
+  weight: ['300', '400', '500', '600'],
   variable: '--sans',
 });
 
@@ -58,7 +57,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${cormorantGaramond.variable} ${jetbrainsMono.variable} ${plusJakartaSans.variable} antialiased`}
+        className={`${fraunces.variable} ${ibmPlexMono.variable} ${manrope.variable} antialiased`}
       >
         {children}
       </body>
