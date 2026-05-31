@@ -1,8 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
 import nodemailer from 'nodemailer';
 
-const resend = new Resend(process.env.RESEND_API_KEY);
-
 interface ContactFormData {
     name: string;
     email: string;
@@ -49,45 +47,24 @@ export async function POST(request: NextRequest) {
       <p>${escapeHtml(body.message).replace(/\n/g, '<br />')}</p>
     `;
 
-        // Prefer Nodemailer when SMTP settings are provided; otherwise fall back to Resend
-        const hasSmtp = Boolean(process.env.SMTP_HOST && process.env.SMTP_USER && process.env.SMTP_PASS);
+        const transporter = nodemailer.createTransport({
+            host: process.env.SMTP_HOST,
+            port: Number(process.env.SMTP_PORT) || 587,
+            secure: process.env.SMTP_SECURE === 'true',
+            auth: {
+                user: process.env.SMTP_USER,
+                pass: process.env.SMTP_PASS,
+            },
+        });
 
-        if (hasSmtp) {
-            const transporter = nodemailer.createTransport({
-                host: process.env.SMTP_HOST,
-                port: Number(process.env.SMTP_PORT) || 587,
-                secure: process.env.SMTP_SECURE === 'true',
-                auth: {
-                    user: process.env.SMTP_USER,
-                    pass: process.env.SMTP_PASS,
-                },
-            });
+        await transporter.sendMail({
+            from: process.env.FROM_EMAIL || process.env.SMTP_USER,
+            to: process.env.TO_EMAIL || contactEmail,
+            replyTo: body.email,
+            subject: `New message from ${body.name}`,
+            html: htmlBody,
+        });
 
-            await transporter.sendMail({
-                from: process.env.FROM_EMAIL || process.env.SMTP_USER,
-                to: process.env.TO_EMAIL || contactEmail,
-                replyTo: body.email,
-                subject: `New message from ${body.name}`,
-                html: htmlBody,
-            });
-        } else {
-            // Send email via Resend as before
-            const emailResult = await resend.emails.send({
-                from: 'Portfolio Contact <onboarding@resend.dev>',
-                to: contactEmail,
-                replyTo: body.email,
-                subject: `New message from ${body.name}`,
-                html: htmlBody,
-            });
-
-            if (emailResult.error) {
-                console.error('Resend error:', emailResult.error);
-                return NextResponse.json(
-                    { error: 'Failed to send email' },
-                    { status: 500 }
-                );
-            }
-        }
 
         return NextResponse.json(
             { success: true, message: 'Email sent successfully' },
