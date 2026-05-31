@@ -6,6 +6,7 @@ Overview
 This repository contains a personal portfolio built on the Next.js App Router, authored in TypeScript and styled with Tailwind CSS.
 
 Key features
+
 - Modern Next.js app router setup (`src/app`)
 - Responsive hero with modular subcomponents
 - Projects section that fetches repository metadata from GitHub (`src/lib/github.ts`)
@@ -14,6 +15,7 @@ Key features
 - Modularized components and small UI primitives under `src/components` and `src/ui`
 
 Tech stack
+
 - Next.js (App Router)
 - TypeScript
 - Tailwind CSS
@@ -24,6 +26,7 @@ Getting started (local)
 -----------------------
 
 Prerequisites
+
 - Node.js 18+ (or your project's required Node version)
 - npm, yarn, or pnpm
 
@@ -43,7 +46,7 @@ npm run dev
 pnpm dev
 ```
 
-Open http://localhost:3000 to view the site.
+Open <http://localhost:3000> to view the site.
 
 Environment variables
 ---------------------
@@ -51,6 +54,7 @@ Environment variables
 Copy `.env.example` to `.env.local` and fill in values relevant to your environment.
 
 Important variables
+
 - `RESEND_API_KEY` — optional; used when Resend is preferred for sending emails
 - `CONTACT_EMAIL` — default recipient email used by the contact API
 - `SMTP_HOST`, `SMTP_PORT`, `SMTP_USER`, `SMTP_PASS` — when present, the contact API will prefer Nodemailer (SMTP) for delivery
@@ -58,6 +62,7 @@ Important variables
 - `GITHUB_TOKEN` — optional GitHub token to increase API rate limits when fetching repo metadata via `src/lib/github.ts`
 
 The contact API behavior (in `src/app/api/contact/route.ts`) is:
+
 - If `SMTP_HOST` + `SMTP_USER` + `SMTP_PASS` exist, the API uses Nodemailer to send via SMTP.
 - Otherwise the API falls back to the Resend client using `RESEND_API_KEY`.
 
@@ -106,6 +111,7 @@ Further improvements (ideas)
 
 Where to look in the repo
 -------------------------
+
 - `src/components/Projects.tsx` — projects section and featured projects layout
 - `src/components/ProjectCard.tsx` — project card UI
 - `src/app/api/contact/route.ts` — contact form API with Nodemailer/Resend logic
