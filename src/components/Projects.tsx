@@ -91,12 +91,8 @@ export default async function Projects() {
                 )}
 
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-3.5 mb-20">
-                    {otherFeaturedProjects.map((project, index) => (
-                        <ProjectCard
-                            key={project.number}
-                            {...project}
-                            className={index === 0 ? 'md:col-span-2' : 'md:col-span-1'}
-                        />
+                    {otherFeaturedProjects.map((project) => (
+                        <ProjectCard key={project.number} {...project} />
                     ))}
                 </div>
 
