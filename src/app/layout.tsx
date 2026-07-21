@@ -39,7 +39,7 @@ export const metadata: Metadata = {
         title: 'Ademola Opeyemi — Software Developer & Full-Stack Developer',
         description:
             'Full-Stack And Software Developer in Lagos, Nigeria. I build production-grade software and  web apps with Next.js, React, TypeScript, and PostgreSQL.',
-        url: 'https://portfolio-doyen04.vercel.app',
+        url: 'https://doyen-portfolio.vercel.app/',
         siteName: 'Ademola Opeyemi',
         locale: 'en_US',
         type: 'website',

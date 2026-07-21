@@ -16,7 +16,7 @@ export default function header() {
                     <Image src={sendicon} alt="arrow" width={20} height={20} />
                 </button>
                 <button className={style.buttons}>
-                    <Link className={style.links} href={"https://www.linkedin.com/in/sola-opeyemi-155729258"} rel="noopener noreferrer" target="_blank">Connect</Link>
+                    <Link className={style.links} href={"https://www.linkedin.com/in/sola-opeyemi-ademola"} rel="noopener noreferrer" target="_blank">Connect</Link>
                 </button>
             </div>
 
