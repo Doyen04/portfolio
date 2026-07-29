@@ -91,7 +91,7 @@ export default function Nav() {
           </div>
 
           <a
-            href="/Ademola_Opeyemi_CV.pdf"
+            href="/ademola%20oluwasola%20resume.pdf"
             target="_blank"
             rel="noopener noreferrer"
             className="btn-fill"
@@ -165,7 +165,7 @@ export default function Nav() {
               </span>
             </div>
             <a
-              href="/Ademola_Opeyemi_CV.pdf"
+              href="/ademola%20oluwasola%20resume.pdf"
               target="_blank"
               rel="noopener noreferrer"
               className="btn-fill inline-block text-center"

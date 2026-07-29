@@ -5,7 +5,7 @@ export default function HeroActions() {
                 View My Work
                 <span>→</span>
             </a>
-            <a href="/Ademola_Opeyemi_CV.pdf" target="_blank" rel="noopener noreferrer" className="btn-outline">
+            <a href="/ademola%20oluwasola%20resume.pdf" target="_blank" rel="noopener noreferrer" className="btn-outline">
                 Download CV
             </a>
         </>
