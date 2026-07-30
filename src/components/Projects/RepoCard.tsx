@@ -1,3 +1,5 @@
+import SiteScreenshot from '@/ui/SiteScreenshot';
+
 type Repo = {
     id: number | string;
     url: string;
@@ -5,18 +7,21 @@ type Repo = {
     description?: string | null;
     language?: string | null;
     stargazers_count?: number;
+    homepage?: string | null;
 };
 
-export default function RepoCard({ repo, className }: { repo: Repo; className?: string }) {
+export default function RepoCard({ repo }: { repo: Repo }) {
     return (
         <a
             key={repo.id}
-            href={repo.url}
+            href={repo.homepage || repo.url}
             target="_blank"
             rel="noopener noreferrer"
-            className={`group relative overflow-hidden transition-colors bg-transparent hover:bg-(--surface) border border-(--border) p-6 flex flex-col justify-between min-h-52.5 ${className || ''}`}
+            className="group relative overflow-hidden transition-colors bg-transparent hover:bg-(--surface) border border-(--border) p-6 flex flex-col h-full min-h-48"
         >
-            <div aria-hidden="true" className="absolute inset-x-0 top-0 h-px bg-linear-to-r from-transparent via-(--accent) to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
+            <div className="mb-4">
+                <SiteScreenshot siteUrl={repo.homepage} compact noBorder />
+            </div>
 
             <div className="flex-1">
                 <h4 className="group-hover:text-(--accent)! transition-colors mb-2 text-[24px]" style={{ fontFamily: 'var(--serif)', fontWeight: 500, color: 'var(--white)' }}>

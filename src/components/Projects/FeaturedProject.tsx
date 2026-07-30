@@ -1,4 +1,4 @@
-import BrowserMockup from '@/ui/BrowserMockup';
+import SiteScreenshot from '@/ui/SiteScreenshot';
 
 type Props = {
     number: string;
@@ -7,9 +7,10 @@ type Props = {
     tags: string[];
     repoUrl: string;
     stars: number;
+    siteUrl?: string | null;
 };
 
-export default function FeaturedProject({ number, name, description, tags, repoUrl, stars }: Props) {
+export default function FeaturedProject({ number, name, description, tags, repoUrl, stars, siteUrl }: Props) {
     return (
         <div
             className="grid grid-cols-1 lg:grid-cols-5 gap-4 lg:gap-5 mb-16 border border-(--border) p-4"
@@ -83,7 +84,7 @@ export default function FeaturedProject({ number, name, description, tags, repoU
             </div>
 
             <div className="lg:col-span-2 w-full flex items-center justify-center rounded-[inherit] border border-(--border) p-6 lg:p-8" style={{ background: 'rgba(0,0,0,0.12)' }}>
-                <BrowserMockup />
+                <SiteScreenshot siteUrl={siteUrl} />
             </div>
         </div>
     );

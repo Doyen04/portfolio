@@ -2,6 +2,7 @@
 
 import { motion } from 'framer-motion';
 import { formatProjectName } from '@/lib/format';
+import SiteScreenshot from '@/ui/SiteScreenshot';
 
 interface ProjectCardProps {
     number: string;
@@ -10,6 +11,7 @@ interface ProjectCardProps {
     tags: string[];
     repoUrl: string;
     stars: number;
+    siteUrl?: string | null;
     className?: string;
 }
 
@@ -20,6 +22,7 @@ export default function ProjectCard({
     tags,
     repoUrl,
     stars,
+    siteUrl,
     className,
 }: ProjectCardProps) {
     return (
@@ -27,10 +30,16 @@ export default function ProjectCard({
             href={repoUrl}
             target="_blank"
             rel="noopener noreferrer"
-            className={`group block transition-colors border border-(--border) p-8 bg-transparent no-underline ${className ?? ''}`}
+            className={`group block overflow-hidden transition-colors border border-(--border) p-8 bg-transparent no-underline ${className ?? ''}`}
             whileHover={{ backgroundColor: 'var(--surface)' }}
             transition={{ duration: 0.2 }}
         >
+            {siteUrl && (
+                <div className="-mx-8 -mt-8 mb-6 overflow-hidden border-b border-(--border)">
+                    <SiteScreenshot siteUrl={siteUrl} compact noBorder />
+                </div>
+            )}
+
             {/* Top row: number + arrow */}
             <div className="flex items-start justify-between mb-6">
                 <span className="text-[52px] leading-none text-(--faint)" style={{ fontFamily: 'var(--mono)', fontWeight: 300 }}>

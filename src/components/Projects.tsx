@@ -50,6 +50,7 @@ export default async function Projects() {
             tags: project.tags,
             repoUrl: repo?.url || `https://github.com/Doyen04/${project.repoSlug}`,
             stars: repo?.stargazers_count || 0,
+            siteUrl: repo?.homepage || null,
         };
     });
 
@@ -87,6 +88,7 @@ export default async function Projects() {
                         tags={unplugProject.tags}
                         repoUrl={unplugProject.repoUrl}
                         stars={unplugProject.stars}
+                        siteUrl={unplugProject.siteUrl}
                     />
                 )}
 
@@ -114,12 +116,23 @@ export default async function Projects() {
                             <span className="transition-transform duration-300 group-hover:translate-x-1">→</span>
                         </a>
 
-                        <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-3.5">
+                        <div className="grid grid-cols-1 md:grid-cols-3 gap-3.5 grid-flow-row-dense">
                             {otherRepos.map((repo, index) => {
-                                const isLarge = index === 0 || index === 3;
-                                const colSpanClass = isLarge ? 'md:col-span-2 xl:col-span-2' : 'md:col-span-1 xl:col-span-1';
-
-                                return <RepoCard key={repo.id} repo={repo} className={colSpanClass} />;
+                                // Bento grid with equal width (all col-span-1), varying heights
+                                const bentoClasses = [
+                                    'md:col-span-1 md:row-span-2', // Item 0: Tall
+                                    'md:col-span-1 md:row-span-1', // Item 1: Small
+                                    'md:col-span-1 md:row-span-1', // Item 2: Small
+                                    'md:col-span-1 md:row-span-2', // Item 3: Tall
+                                    'md:col-span-1 md:row-span-1', // Item 4: Small
+                                    'md:col-span-1 md:row-span-1', // Item 5: Small
+                                ];
+                                const classForIndex = bentoClasses[index % bentoClasses.length];
+                                return (
+                                    <div key={repo.id} className={`${classForIndex} h-full`}>
+                                        <RepoCard repo={repo} />
+                                    </div>
+                                );
                             })}
                         </div>
                     </div>
