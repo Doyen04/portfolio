@@ -11,7 +11,7 @@ export async function GET(request: NextRequest) {
     return NextResponse.json({ error: 'Server config error' }, { status: 500 });
   }
 
-  const apiUrl = `https://api.screenshotone.com/take?access_key=${key}&url=${encodeURIComponent(url)}&viewport_width=1440&viewport_height=900&format=png&image_quality=80&device_scale_factor=2&block_ads=true&block_banners_by_heuristics=true&block_cookie_banners=true&block_chats=true&block_trackers=true`;
+  const apiUrl = `https://api.screenshotone.com/animate?access_key=${key}&url=${encodeURIComponent(url)}&format=webm&block_ads=true&block_cookie_banners=true&block_banners_by_heuristics=false&block_trackers=true&delay=0&timeout=60&scenario=scroll&duration=30&scroll_delay=500&scroll_duration=1500&scroll_by=1000&scroll_start_immediately=true&scroll_back=true&scroll_complete=true&scroll_easing=ease_in_out_quint`;
 
   try {
     const response = await fetch(apiUrl);
@@ -20,8 +20,10 @@ export async function GET(request: NextRequest) {
     }
     return new NextResponse(response.body, {
       headers: {
-        'Content-Type': response.headers.get('content-type') || 'image/png',
-        'Cache-Control': 'public, max-age=86400, s-maxage=86400',
+        'Content-Type': 'video/webm',
+        'Cache-Control': 'no-store, no-cache, must-revalidate, proxy-revalidate',
+        'Pragma': 'no-cache',
+        'Expires': '0',
       },
     });
   } catch {
