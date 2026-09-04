@@ -17,14 +17,14 @@ export default function RepoCard({ repo }: { repo: Repo }) {
             href={repo.homepage || repo.url}
             target="_blank"
             rel="noopener noreferrer"
-            className="group relative overflow-hidden transition-colors bg-transparent hover:bg-(--surface) border border-(--border) p-6 flex flex-col h-full min-h-48"
+            className="group relative overflow-hidden transition-colors bg-transparent hover:bg-(--surface) border border-(--border) p-4 sm:p-6 flex flex-col h-full min-h-40 sm:min-h-48"
         >
             <div className="mb-4">
                 <SiteScreenshot siteUrl={repo.homepage} compact noBorder />
             </div>
 
             <div className="flex-1">
-                <h4 className="group-hover:text-(--accent)! transition-colors mb-2 text-[24px]" style={{ fontFamily: 'var(--serif)', fontWeight: 500, color: 'var(--white)' }}>
+                <h4 className="group-hover:text-(--accent)! transition-colors mb-2 text-[18px] sm:text-[24px]" style={{ fontFamily: 'var(--serif)', fontWeight: 500, color: 'var(--white)' }}>
                     {repo.name.replace(/[-_]+/g, ' ').replace(/\b\w/g, (c) => c.toUpperCase())}
                 </h4>
 

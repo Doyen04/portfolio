@@ -30,19 +30,19 @@ export default function ProjectCard({
             href={repoUrl}
             target="_blank"
             rel="noopener noreferrer"
-            className={`group block overflow-hidden transition-colors border border-(--border) p-8 bg-transparent no-underline ${className ?? ''}`}
+            className={`group block overflow-hidden transition-colors border border-(--border) p-5 sm:p-8 bg-transparent no-underline ${className ?? ''}`}
             whileHover={{ backgroundColor: 'var(--surface)' }}
             transition={{ duration: 0.2 }}
         >
             {siteUrl && (
-                <div className="-mx-8 -mt-8 mb-6 overflow-hidden border-b border-(--border)">
+                <div className="-mx-5 -mt-5 sm:-mx-8 sm:-mt-8 mb-6 overflow-hidden border-b border-(--border)">
                     <SiteScreenshot siteUrl={siteUrl} compact noBorder />
                 </div>
             )}
 
             {/* Top row: number + arrow */}
-            <div className="flex items-start justify-between mb-6">
-                <span className="text-[52px] leading-none text-(--faint)" style={{ fontFamily: 'var(--mono)', fontWeight: 300 }}>
+            <div className="flex items-start justify-between mb-4 sm:mb-6">
+                <span className="text-[36px] sm:text-[52px] leading-none text-(--faint)" style={{ fontFamily: 'var(--mono)', fontWeight: 300 }}>
                     {number}
                 </span>
                 <span className="transition-all duration-200 group-hover:translate-x-1 group-hover:-translate-y-1 text-[20px] text-(--faint)">
@@ -51,12 +51,12 @@ export default function ProjectCard({
             </div>
 
             {/* Title */}
-            <h3 className="text-[42px] mb-3" style={{ fontFamily: 'var(--serif)', fontWeight: 500, lineHeight: 1.05, color: 'var(--white)' }}>
+            <h3 className="text-[24px] sm:text-[32px] md:text-[42px] mb-3" style={{ fontFamily: 'var(--serif)', fontWeight: 500, lineHeight: 1.05, color: 'var(--white)' }}>
                 {formatProjectName(name)}
             </h3>
 
             {/* Description */}
-            <p className="mb-6 text-[15px] leading-[1.75] text-(--muted)" style={{ fontFamily: 'var(--sans)', fontWeight: 300 }}>
+            <p className="mb-6 text-[14px] sm:text-[15px] leading-[1.75] text-(--muted)" style={{ fontFamily: 'var(--sans)', fontWeight: 300 }}>
                 {description}
             </p>
 

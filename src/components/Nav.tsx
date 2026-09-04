@@ -37,7 +37,7 @@ export default function Nav() {
         WebkitBackdropFilter: 'blur(16px)',
       } : undefined}
     >
-      <div className="w-full px-12 flex items-center justify-between py-5">
+      <div className="w-full px-5 sm:px-8 md:px-12 flex items-center justify-between py-5">
         {/* Logo */}
         <Link href="#hero" className="hover:opacity-90 transition-opacity">
           <Logo />
@@ -103,7 +103,7 @@ export default function Nav() {
         {/* Mobile Menu Button */}
         <button
           onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-          className="md:hidden p-2 -mr-2"
+          className="md:hidden p-2 -mr-2 cursor-pointer"
           style={{ color: 'var(--text)' }}
           aria-label="Toggle menu"
         >
@@ -124,15 +124,15 @@ export default function Nav() {
             backdropFilter: 'blur(16px)',
           }}
         >
-          <div className="px-12 py-6 flex flex-col gap-5">
+          <div className="px-6 py-6 flex flex-col gap-5">
             {navLinks.map((link) => (
               <a
                 key={link.href}
                 href={link.href}
-                className="transition-colors"
+                className="transition-colors py-1"
                 style={{
                   fontFamily: 'var(--mono)',
-                  fontSize: '10.5px',
+                  fontSize: '11px',
                   textTransform: 'uppercase',
                   letterSpacing: '0.14em',
                   color: 'var(--muted)',
@@ -143,7 +143,7 @@ export default function Nav() {
               </a>
             ))}
             {/* Available for work (mobile) */}
-            <div className="flex items-center gap-2 pt-2">
+            <div className="flex items-center gap-2 pt-2 border-t border-(--border)">
               <span
                 data-keep-radius="true"
                 className="inline-block w-2 h-2 rounded-full"
@@ -168,7 +168,7 @@ export default function Nav() {
               href="/ademola%20oluwasola%20resume.pdf"
               target="_blank"
               rel="noopener noreferrer"
-              className="btn-fill inline-block text-center"
+              className="btn-fill text-center justify-center w-full mt-1"
             >
               Download CV
             </a>

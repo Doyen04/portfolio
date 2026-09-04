@@ -30,6 +30,7 @@
 html {
     scroll-behavior: smooth;
     scrollbar-gutter: stable;
+    overflow-x: hidden;
 }
 
 /* ─── Selection ─── */
@@ -81,6 +82,7 @@ body {
     background-color: var(--bg);
     color: var(--text);
     position: relative;
+    overflow-x: hidden;
 }
 
 /* Film-grain noise texture overlay */

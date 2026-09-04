@@ -20,21 +20,21 @@ export default function FeaturedProject({ number, name, description, tags, repoU
             }}
         >
             <div
-                className="lg:col-span-3 flex flex-col justify-between gap-8 rounded-[inherit] border border-(--border) p-8 lg:p-10"
+                className="lg:col-span-3 flex flex-col justify-between gap-6 sm:gap-8 rounded-[inherit] border border-(--border) p-5 sm:p-8 lg:p-10"
                 style={{ background: 'rgba(255,255,255,0.015)' }}
             >
                 <div>
-                    <div className="flex items-start justify-between gap-4 mb-8">
+                    <div className="flex items-start justify-between gap-4 mb-6 sm:mb-8">
                         <div>
-                            <span className="text-xs uppercase tracking-[0.14em] text-(--accent) mb-2 inline-block" style={{ fontFamily: 'var(--mono)' }}>
+                            <span className="text-xs uppercase tracking-[0.14em] text-(--accent) mb-1 inline-block" style={{ fontFamily: 'var(--mono)' }}>
                                 Featured Product
                             </span>
-                            <div className="text-xs text-(--muted) mt-2" style={{ fontFamily: 'var(--mono)' }}>
+                            <div className="text-xs text-(--muted) mt-1" style={{ fontFamily: 'var(--mono)' }}>
                                 {stars} stars on GitHub
                             </div>
                         </div>
 
-                        <span className="text-[64px] leading-[0.9] text-(--faint)" style={{ fontFamily: 'var(--mono)', fontWeight: 300 }}>
+                        <span className="text-[48px] sm:text-[64px] leading-[0.9] text-(--faint)" style={{ fontFamily: 'var(--mono)', fontWeight: 300 }}>
                             {number}
                         </span>
                     </div>
@@ -42,7 +42,7 @@ export default function FeaturedProject({ number, name, description, tags, repoU
                     <h3
                         style={{
                             fontFamily: 'var(--serif)',
-                            fontSize: 'clamp(34px, 4vw, 56px)',
+                            fontSize: 'clamp(26px, 4vw, 56px)',
                             fontWeight: 500,
                             lineHeight: 1.05,
                             color: 'var(--white)',
@@ -52,7 +52,7 @@ export default function FeaturedProject({ number, name, description, tags, repoU
                         {name}
                     </h3>
 
-                    <p className="mb-6 max-w-[56ch] text-[15px] leading-[1.75] text-(--muted)" style={{ fontFamily: 'var(--sans)', fontWeight: 300 }}>
+                    <p className="mb-6 max-w-[56ch] text-[14px] sm:text-[15px] leading-[1.75] text-(--muted)" style={{ fontFamily: 'var(--sans)', fontWeight: 300 }}>
                         {description}
                     </p>
 
@@ -69,8 +69,8 @@ export default function FeaturedProject({ number, name, description, tags, repoU
                     </div>
                 </div>
 
-                <div className="flex flex-wrap items-center gap-6 mt-auto">
-                    <a href={repoUrl} target="_blank" rel="noopener noreferrer" className="btn-fill text-center">
+                <div className="flex flex-wrap items-center gap-4 sm:gap-6 mt-auto pt-2">
+                    <a href={repoUrl} target="_blank" rel="noopener noreferrer" className="btn-fill text-center w-full sm:w-auto justify-center">
                         View My Work <span>→</span>
                     </a>
 
@@ -83,7 +83,7 @@ export default function FeaturedProject({ number, name, description, tags, repoU
                 </div>
             </div>
 
-            <div className="lg:col-span-2 w-full flex items-center justify-center rounded-[inherit] border border-(--border) p-6 lg:p-8" style={{ background: 'rgba(0,0,0,0.12)' }}>
+            <div className="lg:col-span-2 w-full flex items-center justify-center rounded-[inherit] border border-(--border) p-4 sm:p-6 lg:p-8" style={{ background: 'rgba(0,0,0,0.12)' }}>
                 <SiteScreenshot siteUrl={siteUrl} />
             </div>
         </div>

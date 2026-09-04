@@ -3,11 +3,7 @@ export default function Footer() {
 
   return (
     <footer
-      style={{
-        borderTop: '1px solid var(--border)',
-        background: 'var(--bg)',
-        padding: '48px',
-      }}
+      className="border-t border-(--border) bg-(--bg) px-5 sm:px-8 md:px-12 py-8 md:py-12"
     >
       <div className="flex flex-col md:flex-row items-center justify-between gap-4">
         <p

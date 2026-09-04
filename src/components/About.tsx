@@ -32,7 +32,7 @@ const STATS = [
 
 export default function About() {
     return (
-        <section id="about" className="py-24 px-12 border-b border-(--border)">
+        <section id="about" className="py-16 md:py-24 px-5 sm:px-8 md:px-12 border-b border-(--border)">
             {/* Section Tag */}
             <div className="section-tag">
                 <span className="section-tag__number">[03]</span>
@@ -40,11 +40,11 @@ export default function About() {
             </div>
 
             {/* Section Heading */}
-            <h2 className="mb-16" style={{ fontFamily: 'var(--serif)', fontSize: 'clamp(44px, 6vw, 84px)', fontWeight: 300, lineHeight: 1.05, letterSpacing: '-0.015em', color: 'var(--white)' }}>
+            <h2 className="mb-10 md:mb-16" style={{ fontFamily: 'var(--serif)', fontSize: 'clamp(32px, 6vw, 84px)', fontWeight: 300, lineHeight: 1.05, letterSpacing: '-0.015em', color: 'var(--white)' }}>
                 A bit{' '}about me
             </h2>
 
-            <motion.div className="grid grid-cols-1 md:grid-cols-2 gap-20" variants={containerVariants} initial="hidden" whileInView="visible" viewport={{ once: true, margin: '-100px' }}>
+            <motion.div className="grid grid-cols-1 md:grid-cols-2 gap-10 md:gap-20" variants={containerVariants} initial="hidden" whileInView="visible" viewport={{ once: true, margin: '-100px' }}>
                 <motion.div variants={itemVariants} className="flex flex-col gap-6">
                     <AboutBio />
                 </motion.div>

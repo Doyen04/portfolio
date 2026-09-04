@@ -34,15 +34,15 @@ export default function ContactInfo() {
     return (
         <>
             {items.map((contact) => (
-                <a key={contact.label} href={contact.href} target={contact.external ? '_blank' : undefined} rel={contact.external ? 'noopener noreferrer' : undefined} className="group flex items-center justify-between transition-colors border border-(--border) p-6 bg-transparent hover:bg-(--surface) no-underline">
-                    <div className="flex items-center gap-4">
-                        <div className="text-(--accent)">{contact.icon}</div>
-                        <div>
-                            <p className="text-[9px] uppercase tracking-[0.14em] text-(--muted) mb-1" style={{ fontFamily: 'var(--mono)' }}>{contact.label}</p>
-                            <p className="group-hover:text-(--accent)! transition-colors text-[14px]" style={{ fontFamily: 'var(--sans)', fontWeight: 400, color: 'var(--text)' }}>{contact.value}</p>
+                <a key={contact.label} href={contact.href} target={contact.external ? '_blank' : undefined} rel={contact.external ? 'noopener noreferrer' : undefined} className="group flex items-center justify-between transition-colors border border-(--border) p-4 sm:p-6 bg-transparent hover:bg-(--surface) no-underline gap-3">
+                    <div className="flex items-center gap-3 sm:gap-4 min-w-0">
+                        <div className="text-(--accent) shrink-0">{contact.icon}</div>
+                        <div className="min-w-0">
+                            <p className="text-[9px] uppercase tracking-[0.14em] text-(--muted) mb-0.5" style={{ fontFamily: 'var(--mono)' }}>{contact.label}</p>
+                            <p className="group-hover:text-(--accent)! transition-colors text-[12px] sm:text-[14px] break-all sm:break-normal" style={{ fontFamily: 'var(--sans)', fontWeight: 400, color: 'var(--text)' }}>{contact.value}</p>
                         </div>
                     </div>
-                    <span className="transition-transform duration-200 group-hover:translate-x-1 text-(--faint) text-[16px]"><span className="group-hover:text-(--accent)! transition-colors">→</span></span>
+                    <span className="transition-transform duration-200 group-hover:translate-x-1 text-(--faint) text-[16px] shrink-0"><span className="group-hover:text-(--accent)! transition-colors">→</span></span>
                 </a>
             ))}
         </>

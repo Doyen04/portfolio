@@ -30,8 +30,7 @@ export default function Hero() {
     return (
         <section
             id="hero"
-            className="relative min-h-screen flex items-center pt-24 md:pt-24 overflow-hidden"
-            style={{ padding: '0 48px' }}
+            className="relative min-h-screen flex items-center pt-24 md:pt-24 px-5 sm:px-8 md:px-12 overflow-hidden"
         >
             {/* Ghost letter "A" */}
             <div
@@ -61,22 +60,22 @@ export default function Hero() {
 
 
                 {/* Heading — Massive serif name */}
-                <motion.h1 variants={itemVariants} style={{ fontFamily: 'var(--serif)', fontSize: 'clamp(62px, 10vw, 150px)', fontWeight: 300, lineHeight: 0.88, letterSpacing: '-0.025em', color: 'var(--white)', marginBottom: '32px', textAlign: 'center' }}>
+                <motion.h1 variants={itemVariants} style={{ fontFamily: 'var(--serif)', fontSize: 'clamp(38px, 9vw, 150px)', fontWeight: 300, lineHeight: 0.9, letterSpacing: '-0.025em', color: 'var(--white)', marginBottom: '32px', textAlign: 'center' }}>
                     <HeroName />
                 </motion.h1>
 
                 {/* Subheading */}
-                <motion.h2 variants={itemVariants} style={{ fontFamily: 'var(--sans)', fontSize: '16.5px', fontWeight: 300, lineHeight: 1.85, color: 'var(--muted)', maxWidth: '560px', marginBottom: '40px', marginLeft: 'auto', marginRight: 'auto', textAlign: 'center' }}>
+                <motion.h2 variants={itemVariants} style={{ fontFamily: 'var(--sans)', fontSize: '15px', fontWeight: 300, lineHeight: 1.75, color: 'var(--muted)', maxWidth: '560px', marginBottom: '36px', marginLeft: 'auto', marginRight: 'auto', textAlign: 'center' }}>
                     <HeroSub />
                 </motion.h2>
 
                 {/* CTAs */}
-                <motion.div variants={itemVariants} className="flex flex-col sm:flex-row justify-center items-center gap-4 mb-8">
+                <motion.div variants={itemVariants} className="flex flex-col sm:flex-row justify-center items-stretch sm:items-center gap-3.5 mb-8 w-full max-w-sm sm:max-w-none mx-auto">
                     <HeroActions />
                 </motion.div>
 
                 {/* Social Links */}
-                <motion.div variants={itemVariants} className="flex flex-col sm:flex-row justify-center items-center gap-6 sm:gap-8 pt-4" style={{ fontFamily: 'var(--mono)', fontSize: '10.5px', textTransform: 'uppercase', letterSpacing: '0.14em' }}>
+                <motion.div variants={itemVariants} className="flex flex-row justify-center items-center gap-4 sm:gap-8 pt-2" style={{ fontFamily: 'var(--mono)', fontSize: '10.5px', textTransform: 'uppercase', letterSpacing: '0.14em' }}>
                     <HeroSocial />
                 </motion.div>
             </motion.div>

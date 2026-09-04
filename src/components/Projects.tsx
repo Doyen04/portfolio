@@ -62,19 +62,19 @@ export default async function Projects() {
         .slice(0, 6);
 
     return (
-        <section id="work" className="py-24 px-12 border-b border-(--border)">
+        <section id="work" className="py-16 md:py-24 px-5 sm:px-8 md:px-12 border-b border-(--border)">
             <div>
                 <SectionTag number="[01]" label="Selected Work" />
 
                 <h2
+                    className="mb-10 md:mb-16"
                     style={{
                         fontFamily: 'var(--serif)',
-                        fontSize: 'clamp(44px, 6vw, 84px)',
+                        fontSize: 'clamp(32px, 6vw, 84px)',
                         fontWeight: 300,
                         lineHeight: 1.05,
                         letterSpacing: '-0.015em',
                         color: 'var(--white)',
-                        marginBottom: '64px',
                     }}
                 >
                     Things I&apos;ve built
@@ -92,7 +92,7 @@ export default async function Projects() {
                     />
                 )}
 
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-3.5 mb-20">
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-3.5 mb-12 md:mb-20">
                     {otherFeaturedProjects.map((project) => (
                         <ProjectCard key={project.number} {...project} />
                     ))}

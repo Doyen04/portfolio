@@ -9,8 +9,8 @@ export default function AboutStats({ stats }: { stats: Stat[] }) {
                     const isLastRow = index >= stats.length - 2;
 
                     return (
-                        <div key={stat.label} className="p-7" style={{ borderRight: isEvenCol ? 'none' : '1px solid var(--border)', borderBottom: isLastRow ? 'none' : '1px solid var(--border)' }}>
-                            <div style={{ fontFamily: 'var(--serif)', fontSize: '56px', fontWeight: 300, color: 'var(--white)', lineHeight: 1, marginBottom: '8px' }}>
+                        <div key={stat.label} className="p-4 sm:p-7" style={{ borderRight: isEvenCol ? 'none' : '1px solid var(--border)', borderBottom: isLastRow ? 'none' : '1px solid var(--border)' }}>
+                            <div style={{ fontFamily: 'var(--serif)', fontSize: 'clamp(36px, 8vw, 56px)', fontWeight: 300, color: 'var(--white)', lineHeight: 1, marginBottom: '8px' }}>
                                 {stat.value}
                                 {stat.suffix && <span style={{ color: 'var(--accent)' }}>{stat.suffix}</span>}
                             </div>
@@ -27,7 +27,7 @@ export default function AboutStats({ stats }: { stats: Stat[] }) {
                     { label: 'Location', value: 'Lagos, Nigeria' },
                     { label: 'Availability', value: 'Open to remote & relocation' },
                 ].map((item, i, arr) => (
-                    <div key={item.label} style={{ padding: '16px 20px', borderBottom: i < arr.length - 1 ? '1px solid var(--border)' : 'none' }}>
+                    <div key={item.label} className="p-4 sm:p-5" style={{ borderBottom: i < arr.length - 1 ? '1px solid var(--border)' : 'none' }}>
                         <div style={{ fontFamily: 'var(--mono)', fontSize: '9px', textTransform: 'uppercase', letterSpacing: '0.16em', color: 'var(--accent)', marginBottom: '4px' }}>{item.label}</div>
                         <div style={{ fontFamily: 'var(--sans)', fontSize: '14px', fontWeight: 400, color: 'var(--text)' }}>{item.value}</div>
                     </div>

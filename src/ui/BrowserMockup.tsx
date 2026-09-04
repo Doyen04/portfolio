@@ -26,7 +26,7 @@ export default function BrowserMockup() {
                 <div className="w-14" />
             </div>
 
-            <div className="p-4" style={{ height: 'calc(100% - 34px)' }}>
+            <div className="p-3 sm:p-4 flex gap-3 sm:gap-4" style={{ height: 'calc(100% - 34px)' }}>
                 <div className="w-1/4 border-r border-(--border) pr-4 flex flex-col gap-3 pt-2">
                     <div className="flex items-center gap-1.5 mb-2">
                         <span data-keep-radius="true" className="w-2 h-2 rounded-full bg-(--accent)" />

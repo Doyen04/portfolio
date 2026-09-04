@@ -26,7 +26,7 @@ const itemVariants = {
 export default function Contact() {
 
     return (
-        <section id="contact" className="py-24 px-12 border-b border-(--border)">
+        <section id="contact" className="py-16 md:py-24 px-5 sm:px-8 md:px-12 border-b border-(--border)">
             {/* Section Tag */}
             <div className="section-tag">
                 <span className="section-tag__number">[04]</span>
@@ -34,15 +34,15 @@ export default function Contact() {
             </div>
 
             {/* Massive serif heading */}
-            <h2 className="mb-4" style={{ fontFamily: 'var(--serif)', fontSize: 'clamp(52px, 9vw, 130px)', fontWeight: 300, lineHeight: 0.95, letterSpacing: '-0.02em', color: 'var(--white)' }}>
+            <h2 className="mb-4" style={{ fontFamily: 'var(--serif)', fontSize: 'clamp(36px, 8vw, 130px)', fontWeight: 300, lineHeight: 0.95, letterSpacing: '-0.02em', color: 'var(--white)' }}>
                 Let&apos;s{' '}talk
             </h2>
 
-            <p className="text-[15px] font-light leading-[1.75] text-(--muted) max-w-125 mb-16" style={{ fontFamily: 'var(--sans)' }}>
+            <p className="text-[14px] sm:text-[15px] font-light leading-[1.75] text-(--muted) max-w-125 mb-10 md:mb-16" style={{ fontFamily: 'var(--sans)' }}>
                 I&apos;m currently open to developer roles, freelance projects, and interesting conversations.
             </p>
 
-            <motion.div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-start"
+            <motion.div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12 items-start"
                 variants={containerVariants}
                 initial="hidden"
                 whileInView="visible"
