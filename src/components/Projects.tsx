@@ -48,7 +48,7 @@ export default async function Projects() {
             name: formatProjectName(project.displayName),
             description: repo?.description || project.description,
             tags: project.tags,
-            repoUrl: repo?.url || `https://github.com/Doyen04/${project.repoSlug}`,
+            repoUrl: repo?.html_url || (repo?.url && repo.url.includes('github.com') ? repo.url : `https://github.com/Doyen04/${project.repoSlug}`),
             stars: repo?.stargazers_count || 0,
             siteUrl: repo?.homepage || null,
         };
