@@ -7,28 +7,28 @@ import { formatProjectName } from '@/lib/format';
 
 const FEATURED_PROJECTS = [
     {
-        repoSlug: 'unplug',
+        repoSlug: 'Unplug',
         displayName: 'Unplug',
         description:
             'Subscription waste detection SaaS — AI-powered classification, virtual card issuance per subscription, one-click cancellation',
         tags: ['Next.js', 'Gemini AI', 'Prisma', 'Neon'],
     },
     {
-        repoSlug: 'result-notification-system',
-        displayName: 'Result Notification System',
+        repoSlug: 'ECHELON',
+        displayName: 'Echelon',
         description:
             'University admin dashboard with Senate approval workflows and multi-channel parent alerts (WhatsApp → Email → SMS)',
         tags: ['Next.js', 'Termii', 'QStash', 'Prisma'],
     },
     {
-        repoSlug: 'catalyst-reactor',
+        repoSlug: 'CatalystReactor',
         displayName: 'Catalyst Reactor',
         description:
             'Figma-inspired collaborative browser design tool with CanvasKit canvas engine and real-time state',
         tags: ['React', 'CanvasKit', 'Zustand', 'TypeScript'],
     },
     {
-        repoSlug: 'carrom-pool',
+        repoSlug: 'CARROM_POOL',
         displayName: 'Carrom Pool',
         description:
             'Physics-based Carrom Pool game in the browser with accurate rigid-body simulation',
@@ -38,17 +38,22 @@ const FEATURED_PROJECTS = [
 
 export default async function Projects() {
     const repos = await getGitHubRepos();
-    const repoMap = new Map(repos.map((repo) => [repo.name, repo]));
+
+    const normalize = (str: string) => str.toLowerCase().replace(/[-_]/g, '');
 
     const featuredProjects = FEATURED_PROJECTS.map((project, index) => {
-        const repo = repoMap.get(project.repoSlug);
+        const normSlug = normalize(project.repoSlug);
+        const repo = repos.find((r) => normalize(r.name) === normSlug);
+
+        const repoName = repo ? repo.name : project.repoSlug;
+        const repoUrl = repo?.html_url || (repo?.url && repo.url.includes('github.com') ? repo.url : `https://github.com/Doyen04/${repoName}`);
 
         return {
             number: String(index + 1).padStart(2, '0'),
             name: formatProjectName(project.displayName),
             description: repo?.description || project.description,
             tags: project.tags,
-            repoUrl: repo?.html_url || (repo?.url && repo.url.includes('github.com') ? repo.url : `https://github.com/Doyen04/${project.repoSlug}`),
+            repoUrl,
             stars: repo?.stargazers_count || 0,
             siteUrl: repo?.homepage || null,
         };
@@ -58,7 +63,10 @@ export default async function Projects() {
     const otherFeaturedProjects = featuredProjects.slice(1);
 
     const otherRepos = repos
-        .filter((repo) => !FEATURED_PROJECTS.some((project) => project.repoSlug === repo.name))
+        .filter((repo) => {
+            const normRepoName = normalize(repo.name);
+            return !FEATURED_PROJECTS.some((project) => normalize(project.repoSlug) === normRepoName);
+        })
         .slice(0, 6);
 
     return (
