@@ -9,8 +9,9 @@ Key features
 
 - Modern Next.js app router setup (`src/app`)
 - Responsive hero with modular subcomponents
-- Projects section that fetches repository metadata from GitHub (`src/lib/github.ts`)
-- Contact form with server API that sends email via Nodemailer (SMTP) or Resend as a fallback (`src/app/api/contact/route.ts`)
+- Projects section driven by admin-managed content (no GitHub API dependency)
+- Password-protected admin dashboard at `/doyen` for editing projects, skills, About, Contact and the CV
+- Contact form with server API that sends email via Nodemailer (SMTP) (`src/app/api/contact/route.ts`)
 - Masonry-like skills grid and a lightweight browser mockup UI component
 - Modularized components and small UI primitives under `src/components` and `src/ui`
 
@@ -20,7 +21,7 @@ Tech stack
 - TypeScript
 - Tailwind CSS
 - Framer Motion (animations)
-- Nodemailer / Resend for contact emails
+- Nodemailer for contact emails (SMTP)
 
 Getting started (local)
 -----------------------
@@ -55,16 +56,16 @@ Copy `.env.example` to `.env.local` and fill in values relevant to your environm
 
 Important variables
 
-- `RESEND_API_KEY` — optional; used when Resend is preferred for sending emails
+- `ADMIN_PASSWORD` — password for the admin dashboard login (at `/doyen`)
+- `ADMIN_SESSION_SECRET` — random secret used to sign the admin session cookie
+- `BLOB_READ_WRITE_TOKEN` — Vercel Blob token; content and uploads are stored there in both dev and production
 - `CONTACT_EMAIL` — default recipient email used by the contact API
 - `SMTP_HOST`, `SMTP_PORT`, `SMTP_USER`, `SMTP_PASS` — when present, the contact API will prefer Nodemailer (SMTP) for delivery
 - `FROM_EMAIL` / `TO_EMAIL` — optional overrides for outbound messages when using SMTP
-- `GITHUB_TOKEN` — optional GitHub token to increase API rate limits when fetching repo metadata via `src/lib/github.ts`
 
 The contact API behavior (in `src/app/api/contact/route.ts`) is:
 
-- If `SMTP_HOST` + `SMTP_USER` + `SMTP_PASS` exist, the API uses Nodemailer to send via SMTP.
-- Otherwise the API falls back to the Resend client using `RESEND_API_KEY`.
+- Uses Nodemailer to send via SMTP, configured by the `SMTP_*` variables above (e.g. Gmail with an app password).
 
 Install Nodemailer (if you plan to use SMTP)
 
@@ -75,10 +76,11 @@ npm install nodemailer
 Project structure (high level)
 -----------------------------
 
-- `src/app` — Next.js app routes and pages
+- `src/app` — Next.js app routes and pages (`admin/*` is the dashboard, `doyen` is the login)
 - `src/components` — React components (Hero, Projects, Contact, About, Skills)
-- `src/ui` — small UI primitives (BrowserMockup, SectionTag, etc.)
-- `src/lib` — utilities and data fetchers (`github.ts`, `format.ts`)
+- `src/ui` — small UI primitives (SiteScreenshot, logo, floatNavBar)
+- `src/lib` — content store abstraction, content getters/setters, seeded defaults and session auth (`store.ts`, `content.ts`, `defaults.ts`, `session.ts`)
+- `src/types` — shared content types (`content.ts`)
 - `src/styles` — global styles and CSS modules
 - `public` — static assets
 
@@ -87,7 +89,7 @@ Development notes & conventions
 
 - Tailwind CSS v4 tokens and semantic utilities are used; prefer token-based classes to avoid lint issues.
 - Framer Motion `Variants` typings require numeric easing arrays to be typed as readonly tuples (e.g. `as const`) to avoid TypeScript complaints.
-- The Projects section fetches GitHub repositories using `getGitHubRepos()` in `src/lib/github.ts`. If you expect heavy fetching during development or CI, set `GITHUB_TOKEN` to avoid rate limiting.
+- Portfolio content lives in files (JSON + uploaded media) stored in Vercel Blob when `BLOB_READ_WRITE_TOKEN` is set; seeded defaults in `src/lib/defaults.ts` are used until the first admin save.
 - The contact form is a self-contained component and submits to the API route at `/api/contact`.
 
 Deployment
@@ -100,7 +102,7 @@ Troubleshooting
 ---------------
 
 - If emails are not arriving and you have `SMTP_*` set, check your SMTP provider logs and ensure `FROM_EMAIL` is an allowed sender for that provider.
-- If GitHub data is empty, verify `GITHUB_TOKEN` (optional) and check GitHub API status/rate-limits.
+- If your edits on the dashboard aren't showing on the site, confirm `BLOB_READ_WRITE_TOKEN` is set on the environment you're viewing (dev uses `.env.local`, production uses Vercel env vars).
 
 Further improvements (ideas)
 --------------------------
@@ -114,8 +116,10 @@ Where to look in the repo
 
 - `src/components/Projects.tsx` — projects section and featured projects layout
 - `src/components/ProjectCard.tsx` — project card UI
-- `src/app/api/contact/route.ts` — contact form API with Nodemailer/Resend logic
-- `src/lib/github.ts` — GitHub fetch helpers
+- `src/app/admin/actions.ts` — admin CRUD server actions
+- `src/lib/store.ts` — Vercel Blob / local folder storage abstraction
+- `src/lib/content.ts` — content getters and setters
+- `src/app/api/contact/route.ts` — contact form API with Nodemailer logic
 - `src/styles/globals.css` — theme and global tokens
 
 If you'd like, I can also add a short "How to configure SMTP with Gmail/App Passwords" section or add CI checks that verify env variables before build. Which would you prefer next?

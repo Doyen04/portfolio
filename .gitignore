@@ -43,3 +43,8 @@ CLAUDE.md
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# locally-managed content & uploads (dev-mode storage)
+/data/
+/public/uploads/*
+!/public/uploads/.gitkeep
