@@ -91,7 +91,7 @@ export default function FeaturedProject({ project, number }: Props) {
             </div>
 
             <Link href={`/projects/${id}`} className="lg:col-span-2 w-full flex items-center justify-center rounded-[inherit] border border-(--border) p-4 sm:p-6 lg:p-8 no-underline hover:opacity-90 transition-opacity" style={{ background: 'rgba(0,0,0,0.12)' }}>
-                <SiteScreenshot image={image} video={video} />
+                <SiteScreenshot image={image} video={video} priority />
             </Link>
         </div>
     );

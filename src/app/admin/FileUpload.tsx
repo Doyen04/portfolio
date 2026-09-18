@@ -1,6 +1,7 @@
 'use client';
 
 import { useRef, useState } from 'react';
+import Image from 'next/image';
 import { mediaSrc } from '@/lib/media';
 
 type Props = {
@@ -43,6 +44,7 @@ export default function FileUpload({ name, label, accept, folder, initialUrl, hi
 
     const isVideo = accept?.includes('video');
     const previewSrc = mediaSrc(url);
+    const previewUnoptimized = url.toLowerCase().endsWith('.gif') || /^https?:\/\//i.test(String(previewSrc || ''));
 
     return (
         <div className="border border-(--border) p-4" style={{ background: 'rgba(255,255,255,0.015)' }}>
@@ -73,7 +75,7 @@ export default function FileUpload({ name, label, accept, folder, initialUrl, hi
 
             {url && (
                 <div className="mt-3 flex items-center gap-3">
-                    <div className="w-16 h-12 overflow-hidden border border-(--border) flex items-center justify-center" style={{ background: 'var(--bg)' }}>
+                    <div className="relative w-16 h-12 overflow-hidden border border-(--border) flex items-center justify-center" style={{ background: 'var(--bg)' }}>
                         {isVideo ? (
                             <video src={previewSrc} className="w-full h-full object-contain" muted playsInline />
                         ) : url === '' || url.endsWith('.pdf') ? (
@@ -81,8 +83,14 @@ export default function FileUpload({ name, label, accept, folder, initialUrl, hi
                                 PDF
                             </span>
                         ) : (
-                            // eslint-disable-next-line @next/next/no-img-element
-                            <img src={previewSrc} alt="preview" className="w-full h-full object-cover" />
+                            <Image
+                                src={previewSrc ?? ''}
+                                alt="preview"
+                                fill
+                                sizes="64px"
+                                unoptimized={previewUnoptimized}
+                                className="object-cover"
+                            />
                         )}
                     </div>
                     <div className="min-w-0 flex-1">

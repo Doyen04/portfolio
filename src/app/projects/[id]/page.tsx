@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import Image from 'next/image';
 import { notFound } from 'next/navigation';
 import SectionTag from '@/components/ui/SectionTag';
 import SiteScreenshot from '@/ui/SiteScreenshot';
@@ -93,7 +94,7 @@ export default async function ProjectDetailPage({ params }: { params: Promise<{ 
 
                 {(video || primaryImage) && (
                     <div className="mb-10">
-                        <SiteScreenshot video={video} image={primaryImage} />
+                        <SiteScreenshot video={video} image={primaryImage} priority />
                     </div>
                 )}
 
@@ -104,9 +105,18 @@ export default async function ProjectDetailPage({ params }: { params: Promise<{ 
                         </h2>
                         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                             {gallery.map((url, i) => (
-                                <div key={url} className="border border-(--border) overflow-hidden" style={{ background: 'var(--surface-2)' }}>
-                                    {/* eslint-disable-next-line @next/next/no-img-element */}
-                                    <img src={mediaSrc(url)} alt={`${project.name} screenshot ${i + 1}`} className="w-full h-full object-cover" loading="lazy" />
+                                <div key={url} className="relative border border-(--border) overflow-hidden" style={{ background: 'var(--surface-2)', aspectRatio: '16 / 10' }}>
+                                    <Image
+                                        src={mediaSrc(url) ?? ''}
+                                        alt={`${project.name} screenshot ${i + 1}`}
+                                        fill
+                                        sizes="(min-width: 768px) 50vw, 100vw"
+                                        quality={82}
+                                        unoptimized={url.toLowerCase().endsWith('.gif')}
+                                        className="object-cover"
+                                        loading="lazy"
+                                        decoding="async"
+                                    />
                                 </div>
                             ))}
                         </div>

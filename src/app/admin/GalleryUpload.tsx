@@ -1,6 +1,7 @@
 'use client';
 
 import { useRef, useState } from 'react';
+import Image from 'next/image';
 import { mediaSrc } from '@/lib/media';
 
 type Props = {
@@ -63,8 +64,15 @@ export default function GalleryUpload({ name, label, folder, initialUrls, hint }
                 <div className="grid grid-cols-3 sm:grid-cols-4 gap-3 mb-3">
                     {urls.map((url, index) => (
                         <div key={url} className="relative border border-(--border) overflow-hidden group" style={{ aspectRatio: '4 / 3', background: 'var(--bg)' }}>
-                            {/* eslint-disable-next-line @next/next/no-img-element */}
-                            <img src={mediaSrc(url)} alt={`gallery ${index + 1}`} className="w-full h-full object-cover" />
+                            <Image
+                                src={mediaSrc(url) ?? ''}
+                                alt={`gallery ${index + 1}`}
+                                fill
+                                sizes="120px"
+                                quality={75}
+                                unoptimized={url.toLowerCase().endsWith('.gif') || /^https?:\/\//i.test(String(mediaSrc(url) || ''))}
+                                className="object-cover"
+                            />
                             <button
                                 type="button"
                                 onClick={() => setUrls((prev) => prev.filter((u) => u !== url))}

@@ -1,6 +1,7 @@
 'use client';
 
 import { useEffect, useRef, useState } from 'react';
+import Image from 'next/image';
 import { motion, useInView } from 'framer-motion';
 import { mediaSrc } from '@/lib/media';
 
@@ -9,9 +10,10 @@ type Props = {
     image?: string;
     compact?: boolean;
     noBorder?: boolean;
+    priority?: boolean;
 };
 
-export default function SiteScreenshot({ video, image, compact, noBorder }: Props) {
+export default function SiteScreenshot({ video, image, compact, noBorder, priority }: Props) {
     const [isLoading, setIsLoading] = useState(true);
     const [error, setError] = useState(false);
     const containerRef = useRef<HTMLDivElement>(null);
@@ -20,6 +22,8 @@ export default function SiteScreenshot({ video, image, compact, noBorder }: Prop
 
     const resolvedImage = mediaSrc(image);
     const resolvedVideo = mediaSrc(video);
+    const isGif = String(image || '').toLowerCase().endsWith('.gif');
+    const isRemote = /^https?:\/\//i.test(String(resolvedImage || ''));
 
     useEffect(() => {
         const mediaEl = videoRef.current;
@@ -42,7 +46,7 @@ export default function SiteScreenshot({ video, image, compact, noBorder }: Prop
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: '-100px' }}
             transition={{ duration: 0.8, ease: [0.4, 0, 0.2, 1] as const }}
-            className={`w-full overflow-hidden bg-(--surface-2) ${noBorder ? '' : 'border border-(--border)'}`}
+            className={`relative w-full overflow-hidden bg-(--surface-2) ${noBorder ? '' : 'border border-(--border)'}`}
             style={{ aspectRatio: compact ? '2 / 1' : '1.6 / 1' }}
         >
             {isLoading && hasMedia ? (
@@ -67,16 +71,21 @@ export default function SiteScreenshot({ video, image, compact, noBorder }: Prop
                     preload="none"
                 />
             ) : image && !error ? (
-                // eslint-disable-next-line @next/next/no-img-element
-                <img
-                    src={resolvedImage}
+                <Image
+                    src={resolvedImage ?? ''}
                     alt=""
-                    className={`w-full h-full object-cover ${isLoading ? 'hidden' : ''}`}
+                    fill
+                    sizes={compact ? '(min-width: 768px) 33vw, 100vw' : '100vw'}
+                    quality={82}
+                    priority={priority}
+                    unoptimized={isGif || isRemote}
+                    className={`object-cover ${isLoading ? 'hidden' : ''}`}
                     onLoad={() => setIsLoading(false)}
                     onError={() => {
                         setError(true);
                         setIsLoading(false);
                     }}
+                    decoding="async"
                 />
             ) : (
                 <div className="w-full h-full flex items-center justify-center" style={{ background: 'var(--bg)' }}>
