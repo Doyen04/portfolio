@@ -17,27 +17,33 @@ export default function GalleryUpload({ name, label, folder, initialUrls, hint }
     const [error, setError] = useState('');
     const inputRef = useRef<HTMLInputElement>(null);
 
-    const handleFile = async (file: File) => {
+    const handleFiles = async (files: FileList | null) => {
+        if (!files || files.length === 0) return;
         setUploading(true);
         setError('');
-        const formData = new FormData();
-        formData.append('file', file);
-        formData.append('folder', folder);
-
-        try {
-            const res = await fetch('/api/admin/media', { method: 'POST', body: formData });
-            const data = await res.json();
-            if (!res.ok || !data.url) {
-                setError(data.error || 'Upload failed');
-                return;
+        const selected = Array.from(files);
+        let failed = false;
+        for (const file of selected) {
+            const formData = new FormData();
+            formData.append('file', file);
+            formData.append('folder', folder);
+            try {
+                const res = await fetch('/api/admin/media', { method: 'POST', body: formData });
+                const data = await res.json();
+                if (!res.ok || !data.url) {
+                    setError(data.error || 'Upload failed');
+                    failed = true;
+                    continue;
+                }
+                setUrls((prev) => [...prev, data.url]);
+            } catch {
+                setError('Upload failed. The file may be too large for serverless uploads.');
+                failed = true;
             }
-            setUrls((prev) => [...prev, data.url]);
-        } catch {
-            setError('Upload failed. The file may be too large for serverless uploads.');
-        } finally {
-            setUploading(false);
-            if (inputRef.current) inputRef.current.value = '';
         }
+        if (!failed) setError('');
+        setUploading(false);
+        if (inputRef.current) inputRef.current.value = '';
     };
 
     return (
@@ -51,7 +57,7 @@ export default function GalleryUpload({ name, label, folder, initialUrls, hint }
                 </span>
             </div>
 
-            <input id={`${name}-input`} ref={inputRef} type="file" accept="image/png,image/jpeg,image/webp,image/gif" className="hidden" onChange={(e) => e.target.files?.[0] && handleFile(e.target.files[0])} />
+            <input id={`${name}-input`} ref={inputRef} type="file" accept="image/png,image/jpeg,image/webp,image/gif" multiple className="hidden" onChange={(e) => handleFiles(e.target.files)} />
 
             {urls.length > 0 && (
                 <div className="grid grid-cols-3 sm:grid-cols-4 gap-3 mb-3">
