@@ -26,7 +26,7 @@ const itemVariants = {
     },
 };
 
-export default function Hero() {
+export default function Hero({ cvUrl }: { cvUrl: string }) {
     return (
         <section
             id="hero"
@@ -71,7 +71,7 @@ export default function Hero() {
 
                 {/* CTAs */}
                 <motion.div variants={itemVariants} className="flex flex-col sm:flex-row justify-center items-stretch sm:items-center gap-3.5 mb-8 w-full max-w-sm sm:max-w-none mx-auto">
-                    <HeroActions />
+                    <HeroActions cvUrl={cvUrl} />
                 </motion.div>
 
                 {/* Social Links */}

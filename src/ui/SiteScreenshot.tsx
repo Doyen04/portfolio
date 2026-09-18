@@ -1,33 +1,35 @@
 'use client';
 
-import { useState, useRef, useEffect } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { motion, useInView } from 'framer-motion';
 
 type Props = {
-    siteUrl?: string | null;
+    video?: string;
+    image?: string;
     compact?: boolean;
     noBorder?: boolean;
 };
 
-export default function SiteScreenshot({ siteUrl, compact, noBorder }: Props) {
-    const [error, setError] = useState(false);
+export default function SiteScreenshot({ video, image, compact, noBorder }: Props) {
     const [isLoading, setIsLoading] = useState(true);
+    const [error, setError] = useState(false);
     const containerRef = useRef<HTMLDivElement>(null);
     const videoRef = useRef<HTMLVideoElement>(null);
     const isInView = useInView(containerRef, { once: false, margin: '-100px' });
 
     useEffect(() => {
-        const video = videoRef.current;
-        if (video) {
+        const mediaEl = videoRef.current;
+        if (mediaEl) {
             if (isInView) {
-                video.play().catch(() => { });
+                mediaEl.play().catch(() => {});
             } else {
-                video.pause();
+                mediaEl.pause();
             }
         }
     }, [isInView]);
 
-    const hasUrl = siteUrl && !error;
+    const hasMedia = Boolean(video || image);
+    const mediaFailed = error || (hasMedia && !video && (!image || image === ''));
 
     return (
         <motion.div
@@ -39,22 +41,38 @@ export default function SiteScreenshot({ siteUrl, compact, noBorder }: Props) {
             className={`w-full overflow-hidden bg-(--surface-2) ${noBorder ? '' : 'border border-(--border)'}`}
             style={{ aspectRatio: compact ? '2 / 1' : '1.6 / 1' }}
         >
-            {isLoading && hasUrl ? (
+            {isLoading && hasMedia ? (
                 <div className="w-full h-full flex items-center justify-center bg-(--bg)">
                     <div className="animate-spin w-8 h-8 bg-(--accent)" />
                 </div>
             ) : null}
-            {hasUrl ? (
+
+            {video && !error ? (
                 <video
                     ref={videoRef}
-                    src={`/api/screenshot?url=${encodeURIComponent(siteUrl)}`}
+                    src={video}
                     className={`w-full h-full object-cover ${isLoading ? 'hidden' : ''}`}
                     onLoadedData={() => setIsLoading(false)}
-                    onError={() => { setError(true); setIsLoading(false); }}
+                    onError={() => {
+                        setError(true);
+                        setIsLoading(false);
+                    }}
                     muted
                     loop
                     playsInline
                     preload="none"
+                />
+            ) : image && !error ? (
+                // eslint-disable-next-line @next/next/no-img-element
+                <img
+                    src={image}
+                    alt=""
+                    className={`w-full h-full object-cover ${isLoading ? 'hidden' : ''}`}
+                    onLoad={() => setIsLoading(false)}
+                    onError={() => {
+                        setError(true);
+                        setIsLoading(false);
+                    }}
                 />
             ) : (
                 <div className="w-full h-full flex items-center justify-center" style={{ background: 'var(--bg)' }}>
@@ -65,7 +83,7 @@ export default function SiteScreenshot({ siteUrl, compact, noBorder }: Props) {
                             <line x1="12" y1="17" x2="12" y2="21" />
                         </svg>
                         <span className={`${compact ? 'text-[8px]' : 'text-[10px]'} text-(--muted) font-mono uppercase tracking-widest`}>
-                            {error ? 'Preview failed' : 'No preview'}
+                            {mediaFailed ? 'Preview failed' : 'No preview yet'}
                         </span>
                     </div>
                 </div>

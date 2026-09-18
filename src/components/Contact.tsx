@@ -3,6 +3,7 @@
 import { motion } from 'framer-motion';
 import ContactForm from './Contact/ContactForm';
 import ContactInfo from './Contact/ContactInfo';
+import type { ContactItem } from '@/types/content';
 
 const containerVariants = {
     hidden: { opacity: 0 },
@@ -23,7 +24,7 @@ const itemVariants = {
     },
 };
 
-export default function Contact() {
+export default function Contact({ items }: { items: ContactItem[] }) {
 
     return (
         <section id="contact" className="py-16 md:py-24 px-5 sm:px-8 md:px-12 border-b border-(--border)">
@@ -55,7 +56,7 @@ export default function Contact() {
 
                 {/* Contact Info */}
                 <motion.div className="flex flex-col gap-1" variants={itemVariants}>
-                    <ContactInfo />
+                    <ContactInfo items={items} />
                 </motion.div>
             </motion.div>
         </section>

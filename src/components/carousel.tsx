@@ -3,30 +3,9 @@
 import React from 'react';
 import styles from '../styles/carousel.module.css';
 
-const SKILLS = [
-  'TypeScript',
-  'JavaScript',
-  'Next.js',
-  'React',
-  'Tailwind CSS',
-  'Node.js',
-  'Prisma ORM',
-  'Drizzle ORM',
-  'PostgreSQL',
-  'Google Gemini',
-  'Anthropic Claude',
-  'Termii',
-  'Resend',
-  'Vercel',
-  'Cloudflare',
-  'Upstash',
-  'NextAuth',
-  'Git & GitHub'
-];
-
-export default function Carousel() {
+export default function Carousel({ skills }: { skills: string[] }) {
   // Duplicate skills list for a seamless loop
-  const repeatedSkills = [...SKILLS, ...SKILLS];
+  const repeatedSkills = [...skills, ...skills];
 
   return (
     <div className={styles.carousel_container}>

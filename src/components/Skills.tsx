@@ -2,33 +2,7 @@
 
 import { motion } from 'framer-motion';
 import SkillGroup from './Skills/SkillGroup';
-
-const SKILLS_GROUPS = [
-    {
-        category: 'Languages',
-        items: ['TypeScript', 'JavaScript', 'HTML5', 'CSS3', 'SQL'],
-    },
-    {
-        category: 'Frameworks',
-        items: ['Next.js 15', 'React 18', 'Tailwind CSS', 'Konva.js'],
-    },
-    {
-        category: 'Backend & DB',
-        items: ['Node.js', 'Prisma ORM', 'Drizzle ORM', 'PostgreSQL (Neon)'],
-    },
-    {
-        category: 'AI & APIs',
-        items: ['Google Gemini', 'Anthropic Claude', 'Termii', 'Resend'],
-    },
-    {
-        category: 'Infrastructure',
-        items: ['Vercel', 'Cloudflare R2', 'Upstash QStash', 'NextAuth v5'],
-    },
-    {
-        category: 'Tooling',
-        items: ['Git & GitHub', 'GitHub Copilot', 'VS Code'],
-    },
-];
+import type { SkillGroup as SkillGroupType } from '@/types/content';
 
 
 const containerVariants = {
@@ -50,7 +24,9 @@ const itemVariants = {
     },
 };
 
-export default function Skills() {
+export default function Skills({ groups }: { groups: SkillGroupType[] }) {
+    const sortedGroups = [...groups].sort((a, b) => a.order - b.order);
+
     return (
         <section id="skills" className="py-16 md:py-24 px-5 sm:px-8 md:px-12 border-b border-(--border)">
             {/* Section Tag */}
@@ -88,12 +64,13 @@ export default function Skills() {
 
             {/* Masonry-style grouped cards */}
             <motion.div className="columns-1 md:columns-2 xl:columns-3 gap-4" variants={containerVariants} initial="hidden" whileInView="visible" viewport={{ once: true, margin: '-100px' }}>
-                {SKILLS_GROUPS.map((group, index) => {
+                {sortedGroups.map((group, index) => {
                     const isTall = index === 0 || index === 2 || index === 4;
+                    const skills = [...group.skills].sort((a, b) => a.order - b.order).map((s) => s.name);
 
                     return (
-                        <motion.article key={group.category} variants={itemVariants} className={`group mb-4 break-inside-avoid border border-(--border) bg-transparent p-5 sm:p-6 flex flex-col justify-between ${isTall ? 'min-h-48 sm:min-h-65' : 'min-h-40 sm:min-h-55'}`} whileHover={{ backgroundColor: 'var(--surface)' }}>
-                            <SkillGroup category={group.category} items={group.items} index={index} />
+                        <motion.article key={group.id} variants={itemVariants} className={`group mb-4 break-inside-avoid border border-(--border) bg-transparent p-5 sm:p-6 flex flex-col justify-between ${isTall ? 'min-h-48 sm:min-h-65' : 'min-h-40 sm:min-h-55'}`} whileHover={{ backgroundColor: 'var(--surface)' }}>
+                            <SkillGroup category={group.name} items={skills} index={index} />
                         </motion.article>
                     );
                 })}

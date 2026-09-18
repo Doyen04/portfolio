@@ -4,7 +4,7 @@ import { useEffect, useState } from 'react';
 import Link from 'next/link';
 import Logo from '../ui/logo';
 
-export default function Nav() {
+export default function Nav({ cvUrl }: { cvUrl: string }) {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
@@ -91,7 +91,7 @@ export default function Nav() {
           </div>
 
           <a
-            href="/ademola%20oluwasola%20resume.pdf"
+            href={cvUrl || '/ademola%20oluwasola%20resume.pdf'}
             target="_blank"
             rel="noopener noreferrer"
             className="btn-fill"
@@ -165,7 +165,7 @@ export default function Nav() {
               </span>
             </div>
             <a
-              href="/ademola%20oluwasola%20resume.pdf"
+              href={cvUrl || '/ademola%20oluwasola%20resume.pdf'}
               target="_blank"
               rel="noopener noreferrer"
               className="btn-fill text-center justify-center w-full mt-1"

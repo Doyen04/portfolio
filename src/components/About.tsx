@@ -3,6 +3,7 @@
 import { motion } from 'framer-motion';
 import AboutBio from './About/AboutBio';
 import AboutStats from './About/AboutStats';
+import type { About as AboutType } from '@/types/content';
 
 const containerVariants = {
     hidden: { opacity: 0 },
@@ -23,14 +24,7 @@ const itemVariants = {
     },
 };
 
-const STATS = [
-    { value: '4', suffix: '+', label: 'Projects Shipped' },
-    { value: '1', suffix: '+', label: 'Years Building' },
-    { value: '∞', suffix: '', label: 'Curiosity' },
-    { value: '1', suffix: '', label: 'Internship' },
-];
-
-export default function About() {
+export default function About({ about }: { about: AboutType }) {
     return (
         <section id="about" className="py-16 md:py-24 px-5 sm:px-8 md:px-12 border-b border-(--border)">
             {/* Section Tag */}
@@ -46,11 +40,11 @@ export default function About() {
 
             <motion.div className="grid grid-cols-1 md:grid-cols-2 gap-10 md:gap-20" variants={containerVariants} initial="hidden" whileInView="visible" viewport={{ once: true, margin: '-100px' }}>
                 <motion.div variants={itemVariants} className="flex flex-col gap-6">
-                    <AboutBio />
+                    <AboutBio bio={about.bio} />
                 </motion.div>
 
                 <motion.div variants={itemVariants}>
-                    <AboutStats stats={STATS} />
+                    <AboutStats stats={about.stats} details={about.details} />
                 </motion.div>
             </motion.div>
         </section>

@@ -5,8 +5,6 @@ type SkillGroupProps = {
 };
 
 export default function SkillGroup({ category, items, index }: SkillGroupProps) {
-    const isTall = index === 0 || index === 2 || index === 4;
-
     return (
         <>
             <div className="flex justify-between gap-4 items-start mb-4">

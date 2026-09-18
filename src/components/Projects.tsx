@@ -1,73 +1,19 @@
-import { getGitHubRepos } from '@/lib/github';
 import ProjectCard from './ProjectCard';
 import SectionTag from './ui/SectionTag';
 import FeaturedProject from './Projects/FeaturedProject';
-import RepoCard from './Projects/RepoCard';
-import { formatProjectName } from '@/lib/format';
+import type { Project } from '@/types/content';
 
-const FEATURED_PROJECTS = [
-    {
-        repoSlug: 'Unplug',
-        displayName: 'Unplug',
-        description:
-            'Subscription waste detection SaaS — AI-powered classification, virtual card issuance per subscription, one-click cancellation',
-        tags: ['Next.js', 'Gemini AI', 'Prisma', 'Neon'],
-    },
-    {
-        repoSlug: 'ECHELON',
-        displayName: 'Echelon',
-        description:
-            'University admin dashboard with Senate approval workflows and multi-channel parent alerts (WhatsApp → Email → SMS)',
-        tags: ['Next.js', 'Termii', 'QStash', 'Prisma'],
-    },
-    {
-        repoSlug: 'CatalystReactor',
-        displayName: 'Catalyst Reactor',
-        description:
-            'Figma-inspired collaborative browser design tool with CanvasKit canvas engine and real-time state',
-        tags: ['React', 'CanvasKit', 'Zustand', 'TypeScript'],
-    },
-    {
-        repoSlug: 'CARROM_POOL',
-        displayName: 'Carrom Pool',
-        description:
-            'Physics-based Carrom Pool game in the browser with accurate rigid-body simulation',
-        tags: ['JavaScript', 'Matter.js', 'Canvas'],
-    },
-];
+export default function Projects({ projects }: { projects: Project[] }) {
+    const sorted = [...projects]
+        .filter((project) => project.enabled !== false)
+        .sort((a, b) => a.order - b.order);
 
-export default async function Projects() {
-    const repos = await getGitHubRepos();
+    const featured = sorted.filter((project) => project.featured);
+    const mainProject = featured[0] ?? null;
+    const otherFeatured = featured.slice(1);
+    const otherProjects = sorted.filter((project) => !project.featured);
 
-    const normalize = (str: string) => str.toLowerCase().replace(/[-_]/g, '');
-
-    const featuredProjects = FEATURED_PROJECTS.map((project, index) => {
-        const normSlug = normalize(project.repoSlug);
-        const repo = repos.find((r) => normalize(r.name) === normSlug);
-
-        const repoName = repo ? repo.name : project.repoSlug;
-        const repoUrl = repo?.html_url || (repo?.url && repo.url.includes('github.com') ? repo.url : `https://github.com/Doyen04/${repoName}`);
-
-        return {
-            number: String(index + 1).padStart(2, '0'),
-            name: formatProjectName(project.displayName),
-            description: repo?.description || project.description,
-            tags: project.tags,
-            repoUrl,
-            stars: repo?.stargazers_count || 0,
-            siteUrl: repo?.homepage || null,
-        };
-    });
-
-    const unplugProject = featuredProjects[0];
-    const otherFeaturedProjects = featuredProjects.slice(1);
-
-    const otherRepos = repos
-        .filter((repo) => {
-            const normRepoName = normalize(repo.name);
-            return !FEATURED_PROJECTS.some((project) => normalize(project.repoSlug) === normRepoName);
-        })
-        .slice(0, 6);
+    const numberFor = (project: Project) => String(sorted.indexOf(project) + 1).padStart(2, '0');
 
     return (
         <section id="work" className="py-16 md:py-24 px-5 sm:px-8 md:px-12 border-b border-(--border)">
@@ -88,25 +34,19 @@ export default async function Projects() {
                     Things I&apos;ve built
                 </h2>
 
-                {unplugProject && (
-                    <FeaturedProject
-                        number={unplugProject.number}
-                        name={unplugProject.name}
-                        description={unplugProject.description}
-                        tags={unplugProject.tags}
-                        repoUrl={unplugProject.repoUrl}
-                        stars={unplugProject.stars}
-                        siteUrl={unplugProject.siteUrl}
-                    />
+                {mainProject && (
+                    <FeaturedProject project={mainProject} number={numberFor(mainProject)} />
                 )}
 
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-3.5 mb-12 md:mb-20">
-                    {otherFeaturedProjects.map((project) => (
-                        <ProjectCard key={project.number} {...project} />
-                    ))}
-                </div>
+                {otherFeatured.length > 0 && (
+                    <div className="grid grid-cols-1 md:grid-cols-3 gap-3.5 mb-12 md:mb-20">
+                        {otherFeatured.map((project) => (
+                            <ProjectCard key={project.id} project={project} number={numberFor(project)} />
+                        ))}
+                    </div>
+                )}
 
-                {otherRepos.length > 0 && (
+                {otherProjects.length > 0 && (
                     <div style={{ borderTop: '1px solid var(--border)', paddingTop: '48px' }}>
                         <a
                             href="https://github.com/Doyen04?tab=repositories"
@@ -120,25 +60,24 @@ export default async function Projects() {
                                 letterSpacing: '0.14em',
                             }}
                         >
-                            <span>Other work on GitHub</span>
+                            <span>Other work</span>
                             <span className="transition-transform duration-300 group-hover:translate-x-1">→</span>
                         </a>
 
                         <div className="grid grid-cols-1 md:grid-cols-3 gap-3.5 grid-flow-row-dense">
-                            {otherRepos.map((repo, index) => {
-                                // Bento grid with equal width (all col-span-1), varying heights
+                            {otherProjects.map((project, index) => {
                                 const bentoClasses = [
-                                    'md:col-span-1 md:row-span-2', // Item 0: Tall
-                                    'md:col-span-1 md:row-span-1', // Item 1: Small
-                                    'md:col-span-1 md:row-span-1', // Item 2: Small
-                                    'md:col-span-1 md:row-span-2', // Item 3: Tall
-                                    'md:col-span-1 md:row-span-1', // Item 4: Small
-                                    'md:col-span-1 md:row-span-1', // Item 5: Small
+                                    'md:col-span-1 md:row-span-2',
+                                    'md:col-span-1 md:row-span-1',
+                                    'md:col-span-1 md:row-span-1',
+                                    'md:col-span-1 md:row-span-2',
+                                    'md:col-span-1 md:row-span-1',
+                                    'md:col-span-1 md:row-span-1',
                                 ];
                                 const classForIndex = bentoClasses[index % bentoClasses.length];
                                 return (
-                                    <div key={repo.id} className={`${classForIndex} h-full`}>
-                                        <RepoCard repo={repo} />
+                                    <div key={project.id} className={`${classForIndex} h-full`}>
+                                        <ProjectCard project={project} number={numberFor(project)} />
                                     </div>
                                 );
                             })}
