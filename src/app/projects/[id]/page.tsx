@@ -3,6 +3,7 @@ import { notFound } from 'next/navigation';
 import SectionTag from '@/components/ui/SectionTag';
 import SiteScreenshot from '@/ui/SiteScreenshot';
 import { getProjects } from '@/lib/content';
+import { mediaSrc } from '@/lib/media';
 
 export const dynamic = 'force-dynamic';
 
@@ -105,7 +106,7 @@ export default async function ProjectDetailPage({ params }: { params: Promise<{ 
                             {gallery.map((url, i) => (
                                 <div key={url} className="border border-(--border) overflow-hidden" style={{ background: 'var(--surface-2)' }}>
                                     {/* eslint-disable-next-line @next/next/no-img-element */}
-                                    <img src={url} alt={`${project.name} screenshot ${i + 1}`} className="w-full h-full object-cover" loading="lazy" />
+                                    <img src={mediaSrc(url)} alt={`${project.name} screenshot ${i + 1}`} className="w-full h-full object-cover" loading="lazy" />
                                 </div>
                             ))}
                         </div>

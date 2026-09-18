@@ -3,10 +3,13 @@
 import { useEffect, useState } from 'react';
 import Link from 'next/link';
 import Logo from '../ui/logo';
+import { mediaSrc } from '@/lib/media';
 
 export default function Nav({ cvUrl }: { cvUrl: string }) {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+
+  const resumeHref = mediaSrc(cvUrl) ?? '/ademola%20oluwasola%20resume.pdf';
 
   useEffect(() => {
     const handleScroll = () => {
@@ -91,7 +94,7 @@ export default function Nav({ cvUrl }: { cvUrl: string }) {
           </div>
 
           <a
-            href={cvUrl || '/ademola%20oluwasola%20resume.pdf'}
+            href={resumeHref}
             target="_blank"
             rel="noopener noreferrer"
             className="btn-fill"
@@ -165,7 +168,7 @@ export default function Nav({ cvUrl }: { cvUrl: string }) {
               </span>
             </div>
             <a
-              href={cvUrl || '/ademola%20oluwasola%20resume.pdf'}
+              href={resumeHref}
               target="_blank"
               rel="noopener noreferrer"
               className="btn-fill text-center justify-center w-full mt-1"

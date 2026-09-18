@@ -1,6 +1,7 @@
 'use client';
 
 import { useRef, useState } from 'react';
+import { mediaSrc } from '@/lib/media';
 
 type Props = {
     name: string;
@@ -41,7 +42,7 @@ export default function FileUpload({ name, label, accept, folder, initialUrl, hi
     };
 
     const isVideo = accept?.includes('video');
-    const showUrl = url.startsWith('http');
+    const previewSrc = mediaSrc(url);
 
     return (
         <div className="border border-(--border) p-4" style={{ background: 'rgba(255,255,255,0.015)' }}>
@@ -74,14 +75,14 @@ export default function FileUpload({ name, label, accept, folder, initialUrl, hi
                 <div className="mt-3 flex items-center gap-3">
                     <div className="w-16 h-12 overflow-hidden border border-(--border) flex items-center justify-center" style={{ background: 'var(--bg)' }}>
                         {isVideo ? (
-                            <video src={showUrl ? url : url} className="w-full h-full object-contain" muted playsInline />
+                            <video src={previewSrc} className="w-full h-full object-contain" muted playsInline />
                         ) : url === '' || url.endsWith('.pdf') ? (
                             <span className="text-[8px] uppercase text-(--muted)" style={{ fontFamily: 'var(--mono)' }}>
                                 PDF
                             </span>
                         ) : (
                             // eslint-disable-next-line @next/next/no-img-element
-                            <img src={url} alt="preview" className="w-full h-full object-cover" />
+                            <img src={previewSrc} alt="preview" className="w-full h-full object-cover" />
                         )}
                     </div>
                     <div className="min-w-0 flex-1">

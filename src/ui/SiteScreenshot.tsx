@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from 'react';
 import { motion, useInView } from 'framer-motion';
+import { mediaSrc } from '@/lib/media';
 
 type Props = {
     video?: string;
@@ -16,6 +17,9 @@ export default function SiteScreenshot({ video, image, compact, noBorder }: Prop
     const containerRef = useRef<HTMLDivElement>(null);
     const videoRef = useRef<HTMLVideoElement>(null);
     const isInView = useInView(containerRef, { once: false, margin: '-100px' });
+
+    const resolvedImage = mediaSrc(image);
+    const resolvedVideo = mediaSrc(video);
 
     useEffect(() => {
         const mediaEl = videoRef.current;
@@ -50,7 +54,7 @@ export default function SiteScreenshot({ video, image, compact, noBorder }: Prop
             {video && !error ? (
                 <video
                     ref={videoRef}
-                    src={video}
+                    src={resolvedVideo}
                     className={`w-full h-full object-cover ${isLoading ? 'hidden' : ''}`}
                     onLoadedData={() => setIsLoading(false)}
                     onError={() => {
@@ -65,7 +69,7 @@ export default function SiteScreenshot({ video, image, compact, noBorder }: Prop
             ) : image && !error ? (
                 // eslint-disable-next-line @next/next/no-img-element
                 <img
-                    src={image}
+                    src={resolvedImage}
                     alt=""
                     className={`w-full h-full object-cover ${isLoading ? 'hidden' : ''}`}
                     onLoad={() => setIsLoading(false)}

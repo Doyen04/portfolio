@@ -13,12 +13,27 @@ function localPath(p: string): string {
     return path.join(DATA_DIR, p);
 }
 
-function publicUrl(p: string): string {
-    return '/' + p;
-}
-
 async function ensureDir(filePath: string) {
     await fs.mkdir(path.dirname(filePath), { recursive: true });
+}
+
+const EXT_TO_CONTENT_TYPE: Record<string, string> = {
+    png: 'image/png',
+    jpg: 'image/jpeg',
+    jpeg: 'image/jpeg',
+    webp: 'image/webp',
+    gif: 'image/gif',
+    avif: 'image/avif',
+    svg: 'image/svg+xml',
+    mp4: 'video/mp4',
+    webm: 'video/webm',
+    pdf: 'application/pdf',
+    json: 'application/json',
+};
+
+export function contentTypeFromExt(pathname: string): string {
+    const ext = (pathname.match(/\.(\w{1,8})$/)?.[1] || '').toLowerCase();
+    return EXT_TO_CONTENT_TYPE[ext] || 'application/octet-stream';
 }
 
 // ── Read ────────────────────────────────────────────────────────────────────
@@ -26,11 +41,10 @@ async function ensureDir(filePath: string) {
 export async function readText(pathname: string): Promise<string | null> {
     if (isBlobStore()) {
         try {
-            const { head } = await import('@vercel/blob');
-            const b = await head(pathname);
-            const res = await fetch(b.url);
-            if (!res.ok) return null;
-            return await res.text();
+            const { get } = await import('@vercel/blob');
+            const res = await get(pathname, { access: 'private' });
+            if (!res || res.statusCode !== 200 || !res.stream) return null;
+            return await new Response(res.stream).text();
         } catch {
             return null;
         }
@@ -51,9 +65,10 @@ export async function writeText(pathname: string, content: string): Promise<void
     if (isBlobStore()) {
         const { put } = await import('@vercel/blob');
         await put(pathname, content, {
-            access: 'public',
+            access: 'private',
             contentType: pathname.endsWith('.json') ? 'application/json' : 'text/plain',
             addRandomSuffix: false,
+            allowOverwrite: true,
         });
         return;
     }
@@ -66,8 +81,10 @@ export async function writeText(pathname: string, content: string): Promise<void
 // ── Media ───────────────────────────────────────────────────────────────────
 
 /**
- * Save a media file (image, video, PDF, etc.) and return its public URL.
- * `key` is the desired storage path, e.g. "uploads/projects/unplug.mp4"
+ * Save a media file (image, video, PDF, etc.) and return its storage key
+ * (e.g. "uploads/projects/unplug.mp4"). Render it through `mediaSrc()` from
+ * `src/lib/media` so it is served via `/api/media?key=...` (Blob-backed) or
+ * statically (local-folder fallback).
  */
 export async function saveMedia(
     key: string,
@@ -77,11 +94,11 @@ export async function saveMedia(
     if (isBlobStore()) {
         const { put } = await import('@vercel/blob');
         const blob = await put(key, data as unknown as File, {
-            access: 'public',
+            access: 'private',
             contentType,
             addRandomSuffix: false,
         });
-        return blob.url;
+        return blob.pathname;
     }
 
     const filePath = path.join(PUBLIC_DIR, key);
@@ -104,7 +121,33 @@ export async function saveMedia(
         }
         await fs.writeFile(filePath, Buffer.concat(chunks));
     }
-    return publicUrl(key);
+    return key;
+}
+
+/**
+ * Stream the bytes of a stored media file, used by the public `/api/media`
+ * proxy. Returns `null` when the file does not exist.
+ */
+export async function readMedia(key: string): Promise<{ body: ReadableStream<Uint8Array> | ArrayBuffer; contentType: string } | null> {
+    if (isBlobStore()) {
+        try {
+            const { get } = await import('@vercel/blob');
+            const res = await get(key, { access: 'private' });
+            if (!res || res.statusCode !== 200 || !res.stream) return null;
+            return { body: res.stream, contentType: res.blob.contentType || contentTypeFromExt(key) };
+        } catch {
+            return null;
+        }
+    }
+
+    try {
+        const filePath = path.join(PUBLIC_DIR, key);
+        const data = await fs.readFile(filePath);
+        const buffer = data.buffer.slice(data.byteOffset, data.byteOffset + data.byteLength) as ArrayBuffer;
+        return { body: buffer, contentType: contentTypeFromExt(key) };
+    } catch {
+        return null;
+    }
 }
 
 // ── Delete ──────────────────────────────────────────────────────────────────
@@ -128,36 +171,35 @@ export async function deleteObject(pathname: string): Promise<void> {
     }
 }
 
-// ── Media delete from public path ───────────────────────────────────────────
+// ── Media delete from a stored value ────────────────────────────────────────
 
-export async function deleteMediaUrl(url: string): Promise<void> {
-    // If it's a local path like /uploads/foo.mp4 → delete from public/
-    if (!url.startsWith('http')) {
-        const rel = url.replace(/^\//, '');
-        const filePath = path.join(PUBLIC_DIR, rel);
+export async function deleteMediaUrl(value: string): Promise<void> {
+    // Accept a storage key ("uploads/x.png"), a static path ("/uploads/x.png"),
+    // or a full URL (legacy public blob URL).
+    if (value.startsWith('http://') || value.startsWith('https://')) {
         try {
-            await fs.unlink(filePath);
+            const { del } = await import('@vercel/blob');
+            await del(value);
         } catch {
             // ignore
         }
         return;
     }
 
-    // If it's a Vercel Blob URL → delete via pathname
+    const key = value.replace(/^\/+/, '');
+    if (isBlobStore()) {
+        try {
+            const { del } = await import('@vercel/blob');
+            await del(key);
+        } catch {
+            // ignore
+        }
+        return;
+    }
+
     try {
-        const { del } = await import('@vercel/blob');
-        await del(url);
+        await fs.unlink(path.join(PUBLIC_DIR, key));
     } catch {
         // ignore
     }
-}
-
-// ── Media URL for the local-folder fallback ─────────────────────────────────
-
-/**
- * Given a storage key (e.g. "uploads/cv/resume.pdf"), return the public URL
- * in the local-folder fallback mode (used only when no Blob token is set).
- */
-export function mediaPublicUrl(key: string): string {
-    return publicUrl(key);
 }

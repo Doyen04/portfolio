@@ -1,6 +1,7 @@
 'use client';
 
 import { useRef, useState } from 'react';
+import { mediaSrc } from '@/lib/media';
 
 type Props = {
     name: string;
@@ -57,7 +58,7 @@ export default function GalleryUpload({ name, label, folder, initialUrls, hint }
                     {urls.map((url, index) => (
                         <div key={url} className="relative border border-(--border) overflow-hidden group" style={{ aspectRatio: '4 / 3', background: 'var(--bg)' }}>
                             {/* eslint-disable-next-line @next/next/no-img-element */}
-                            <img src={url} alt={`gallery ${index + 1}`} className="w-full h-full object-cover" />
+                            <img src={mediaSrc(url)} alt={`gallery ${index + 1}`} className="w-full h-full object-cover" />
                             <button
                                 type="button"
                                 onClick={() => setUrls((prev) => prev.filter((u) => u !== url))}
