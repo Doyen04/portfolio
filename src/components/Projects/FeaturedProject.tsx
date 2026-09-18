@@ -1,3 +1,4 @@
+import Link from 'next/link';
 import SiteScreenshot from '@/ui/SiteScreenshot';
 import type { Project } from '@/types/content';
 
@@ -7,7 +8,7 @@ type Props = {
 };
 
 export default function FeaturedProject({ project, number }: Props) {
-    const { name, description, tags, repoUrl, liveUrl, image, video } = project;
+    const { id, name, description, tags, repoUrl, liveUrl, image, video } = project;
 
     return (
         <div
@@ -34,18 +35,20 @@ export default function FeaturedProject({ project, number }: Props) {
                         </span>
                     </div>
 
-                    <h3
-                        style={{
-                            fontFamily: 'var(--serif)',
-                            fontSize: 'clamp(26px, 4vw, 56px)',
-                            fontWeight: 500,
-                            lineHeight: 1.05,
-                            color: 'var(--white)',
-                            marginBottom: '16px',
-                        }}
-                    >
-                        {name}
-                    </h3>
+                    <Link href={`/projects/${id}`} className="block no-underline">
+                        <h3
+                            style={{
+                                fontFamily: 'var(--serif)',
+                                fontSize: 'clamp(26px, 4vw, 56px)',
+                                fontWeight: 500,
+                                lineHeight: 1.05,
+                                color: 'var(--white)',
+                                marginBottom: '16px',
+                            }}
+                        >
+                            {name}
+                        </h3>
+                    </Link>
 
                     <p className="mb-6 max-w-[56ch] text-[14px] sm:text-[15px] leading-[1.75] text-(--muted)" style={{ fontFamily: 'var(--sans)', fontWeight: 300 }}>
                         {description}
@@ -79,12 +82,17 @@ export default function FeaturedProject({ project, number }: Props) {
                             <span>↗</span>
                         </a>
                     )}
+
+                    <Link href={`/projects/${id}`} className="text-center w-full sm:w-auto justify-center flex items-center gap-2 no-underline group" style={{ fontFamily: 'var(--mono)', fontSize: '12px' }}>
+                        <span className="uppercase tracking-[0.12em] text-(--muted) group-hover:text-(--accent) transition-colors">View details</span>
+                        <span className="transition-transform duration-300 group-hover:translate-x-1 text-(--muted) group-hover:text-(--accent)">→</span>
+                    </Link>
                 </div>
             </div>
 
-            <div className="lg:col-span-2 w-full flex items-center justify-center rounded-[inherit] border border-(--border) p-4 sm:p-6 lg:p-8" style={{ background: 'rgba(0,0,0,0.12)' }}>
+            <Link href={`/projects/${id}`} className="lg:col-span-2 w-full flex items-center justify-center rounded-[inherit] border border-(--border) p-4 sm:p-6 lg:p-8 no-underline hover:opacity-90 transition-opacity" style={{ background: 'rgba(0,0,0,0.12)' }}>
                 <SiteScreenshot image={image} video={video} />
-            </div>
+            </Link>
         </div>
     );
 }

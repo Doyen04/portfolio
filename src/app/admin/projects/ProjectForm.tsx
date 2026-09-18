@@ -4,6 +4,7 @@ import { useActionState } from 'react';
 import Link from 'next/link';
 import Field from '../Field';
 import FileUpload from '../FileUpload';
+import GalleryUpload from '../GalleryUpload';
 import { saveProjectForm, type ActionResult } from '../actions';
 import type { Project } from '@/types/content';
 
@@ -41,6 +42,16 @@ export default function ProjectForm({ project }: { project: Project | null }) {
                     folder="uploads/projects"
                     initialUrl={project?.video}
                     hint="MP4 / WEBM"
+                />
+            </div>
+
+            <div className="mb-5">
+                <GalleryUpload
+                    name="gallery"
+                    label="Gallery images"
+                    folder="uploads/projects"
+                    initialUrls={project?.gallery}
+                    hint="PNG / JPG, add as many as you like"
                 />
             </div>
 

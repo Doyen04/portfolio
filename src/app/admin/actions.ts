@@ -9,6 +9,21 @@ import type { Project, SkillGroup, About, Contact } from '@/types/content';
 
 export type ActionResult = { ok: true; message: string } | { ok: false; error: string };
 
+function parseGallery(raw: FormDataEntryValue | null): string[] {
+    if (!raw) return [];
+    try {
+        const parsed = JSON.parse(String(raw));
+        if (!Array.isArray(parsed)) return [];
+        return parsed.map((url) => String(url ?? '').trim()).filter(Boolean);
+    } catch {
+        return [];
+    }
+}
+
+function mediaUrls(project: Project): string[] {
+    return [project.image, project.video, ...(project.gallery ?? [])].filter((url): url is string => Boolean(url));
+}
+
 // ── Projects ────────────────────────────────────────────────────────────────
 
 export async function saveProjectForm(_state: ActionResult | void, formData: FormData): Promise<ActionResult | void> {
@@ -38,10 +53,18 @@ export async function saveProjectForm(_state: ActionResult | void, formData: For
         liveUrl: String(formData.get('liveUrl') ?? '').trim() || undefined,
         image: String(formData.get('image') ?? '').trim() || undefined,
         video: String(formData.get('video') ?? '').trim() || undefined,
+        gallery: parseGallery(formData.get('gallery')),
         featured: formData.get('featured') === 'on',
         order: Number(formData.get('order') ?? existing?.order ?? 0) || 0,
         enabled: formData.get('enabled') !== 'off',
     };
+
+    // Delete blobs that were replaced or removed so nothing is left behind.
+    if (existing) {
+        const remaining = new Set(mediaUrls(updated).filter(Boolean));
+        const removed = mediaUrls(existing).filter((url) => url && !remaining.has(url));
+        await Promise.allSettled(removed.map((url) => deleteMediaUrl(url)));
+    }
 
     if (existing) {
         await saveProjects(projects.map((p) => (p.id === projectId ? updated : p)));
@@ -61,7 +84,7 @@ export async function deleteProjectAction(formData: FormData): Promise<void> {
 
     // Remove the project's media blobs too so nothing is left behind.
     if (target) {
-        const media = [target.image, target.video].filter((url): url is string => Boolean(url));
+        const media = mediaUrls(target).filter((url): url is string => Boolean(url));
         await Promise.allSettled(media.map((url) => deleteMediaUrl(url)));
     }
 

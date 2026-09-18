@@ -7,6 +7,7 @@ export type Project = {
     liveUrl?: string;
     image?: string;
     video?: string;
+    gallery?: string[];
     featured: boolean;
     order: number;
     enabled: boolean;
