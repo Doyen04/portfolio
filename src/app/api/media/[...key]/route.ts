@@ -1,13 +1,12 @@
-import { NextRequest, NextResponse } from 'next/server';
+import { NextResponse } from 'next/server';
 import { readMedia } from '@/lib/store';
 
 export const runtime = 'nodejs';
 export const dynamic = 'force-dynamic';
 
-export async function GET(request: NextRequest) {
-    const key = request.nextUrl.searchParams.get('key') ?? '';
-
-    const safeKey = key.replace(/^\/+/, '').replace(/\.{2,}/g, '');
+export async function GET(_request: Request, context: { params: Promise<{ key: string[] }> }) {
+    const { key } = await context.params;
+    const safeKey = key.join('/').replace(/^\/+/, '').replace(/\.{2,}/g, '');
     if (!safeKey) {
         return new NextResponse('Missing key', { status: 400 });
     }

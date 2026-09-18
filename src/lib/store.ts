@@ -83,7 +83,7 @@ export async function writeText(pathname: string, content: string): Promise<void
 /**
  * Save a media file (image, video, PDF, etc.) and return its storage key
  * (e.g. "uploads/projects/unplug.mp4"). Render it through `mediaSrc()` from
- * `src/lib/media` so it is served via `/api/media?key=...` (Blob-backed) or
+ * `src/lib/media` so it is served via `/api/media/<key>` (Blob-backed) or
  * statically (local-folder fallback).
  */
 export async function saveMedia(
