@@ -21,11 +21,9 @@ export default function ProjectCard({ project, number, className }: ProjectCardP
             whileHover={{ backgroundColor: 'var(--surface)' }}
             transition={{ duration: 0.2 }}
         >
-            {(image || video) && (
-                <Link href={detailHref} className="block -mx-5 -mt-5 sm:-mx-8 sm:-mt-8 mb-6 overflow-hidden border-b border-(--border)">
-                    <SiteScreenshot image={image} video={video} compact noBorder />
-                </Link>
-            )}
+            <Link href={detailHref} className="block -mx-5 -mt-5 sm:-mx-8 sm:-mt-8 mb-6 overflow-hidden border-b border-(--border)">
+                <SiteScreenshot image={image} video={video} compact noBorder />
+            </Link>
 
             {/* Top row: number + arrow */}
             <div className="flex items-start justify-between mb-4 sm:mb-6">
