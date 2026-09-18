@@ -50,7 +50,7 @@ export default function FeaturedProject({ project, number }: Props) {
                         </h3>
                     </Link>
 
-                    <p className="mb-6 max-w-[56ch] text-[14px] sm:text-[15px] leading-[1.75] text-(--muted)" style={{ fontFamily: 'var(--sans)', fontWeight: 300 }}>
+                    <p className="mb-6 max-w-[56ch] text-[14px] sm:text-[15px] leading-[1.75] text-(--muted) line-clamp-5" style={{ fontFamily: 'var(--sans)', fontWeight: 300 }}>
                         {description}
                     </p>
 

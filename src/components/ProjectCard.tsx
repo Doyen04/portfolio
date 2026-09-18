@@ -43,7 +43,7 @@ export default function ProjectCard({ project, number, className }: ProjectCardP
             </Link>
 
             {/* Description */}
-            <p className="mb-6 text-[14px] sm:text-[15px] leading-[1.75] text-(--muted)" style={{ fontFamily: 'var(--sans)', fontWeight: 300 }}>
+            <p className="mb-6 text-[14px] sm:text-[15px] leading-[1.75] text-(--muted) line-clamp-3" style={{ fontFamily: 'var(--sans)', fontWeight: 300 }}>
                 {description}
             </p>
 
