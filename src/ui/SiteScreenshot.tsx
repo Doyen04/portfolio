@@ -49,44 +49,52 @@ export default function SiteScreenshot({ video, image, compact, noBorder, priori
             className={`relative w-full overflow-hidden bg-(--surface-2) ${noBorder ? '' : 'border border-(--border)'}`}
             style={{ aspectRatio: compact ? '2 / 1' : '1.6 / 1' }}
         >
-            {isLoading && hasMedia ? (
-                <div className="w-full h-full flex items-center justify-center bg-(--bg)">
-                    <div className="animate-spin w-8 h-8 bg-(--accent)" />
-                </div>
-            ) : null}
-
             {video && !error ? (
-                <video
-                    ref={videoRef}
-                    src={resolvedVideo}
-                    className={`w-full h-full object-contain ${isLoading ? 'hidden' : ''}`}
-                    onLoadedData={() => setIsLoading(false)}
-                    onError={() => {
-                        setError(true);
-                        setIsLoading(false);
-                    }}
-                    muted
-                    loop
-                    playsInline
-                    preload="none"
-                />
+                <>
+                    {isLoading && (
+                        <div className="absolute inset-0 z-10 flex items-center justify-center bg-(--bg)">
+                            <div className="animate-spin w-8 h-8 bg-(--accent)" />
+                        </div>
+                    )}
+                    <video
+                        ref={videoRef}
+                        src={resolvedVideo}
+                        className="w-full h-full object-contain"
+                        onLoadedData={() => setIsLoading(false)}
+                        onError={() => {
+                            setError(true);
+                            setIsLoading(false);
+                        }}
+                        muted
+                        loop
+                        playsInline
+                        preload="none"
+                    />
+                </>
             ) : image && !error ? (
-                <Image
-                    src={resolvedImage ?? ''}
-                    alt=""
-                    fill
-                    sizes={compact ? '(min-width: 768px) 33vw, 100vw' : '100vw'}
-                    quality={82}
-                    priority={priority}
-                    unoptimized={isGif || isRemote}
-                    className={`object-contain ${isLoading ? 'hidden' : ''}`}
-                    onLoad={() => setIsLoading(false)}
-                    onError={() => {
-                        setError(true);
-                        setIsLoading(false);
-                    }}
-                    decoding="async"
-                />
+                <>
+                    {isLoading && (
+                        <div className="absolute inset-0 z-10 flex items-center justify-center bg-(--bg)">
+                            <div className="animate-spin w-8 h-8 bg-(--accent)" />
+                        </div>
+                    )}
+                    <Image
+                        src={resolvedImage ?? ''}
+                        alt=""
+                        fill
+                        sizes={compact ? '(min-width: 768px) 33vw, 100vw' : '100vw'}
+                        quality={82}
+                        priority={priority}
+                        unoptimized={isGif || isRemote}
+                        className={`object-contain transition-opacity duration-500 ${isLoading ? 'opacity-0' : 'opacity-100'}`}
+                        onLoad={() => setIsLoading(false)}
+                        onError={() => {
+                            setError(true);
+                            setIsLoading(false);
+                        }}
+                        decoding="async"
+                    />
+                </>
             ) : (
                 <div className="w-full h-full flex items-center justify-center" style={{ background: 'var(--bg)' }}>
                     <div className="flex flex-col items-center gap-3 opacity-40">
