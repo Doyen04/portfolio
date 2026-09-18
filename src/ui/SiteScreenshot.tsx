@@ -59,7 +59,7 @@ export default function SiteScreenshot({ video, image, compact, noBorder, priori
                 <video
                     ref={videoRef}
                     src={resolvedVideo}
-                    className={`w-full h-full object-cover ${isLoading ? 'hidden' : ''}`}
+                    className={`w-full h-full object-contain ${isLoading ? 'hidden' : ''}`}
                     onLoadedData={() => setIsLoading(false)}
                     onError={() => {
                         setError(true);
@@ -79,7 +79,7 @@ export default function SiteScreenshot({ video, image, compact, noBorder, priori
                     quality={82}
                     priority={priority}
                     unoptimized={isGif || isRemote}
-                    className={`object-cover ${isLoading ? 'hidden' : ''}`}
+                    className={`object-contain ${isLoading ? 'hidden' : ''}`}
                     onLoad={() => setIsLoading(false)}
                     onError={() => {
                         setError(true);

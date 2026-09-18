@@ -89,7 +89,7 @@ export default function FileUpload({ name, label, accept, folder, initialUrl, hi
                                 fill
                                 sizes="64px"
                                 unoptimized={previewUnoptimized}
-                                className="object-cover"
+                                className="object-contain"
                             />
                         )}
                     </div>

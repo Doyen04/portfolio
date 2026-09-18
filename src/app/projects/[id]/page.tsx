@@ -113,7 +113,7 @@ export default async function ProjectDetailPage({ params }: { params: Promise<{ 
                                         sizes="(min-width: 768px) 50vw, 100vw"
                                         quality={82}
                                         unoptimized={url.toLowerCase().endsWith('.gif')}
-                                        className="object-cover"
+                                        className="object-contain"
                                         loading="lazy"
                                         decoding="async"
                                     />

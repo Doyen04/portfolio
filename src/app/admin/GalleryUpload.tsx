@@ -71,7 +71,7 @@ export default function GalleryUpload({ name, label, folder, initialUrls, hint }
                                 sizes="120px"
                                 quality={75}
                                 unoptimized={url.toLowerCase().endsWith('.gif') || /^https?:\/\//i.test(String(mediaSrc(url) || ''))}
-                                className="object-cover"
+                                className="object-contain"
                             />
                             <button
                                 type="button"
