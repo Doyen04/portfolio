@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { isAdmin } from '@/lib/dal';
-import { saveMedia } from '@/lib/store';
+import { mediaExists, saveMedia } from '@/lib/store';
 
 export async function POST(request: NextRequest) {
     if (!(await isAdmin())) {
@@ -18,10 +18,18 @@ export async function POST(request: NextRequest) {
         return NextResponse.json({ error: 'No file provided' }, { status: 400 });
     }
 
-    // Safety: cap individual upload size except large videos handled elsewhere.
-    const ext = (file.name.match(/\.(\w{1,8})$/)?.[1] || 'bin').toLowerCase();
-    const safeBase = file.name.replace(/[^a-zA-Z0-9._-]/g, '-').slice(-40);
-    const key = `${folder}/${Date.now()}-${safeBase}.${ext}`;
+    // Build a human-readable, single-extension key from the original filename.
+    // If a file with that name already exists, append a numeric suffix instead
+    // of prefixing timestamps/random strings.
+    const ext = (file.name.match(/\.(\w{1,8})$/)?.[1] ?? 'bin').toLowerCase();
+    const safeBase = (file.name.replace(/\.[^.]*$/, '') || 'file').replace(/[^a-zA-Z0-9._-]/g, '-').slice(0, 60);
+
+    let key = `${folder}/${safeBase}.${ext}`;
+    let suffix = 1;
+    while (await mediaExists(key)) {
+        key = `${folder}/${safeBase}-${suffix}.${ext}`;
+        suffix += 1;
+    }
 
     try {
         const url = await saveMedia(key, file, file.type);

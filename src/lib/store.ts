@@ -36,6 +36,29 @@ export function contentTypeFromExt(pathname: string): string {
     return EXT_TO_CONTENT_TYPE[ext] || 'application/octet-stream';
 }
 
+/**
+ * Check whether a media file already exists at the given key. Used to build
+ * collision-free, human-readable upload keys (e.g. "screenshot.png-1").
+ */
+export async function mediaExists(pathname: string): Promise<boolean> {
+    if (isBlobStore()) {
+        try {
+            const { head } = await import('@vercel/blob');
+            const blob = await head(pathname);
+            return Boolean(blob);
+        } catch {
+            return false;
+        }
+    }
+
+    try {
+        await fs.access(path.join(PUBLIC_DIR, pathname));
+        return true;
+    } catch {
+        return false;
+    }
+}
+
 // ── Read ────────────────────────────────────────────────────────────────────
 
 export async function readText(pathname: string): Promise<string | null> {
