@@ -8,12 +8,17 @@ export default function Projects({ projects }: { projects: Project[] }) {
         .filter((project) => project.enabled !== false)
         .sort((a, b) => a.order - b.order);
 
-    const featured = sorted.filter((project) => project.featured);
-    const mainProject = featured[0] ?? null;
-    const otherFeatured = featured.slice(1);
+    const featuredProjects = sorted.filter((project) => project.featured);
+    const mainProject = featuredProjects[0] ?? null;
+    const otherFeatured = featuredProjects.slice(1);
     const otherProjects = sorted.filter((project) => !project.featured);
 
-    const numberFor = (project: Project) => String(sorted.indexOf(project) + 1).padStart(2, '0');
+    const numberFor = (project: Project) => {
+        const featuredIndex = featuredProjects.findIndex((p) => p.id === project.id);
+        if (featuredIndex !== -1) return String(featuredIndex + 1).padStart(2, '0');
+        const otherIndex = otherProjects.findIndex((p) => p.id === project.id);
+        return String(featuredProjects.length + otherIndex + 1).padStart(2, '0');
+    };
 
     return (
         <section id="work" className="py-16 md:py-24 px-5 sm:px-8 md:px-12 border-b border-(--border)">
