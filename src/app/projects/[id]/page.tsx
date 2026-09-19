@@ -47,56 +47,60 @@ export default async function ProjectDetailPage({ params }: { params: Promise<{ 
                     <SectionTag number={`[${number}]`} label="Case Study" />
                 </div>
 
-                <h1
-                    className="mb-6 max-w-[20ch]"
-                    style={{
-                        fontFamily: 'var(--serif)',
-                        fontSize: 'clamp(38px, 7vw, 96px)',
-                        fontWeight: 300,
-                        lineHeight: 1.02,
-                        letterSpacing: '-0.015em',
-                        color: 'var(--white)',
-                    }}
-                >
-                    {project.name}
-                </h1>
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-10 md:items-start mb-16">
+                    <div>
+                        <h1
+                            className="mb-6 max-w-[20ch]"
+                            style={{
+                                fontFamily: 'var(--serif)',
+                                fontSize: 'clamp(38px, 7vw, 96px)',
+                                fontWeight: 300,
+                                lineHeight: 1.02,
+                                letterSpacing: '-0.015em',
+                                color: 'var(--white)',
+                            }}
+                        >
+                            {project.name}
+                        </h1>
 
-                <p className="mb-8 max-w-[62ch] text-[15px] sm:text-[16px] leading-[1.8] text-(--muted)" style={{ fontFamily: 'var(--sans)', fontWeight: 300 }}>
-                    {project.description}
-                </p>
+                        <p className="mb-8 max-w-[62ch] text-[15px] sm:text-[16px] leading-[1.8] text-(--muted)" style={{ fontFamily: 'var(--sans)', fontWeight: 300 }}>
+                            {project.description}
+                        </p>
 
-                {project.tags.length > 0 && (
-                    <div className="flex flex-wrap gap-2 mb-10">
-                        {project.tags.map((tag) => (
-                            <span key={tag} className="inline-block px-3 py-1.5 border border-(--border) text-[9px] uppercase tracking-[0.12em] text-(--muted)" style={{ fontFamily: 'var(--mono)' }}>
-                                {tag}
-                            </span>
-                        ))}
-                    </div>
-                )}
-
-                {(project.repoUrl || project.liveUrl) && (
-                    <div className="flex flex-wrap items-center gap-3 sm:gap-4 mb-14">
-                        {project.repoUrl && (
-                            <a href={project.repoUrl} target="_blank" rel="noopener noreferrer" className="btn-fill inline-flex items-center gap-2">
-                                <span>View code</span>
-                                <span>→</span>
-                            </a>
+                        {project.tags.length > 0 && (
+                            <div className="flex flex-wrap gap-2 mb-10">
+                                {project.tags.map((tag) => (
+                                    <span key={tag} className="inline-block px-3 py-1.5 border border-(--border) text-[9px] uppercase tracking-[0.12em] text-(--muted)" style={{ fontFamily: 'var(--mono)' }}>
+                                        {tag}
+                                    </span>
+                                ))}
+                            </div>
                         )}
-                        {project.liveUrl && (
-                            <a href={project.liveUrl} target="_blank" rel="noopener noreferrer" className="btn-outline inline-flex items-center gap-2">
-                                <span>Live demo</span>
-                                <span>↗</span>
-                            </a>
+
+                        {(project.repoUrl || project.liveUrl) && (
+                            <div className="flex flex-wrap items-center gap-3 sm:gap-4">
+                                {project.repoUrl && (
+                                    <a href={project.repoUrl} target="_blank" rel="noopener noreferrer" className="btn-fill inline-flex items-center gap-2">
+                                        <span>View code</span>
+                                        <span>→</span>
+                                    </a>
+                                )}
+                                {project.liveUrl && (
+                                    <a href={project.liveUrl} target="_blank" rel="noopener noreferrer" className="btn-outline inline-flex items-center gap-2">
+                                        <span>Live demo</span>
+                                        <span>↗</span>
+                                    </a>
+                                )}
+                            </div>
                         )}
                     </div>
-                )}
 
-                {(video || primaryImage) && (
-                    <div className="mb-10">
-                        <SiteScreenshot video={video} image={primaryImage} priority />
-                    </div>
-                )}
+                    {(video || primaryImage) && (
+                        <div className="md:sticky md:top-6">
+                            <SiteScreenshot video={video} image={primaryImage} priority />
+                        </div>
+                    )}
+                </div>
 
                 {gallery.length > 0 && (
                     <div className="mb-10">
