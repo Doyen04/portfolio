@@ -94,13 +94,20 @@ export default function BentoTile({ project, number, span }: Props) {
     const media = (className: string) =>
         hasMedia && (
             <Link href={detailHref} tabIndex={-1} aria-hidden="true" className={`block shrink-0 overflow-hidden ${className}`}>
-                <SiteScreenshot image={image} video={video} noBorder />
+                <SiteScreenshot image={image} video={video} noBorder transparent />
+            </Link>
+        );
+
+    const bleed = (className: string) =>
+        hasMedia && (
+            <Link href={detailHref} tabIndex={-1} aria-hidden="true" className={`block overflow-hidden ${className}`}>
+                <SiteScreenshot image={image} video={video} noBorder transparent fill cover />
             </Link>
         );
 
     return (
         <motion.div
-            className={`group h-full overflow-hidden border border-(--border) ${COL_SPAN[span.col]}`}
+            className={`group relative h-full overflow-hidden border border-(--border) ${COL_SPAN[span.col]}`}
             whileHover={{ backgroundColor: 'var(--surface)' }}
             transition={{ duration: 0.2 }}
         >
@@ -119,8 +126,20 @@ export default function BentoTile({ project, number, span }: Props) {
                     </div>
                 </div>
             ) : (
-                <div className="flex h-full flex-col sm:flex-row-reverse sm:items-center">
-                    <div className="flex min-w-0 flex-1 flex-col justify-center gap-3 p-5 sm:p-7">
+                <div className="relative flex h-full flex-col">
+                    {/* preview runs edge to edge behind the whole tile on wide screens */}
+                    {bleed('w-full shrink-0 border-b border-(--border) sm:absolute sm:inset-0 sm:border-0')}
+                    {hasMedia && (
+                        <div
+                            aria-hidden="true"
+                            className="absolute inset-0 hidden sm:block"
+                            style={{
+                                background:
+                                    'linear-gradient(90deg, rgba(11,11,11,0.20) 0%, rgba(11,11,11,0.62) 42%, rgba(11,11,11,0.92) 68%, rgba(11,11,11,0.96) 100%)',
+                            }}
+                        />
+                    )}
+                    <div className="relative z-10 flex min-w-0 flex-1 flex-col justify-center gap-3 p-5 sm:ml-auto sm:w-[62%] sm:max-w-[560px] sm:p-7">
                         {marker}
                         {heading}
                         <p className="line-clamp-2 max-w-[58ch] text-[13px] leading-[1.7] text-(--muted)">{description}</p>
@@ -132,7 +151,6 @@ export default function BentoTile({ project, number, span }: Props) {
                             </div>
                         </div>
                     </div>
-                    {media('w-full border-t border-(--border) sm:my-7 sm:w-[42%] sm:max-w-[420px] sm:border-l sm:border-t-0')}
                 </div>
             )}
         </motion.div>

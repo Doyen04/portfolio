@@ -11,9 +11,15 @@ type Props = {
     compact?: boolean;
     noBorder?: boolean;
     priority?: boolean;
+    /** Drop the panel background so the surrounding surface shows through. */
+    transparent?: boolean;
+    /** Stretch to the parent box instead of holding a fixed aspect ratio. */
+    fill?: boolean;
+    /** Fill the box edge to edge instead of letterboxing the whole preview. */
+    cover?: boolean;
 };
 
-export default function SiteScreenshot({ video, image, compact, noBorder, priority }: Props) {
+export default function SiteScreenshot({ video, image, compact, noBorder, priority, transparent, fill, cover }: Props) {
     const [isLoading, setIsLoading] = useState(true);
     const [error, setError] = useState(false);
     const containerRef = useRef<HTMLDivElement>(null);
@@ -46,8 +52,8 @@ export default function SiteScreenshot({ video, image, compact, noBorder, priori
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: '-100px' }}
             transition={{ duration: 0.8, ease: [0.4, 0, 0.2, 1] as const }}
-            className={`relative w-full overflow-hidden bg-(--surface-2) ${noBorder ? '' : 'border border-(--border)'}`}
-            style={{ aspectRatio: compact ? '2 / 1' : '1.6 / 1' }}
+            className={`relative w-full overflow-hidden ${fill ? 'h-full' : ''} ${transparent ? '' : 'bg-(--surface-2)'} ${noBorder ? '' : 'border border-(--border)'}`}
+            style={{ aspectRatio: fill ? 'auto' : compact ? '2 / 1' : '1.6 / 1' }}
         >
             {video && !error ? (
                 <>
@@ -59,7 +65,6 @@ export default function SiteScreenshot({ video, image, compact, noBorder, priori
                     <video
                         ref={videoRef}
                         src={resolvedVideo}
-                        className="w-full h-full object-contain"
                         onLoadedData={() => setIsLoading(false)}
                         onError={() => {
                             setError(true);
@@ -69,6 +74,7 @@ export default function SiteScreenshot({ video, image, compact, noBorder, priori
                         loop
                         playsInline
                         preload="none"
+                        className={`h-full w-full ${cover ? 'object-cover' : 'object-contain'}`}
                     />
                 </>
             ) : image && !error ? (
@@ -82,11 +88,11 @@ export default function SiteScreenshot({ video, image, compact, noBorder, priori
                         src={resolvedImage ?? ''}
                         alt=""
                         fill
-                        sizes={compact ? '(min-width: 768px) 33vw, 100vw' : '100vw'}
+                        sizes={fill ? '100vw' : compact ? '(min-width: 768px) 33vw, 100vw' : '100vw'}
                         quality={82}
                         priority={priority}
                         unoptimized={isGif || isRemote}
-                        className={`object-contain transition-opacity duration-500 ${isLoading ? 'opacity-0' : 'opacity-100'}`}
+                        className={`transition-opacity duration-500 ${cover ? 'object-cover' : 'object-contain'} ${isLoading ? 'opacity-0' : 'opacity-100'}`}
                         onLoad={() => setIsLoading(false)}
                         onError={() => {
                             setError(true);
