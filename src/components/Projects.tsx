@@ -1,5 +1,6 @@
 import ProjectCard from './ProjectCard';
 import SectionTag from './ui/SectionTag';
+import BentoGrid from './Projects/BentoGrid';
 import FeaturedProject from './Projects/FeaturedProject';
 import type { Project } from '@/types/content';
 
@@ -69,24 +70,7 @@ export default function Projects({ projects }: { projects: Project[] }) {
                             <span className="transition-transform duration-300 group-hover:translate-x-1">→</span>
                         </a>
 
-                        <div className="grid grid-cols-1 md:grid-cols-3 gap-3.5 grid-flow-row-dense">
-                            {otherProjects.map((project, index) => {
-                                const bentoClasses = [
-                                    'md:col-span-1 md:row-span-2',
-                                    'md:col-span-1 md:row-span-1',
-                                    'md:col-span-1 md:row-span-1',
-                                    'md:col-span-1 md:row-span-2',
-                                    'md:col-span-1 md:row-span-1',
-                                    'md:col-span-1 md:row-span-1',
-                                ];
-                                const classForIndex = bentoClasses[index % bentoClasses.length];
-                                return (
-                                    <div key={project.id} className={`${classForIndex} h-full`}>
-                                        <ProjectCard project={project} number={numberFor(project)} />
-                                    </div>
-                                );
-                            })}
-                        </div>
+                        <BentoGrid projects={otherProjects} numberFor={numberFor} />
                     </div>
                 )}
             </div>
