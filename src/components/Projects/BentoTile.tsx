@@ -126,20 +126,11 @@ export default function BentoTile({ project, number, span }: Props) {
                     </div>
                 </div>
             ) : (
-                <div className="relative flex h-full flex-col">
-                    {/* preview runs edge to edge behind the whole tile on wide screens */}
-                    {bleed('w-full shrink-0 border-b border-(--border) sm:absolute sm:inset-0 sm:border-0')}
-                    {hasMedia && (
-                        <div
-                            aria-hidden="true"
-                            className="absolute inset-0 hidden sm:block"
-                            style={{
-                                background:
-                                    'linear-gradient(90deg, rgba(11,11,11,0.20) 0%, rgba(11,11,11,0.62) 42%, rgba(11,11,11,0.92) 68%, rgba(11,11,11,0.96) 100%)',
-                            }}
-                        />
-                    )}
-                    <div className="relative z-10 flex min-w-0 flex-1 flex-col justify-center gap-3 p-5 sm:ml-auto sm:w-[62%] sm:max-w-[560px] sm:p-7">
+                <div className="relative flex h-full flex-col sm:justify-center">
+                    {/* in flow with its own ratio on mobile, edge to edge behind the tile from sm up */}
+                    {bleed('aspect-[8/5] w-full shrink-0 border-b border-(--border) sm:absolute sm:inset-0 sm:aspect-auto sm:border-0')}
+                    {/* translucent panel: hugs the copy and lets the preview read through */}
+                    <div className="relative z-10 flex min-w-0 flex-col gap-3 p-5 sm:ml-auto sm:w-[62%] sm:max-w-[560px] sm:bg-black/80 sm:p-7">
                         {marker}
                         {heading}
                         <p className="line-clamp-2 max-w-[58ch] text-[13px] leading-[1.7] text-(--muted)">{description}</p>
